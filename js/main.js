@@ -58,6 +58,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Hero slideshow: auto-advancing slides with clickable progress-bar tabs
+  document.querySelectorAll('[data-hero-slideshow]').forEach(function (root) {
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.hero-slide'));
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('.hero-slide-tab'));
+    if (slides.length < 2 || tabs.length !== slides.length) return;
+
+    var duration = 7000;
+    var current = 0;
+    var timer = null;
+
+    function show(index) {
+      slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === index); });
+      tabs.forEach(function (tab, i) {
+        tab.classList.toggle('is-active', i === index);
+        var fill = tab.querySelector('.hero-slide-tab-fill');
+        if (!fill) return;
+        fill.style.animation = 'none';
+        if (i === index) {
+          void fill.offsetWidth;
+          fill.style.animation = '';
+        }
+      });
+      current = index;
+    }
+
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(function () { show((current + 1) % slides.length); }, duration);
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () {
+        show(i);
+        restart();
+      });
+    });
+
+    restart();
+  });
+
   // Contact / quote request forms: client-side only (no backend configured yet)
   document.querySelectorAll('form[data-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {

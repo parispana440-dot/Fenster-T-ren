@@ -3,17 +3,18 @@
    ========================================================================== */
 
 :root {
-  --color-ink: #21262b;
-  --color-ink-2: #343b42;
+  /* Palette matches the Assos logo/letterhead: brand blue + logo grey, white base */
+  --color-ink: #3e4140;
+  --color-ink-2: #53565b;
   --color-white: #ffffff;
-  --color-bg: #f6f6f4;
-  --color-bg-alt: #eeeee9;
-  --color-border: #e0e0da;
-  --color-text: #21262b;
+  --color-bg: #f6f7f7;
+  --color-bg-alt: #eceeee;
+  --color-border: #dfe2e4;
+  --color-text: #3e4140;
   --color-text-muted: #5c6470;
-  --color-accent: #b98a3e;
-  --color-accent-dark: #8f6a2c;
-  --color-accent-light: #f4e9d8;
+  --color-accent: #3895d3;
+  --color-accent-dark: #2675ab;
+  --color-accent-light: #e5f1fa;
   --color-success: #2f7d5c;
 
   --font-heading: 'Jost', 'Inter', system-ui, sans-serif;
@@ -21,8 +22,8 @@
 
   --container-w: 1180px;
   --radius: 6px;
-  --shadow-sm: 0 1px 3px rgba(33, 38, 43, 0.08);
-  --shadow-md: 0 10px 30px rgba(33, 38, 43, 0.10);
+  --shadow-sm: 0 1px 3px rgba(62, 65, 64, 0.08);
+  --shadow-md: 0 10px 30px rgba(62, 65, 64, 0.10);
 }
 
 * { box-sizing: border-box; }
@@ -114,8 +115,8 @@ section { padding: 88px 0; }
   border-color: var(--color-border);
 }
 .btn-outline:hover { border-color: var(--color-ink); color: var(--color-ink); }
-.section-ink .btn-outline { color: var(--color-white); border-color: rgba(255,255,255,0.35); }
-.section-ink .btn-outline:hover { border-color: var(--color-white); }
+.section-ink .btn-outline, .hero .btn-outline { color: var(--color-white); border-color: rgba(255,255,255,0.35); }
+.section-ink .btn-outline:hover, .hero .btn-outline:hover { border-color: var(--color-white); color: var(--color-white); }
 .btn-sm { padding: 10px 18px; font-size: 0.85rem; }
 .btn-block { width: 100%; justify-content: center; }
 
@@ -303,7 +304,7 @@ section { padding: 88px 0; }
 /* Hero */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, var(--color-ink) 0%, #2c333b 55%, #3a3226 100%);
+  background: linear-gradient(135deg, var(--color-ink) 0%, #383b3f 55%, #1d3a4d 100%);
   color: var(--color-white);
   padding: 110px 0 100px;
   overflow: hidden;
@@ -481,7 +482,7 @@ section { padding: 88px 0; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #dedbd0, #f1efe9);
+  background: linear-gradient(135deg, #dde3e7, #eef2f5);
   color: var(--color-text-muted);
 }
 .gallery-thumb svg { width: 46px; height: 46px; opacity: 0.5; }

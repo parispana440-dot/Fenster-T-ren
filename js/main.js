@@ -2,20 +2,59 @@
 document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.main-nav');
+  var isMobileNav = window.matchMedia('(max-width: 900px)');
+
+  function collapseSubmenus() {
+    document.querySelectorAll('.nav-item-mega.mobile-open').forEach(function (item) {
+      item.classList.remove('mobile-open');
+      var trigger = item.querySelector('.mega-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
       var isOpen = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      // Beim Schließen zurücksetzen, damit das Menü beim nächsten Öffnen wieder zu ist
+      if (!isOpen) collapseSubmenus();
     });
 
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
+        // Der Produkte-Eintrag klappt auf Mobil nur auf, er schließt das Menü nicht
+        if (isMobileNav.matches && link.classList.contains('mega-trigger')) return;
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
+        collapseSubmenus();
       });
     });
   }
+
+  // Mobil: Produkte-Untermenü ist zugeklappt und öffnet erst beim Antippen
+  document.querySelectorAll('.nav-item-mega').forEach(function (item) {
+    var trigger = item.querySelector('.mega-trigger');
+    if (!trigger) return;
+
+    function syncTriggerState() {
+      if (isMobileNav.matches) {
+        trigger.setAttribute('aria-expanded', item.classList.contains('mobile-open') ? 'true' : 'false');
+      } else {
+        trigger.removeAttribute('aria-expanded');
+        item.classList.remove('mobile-open');
+      }
+    }
+
+    trigger.addEventListener('click', function (event) {
+      if (!isMobileNav.matches) return; // Am Desktop bleibt es ein normaler Link
+      event.preventDefault();
+      item.classList.toggle('mobile-open');
+      syncTriggerState();
+    });
+
+    isMobileNav.addEventListener('change', syncTriggerState);
+    syncTriggerState();
+  });
 
   // Mega menu (Produkte): keep it open across brief cursor gaps between the narrow
   // trigger and the full-width panel, so a fast diagonal move toward a link doesn't

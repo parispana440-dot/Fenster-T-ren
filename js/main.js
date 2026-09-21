@@ -48,6 +48,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // FAQ accordions: click a question to reveal/hide its answer
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var button = item.querySelector('.faq-question');
+    if (!button) return;
+    button.addEventListener('click', function () {
+      var isOpen = item.classList.toggle('open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
   // Contact / quote request forms: client-side only (no backend configured yet)
   document.querySelectorAll('form[data-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {

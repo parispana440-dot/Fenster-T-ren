@@ -197,10 +197,12 @@ section { padding: 88px 0; }
   transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 200;
 }
-/* .mega-open is toggled by JS with a short close delay (see js/main.js) so a fast
+/* Plain :hover always opens the menu (works with no JS at all). .mega-open is an
+   enhancement toggled by JS with a short close delay (see js/main.js) so a fast
    diagonal move from the narrow "Produkte" tab toward a link on the far side of the
-   full-width panel doesn't get treated as "left the menu". :focus-within is kept as
-   a pure-keyboard fallback if JS is unavailable. */
+   full-width panel doesn't get treated as "left the menu". :focus-within covers
+   keyboard use. */
+.nav-item-mega:hover .mega-menu,
 .nav-item-mega.mega-open .mega-menu,
 .nav-item-mega:focus-within .mega-menu {
   opacity: 1;

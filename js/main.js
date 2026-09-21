@@ -17,6 +17,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Mega menu (Produkte): keep it open across brief cursor gaps between the narrow
+  // trigger and the full-width panel, so a fast diagonal move toward a link doesn't
+  // close it prematurely. Only wired on hover-capable/fine-pointer devices — on touch
+  // (mobile) the panel is always expanded inline via CSS, no JS needed there.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.nav-item-mega').forEach(function (item) {
+      var closeTimer = null;
+      var open = function () {
+        clearTimeout(closeTimer);
+        item.classList.add('mega-open');
+      };
+      var scheduleClose = function () {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(function () {
+          item.classList.remove('mega-open');
+        }, 300);
+      };
+      item.addEventListener('mouseenter', open);
+      item.addEventListener('mouseleave', scheduleClose);
+    });
+  }
+
   // Mark current page link as active
   var here = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.main-nav a').forEach(function (link) {

@@ -130,7 +130,7 @@ section { padding: 88px 0; }
 }
 .header-inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   padding: 16px 24px;
   max-width: var(--container-w);
@@ -139,6 +139,7 @@ section { padding: 88px 0; }
 .logo {
   display: flex;
   align-items: center;
+  align-self: center;
   gap: 10px;
   font-family: var(--font-heading);
   font-weight: 700;
@@ -160,7 +161,8 @@ section { padding: 88px 0; }
   flex: none;
 }
 
-.main-nav ul { display: flex; gap: 30px; align-items: center; }
+.main-nav ul { display: flex; gap: 30px; align-items: stretch; height: 100%; }
+.main-nav li { display: flex; align-items: center; }
 .main-nav a {
   color: var(--color-ink);
   font-weight: 500;
@@ -172,33 +174,46 @@ section { padding: 88px 0; }
   color: var(--color-accent-dark);
   border-bottom-color: var(--color-accent);
 }
-/* Mega menu (Produkte) */
-.nav-item-mega { position: relative; }
+/* Mega menu (Produkte) — full-width panel flush with the header, anchored so the
+   hoverable nav item spans the full header height (no gap = no premature close) */
 .mega-menu {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  display: grid;
-  grid-template-columns: repeat(3, 210px);
-  gap: 30px;
+  /* header-inner's own bottom padding (16px) sits below the stretched nav item and
+     above this panel; pull the box up through it (compensated by padding-top so the
+     visible content lands in the same place) so there's no dead hover zone between
+     the nav item and the panel. */
+  margin-top: -16px;
+  padding-top: 16px;
+  left: 0;
+  right: 0;
+  transform: translateY(6px);
   background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
-  padding: 26px 30px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 200;
 }
-.nav-item-mega:hover .mega-menu,
+/* .mega-open is toggled by JS with a short close delay (see js/main.js) so a fast
+   diagonal move from the narrow "Produkte" tab toward a link on the far side of the
+   full-width panel doesn't get treated as "left the menu". :focus-within is kept as
+   a pure-keyboard fallback if JS is unavailable. */
+.nav-item-mega.mega-open .mega-menu,
 .nav-item-mega:focus-within .mega-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+}
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding-top: 28px;
+  padding-bottom: 28px;
 }
 .mega-col { display: flex; flex-direction: column; min-width: 0; }
 .mega-heading {
@@ -223,7 +238,7 @@ section { padding: 88px 0; }
   color: var(--color-accent-dark);
 }
 
-.header-cta { display: flex; align-items: center; gap: 18px; }
+.header-cta { display: flex; align-items: center; align-self: center; gap: 18px; }
 .nav-toggle {
   display: none;
   background: none;
@@ -255,8 +270,8 @@ section { padding: 88px 0; }
     overflow-y: auto;
   }
   .main-nav.open { transform: translateX(0); }
-  .main-nav ul { flex-direction: column; align-items: flex-start; gap: 0; padding: 20px 24px; }
-  .main-nav li { width: 100%; border-bottom: 1px solid var(--color-border); }
+  .main-nav ul { flex-direction: column; align-items: flex-start; height: auto; gap: 0; padding: 20px 24px; }
+  .main-nav li { display: block; width: 100%; border-bottom: 1px solid var(--color-border); }
   .main-nav a { display: block; padding: 16px 0; }
   .header-cta .btn-primary { display: none; }
 
@@ -266,12 +281,16 @@ section { padding: 88px 0; }
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    display: block;
     background: none;
     border: none;
     box-shadow: none;
-    padding: 0 0 12px;
     z-index: auto;
+  }
+  .mega-menu-grid {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 12px;
   }
   .mega-col { margin-top: 14px; }
   .mega-heading { border-bottom: none; padding-bottom: 0; }

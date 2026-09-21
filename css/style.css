@@ -90,6 +90,7 @@ section { padding: 88px 0; }
 
 .section-head { max-width: 680px; margin-bottom: 48px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-head.tight { margin-bottom: 30px; }
 
 /* Buttons */
 .btn {
@@ -330,7 +331,7 @@ section { padding: 88px 0; }
   position: relative;
   background: linear-gradient(135deg, var(--color-ink) 0%, #383b3f 55%, #1d3a4d 100%);
   color: var(--color-white);
-  padding: 110px 0 100px;
+  padding: 76px 0 68px;
   overflow: hidden;
 }
 .hero::before {
@@ -352,8 +353,8 @@ section { padding: 88px 0; }
 .hero h1, .hero h2, .hero h3 { color: var(--color-white); }
 .hero .eyebrow { color: var(--color-accent); }
 .hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.78); max-width: 540px; }
-.hero-actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-.hero-stats { display: flex; gap: 32px; margin-top: 46px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 32px; margin-top: 30px; flex-wrap: wrap; }
 .hero-stats div strong { display: block; font-family: var(--font-heading); font-size: 1.7rem; color: var(--color-accent); }
 .hero-stats div span { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
 
@@ -477,6 +478,9 @@ section { padding: 88px 0; }
 }
 .card-icon svg { width: 24px; height: 24px; }
 .card h3 { margin-bottom: 10px; }
+.card.compact { padding: 22px 22px; }
+.card.compact .card-icon { width: 40px; height: 40px; margin-bottom: 12px; }
+.card.compact .card-icon svg { width: 20px; height: 20px; }
 .card ul { margin-top: 14px; }
 .card ul li {
   font-size: 0.9rem;

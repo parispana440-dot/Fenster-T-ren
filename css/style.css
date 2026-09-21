@@ -23,6 +23,8 @@
 
   --font-heading: 'Jost', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Wortmarke: klassische Serifenschrift nach Vorbild des Firmenlogos */
+  --font-wordmark: 'Cormorant Garamond', 'Times New Roman', serif;
 
   --container-w: 1180px;
   --radius: 6px;
@@ -86,6 +88,29 @@ section { padding: 88px 0; }
   font-size: 1.04rem;
   line-height: 1.7;
 }
+/* Seitenkopf "Über uns": Text links, Wortmarke rechts */
+.about-hero-inner {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 56px;
+  align-items: center;
+}
+.about-hero-logo {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+.about-hero-logo img {
+  width: 100%;
+  max-width: 290px;
+  height: auto;
+}
+@media (max-width: 860px) {
+  .about-hero-inner { grid-template-columns: 1fr; gap: 34px; }
+  .about-hero-logo { order: -1; justify-content: flex-start; }
+  .about-hero-logo img { max-width: 190px; }
+}
+
 .eco-figure {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -164,20 +189,25 @@ section { padding: 88px 0; }
   display: flex;
   align-items: center;
   align-self: center;
-  gap: 10px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.35rem;
+  gap: 12px;
+  font-family: var(--font-wordmark);
+  font-weight: 600;
+  font-size: 1.62rem;
+  line-height: 1.05;
+  letter-spacing: 0.17em;
   color: var(--color-ink);
 }
 .logo small {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-wordmark);
   font-weight: 500;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-text-muted);
+  /* letter-spacing schiebt das letzte Zeichen nach rechts; optisch ausgleichen */
+  margin-top: 3px;
+  text-indent: 0.2em;
 }
 .logo-mark {
   width: 38px;
@@ -924,6 +954,103 @@ textarea { resize: vertical; min-height: 120px; }
 .form-status.ok { color: var(--color-success); }
 
 /* Contact info tiles */
+/* Kontaktseite */
+.contact-quick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+.contact-quick-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-ink);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.contact-quick-item:hover { border-color: var(--color-accent); box-shadow: var(--shadow-sm); color: var(--color-ink); }
+.contact-quick-icon {
+  flex: none;
+  width: 40px; height: 40px;
+  border-radius: 9px;
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-quick-icon svg { width: 19px; height: 19px; }
+.contact-quick-item strong { display: block; font-size: 0.95rem; line-height: 1.3; }
+.contact-quick-item small { display: block; margin-top: 2px; font-size: 0.78rem; color: var(--color-text-muted); }
+@media (max-width: 800px) { .contact-quick { grid-template-columns: 1fr; gap: 12px; } }
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; gap: 32px; } }
+
+.contact-form-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 34px 32px;
+  box-shadow: var(--shadow-md);
+}
+@media (max-width: 560px) { .contact-form-card { padding: 24px 20px; } }
+
+.contact-side { display: flex; flex-direction: column; gap: 20px; }
+.contact-panel {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 26px 24px;
+}
+.contact-panel h3 { font-size: 1.1rem; margin-bottom: 12px; }
+.contact-panel-ink {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+.contact-panel-ink h3 { color: var(--color-white); }
+.contact-panel-ink p { color: rgba(255,255,255,0.72); }
+.contact-panel-ink .btn { margin-top: 6px; }
+
+.contact-steps { counter-reset: kontaktschritt; list-style: none; margin: 0; padding: 0; }
+.contact-steps li {
+  counter-increment: kontaktschritt;
+  position: relative;
+  padding-left: 42px;
+  padding-bottom: 20px;
+}
+.contact-steps li:last-child { padding-bottom: 0; }
+.contact-steps li::before {
+  content: counter(kontaktschritt);
+  position: absolute;
+  left: 0; top: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.86rem;
+  display: flex; align-items: center; justify-content: center;
+}
+/* Verbindungslinie zwischen den Schritten */
+.contact-steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 13.5px; top: 32px; bottom: 6px;
+  width: 1px;
+  background: var(--color-border);
+}
+.contact-steps strong { display: block; font-size: 0.97rem; margin-bottom: 3px; }
+.contact-steps span { display: block; font-size: 0.89rem; color: var(--color-text-muted); line-height: 1.55; }
+
 .contact-tile {
   display: flex;
   gap: 16px;
@@ -967,7 +1094,7 @@ textarea { resize: vertical; min-height: 120px; }
 .footer-grid h4 { color: var(--color-white); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; }
 .footer-grid a { color: rgba(255,255,255,0.65); display: block; padding: 6px 0; font-size: 0.92rem; }
 .footer-grid a:hover { color: var(--color-accent); }
-.footer-logo { display: flex; align-items: center; gap: 10px; color: var(--color-white); font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; margin-bottom: 14px; }
+.footer-logo { display: flex; align-items: center; gap: 12px; color: var(--color-white); font-family: var(--font-wordmark); font-weight: 600; font-size: 1.45rem; letter-spacing: 0.17em; margin-bottom: 16px; }
 .footer-logo-mark { width: 30px; height: 27px; object-fit: contain; flex: none; }
 .footer-grid a.social-link { display: flex; align-items: center; gap: 10px; }
 .footer-grid a.social-link svg { width: 17px; height: 17px; flex: none; color: rgba(255,255,255,0.5); }

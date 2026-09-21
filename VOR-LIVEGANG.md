@@ -16,9 +16,9 @@ Jede Anfrage geht verloren.
 Nach der Anbindung: In der Datenschutzerklärung Abschnitt 4 den Auftragsverarbeiter ergänzen
 und einen Auftragsverarbeitungsvertrag (AVV) mit dem Anbieter abschließen.
 
-### 2. Öffnungszeiten final festlegen
-Auf `kontakt.html` steht derzeit „Mo–Fr 08:00–17:00 Uhr (Platzhalter – bitte final ergänzen)".
-Sobald die echten Zeiten feststehen, dort eintragen und den Platzhalter-Hinweis entfernen.
+### 2. Öffnungszeiten bestätigen
+Auf `kontakt.html` stehen jetzt „Mo–Fr 08:00–17:00 Uhr" ohne Platzhalter-Hinweis.
+Bitte einmal bestätigen, dass diese Zeiten stimmen, oder mir die richtigen nennen.
 
 ### 3. Referenzen-Seite mit echten Projekten füllen
 `referenzen.html` ist aktuell als „im Aufbau" gekennzeichnet, steht aber in der Hauptnavigation.

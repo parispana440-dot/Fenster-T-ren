@@ -434,7 +434,7 @@ section { padding: 88px 0; }
   width: 0%;
   background: var(--color-accent);
 }
-.hero-slide-tab.is-active .hero-slide-tab-fill { animation: heroSlideProgress 5s linear forwards; }
+.hero-slide-tab.is-active .hero-slide-tab-fill { animation: heroSlideProgress 8s linear forwards; }
 @keyframes heroSlideProgress {
   from { width: 0%; }
   to { width: 100%; }

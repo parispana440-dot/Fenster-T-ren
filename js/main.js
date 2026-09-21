@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var tabs = Array.prototype.slice.call(root.querySelectorAll('.hero-slide-tab'));
     if (slides.length < 2 || tabs.length !== slides.length) return;
 
-    var duration = 5000;
+    var duration = 8000;
     var current = 0;
     var timer = null;
 

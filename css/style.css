@@ -544,6 +544,14 @@ section { padding: 88px 0; }
   .feature-visual-photo { padding: 20px; }
   .feature-visual-photo img { max-height: 320px; }
 }
+.map-embed {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  line-height: 0;
+}
+.map-embed iframe { display: block; }
 .feature-photo {
   border-radius: 10px;
   overflow: hidden;
@@ -793,6 +801,9 @@ textarea { resize: vertical; min-height: 120px; }
 .footer-grid a:hover { color: var(--color-accent); }
 .footer-logo { display: flex; align-items: center; gap: 10px; color: var(--color-white); font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; margin-bottom: 14px; }
 .footer-logo-mark { width: 30px; height: 27px; object-fit: contain; flex: none; }
+.footer-grid a.social-link { display: flex; align-items: center; gap: 10px; }
+.footer-grid a.social-link svg { width: 17px; height: 17px; flex: none; color: rgba(255,255,255,0.5); }
+.footer-grid a.social-link:hover svg { color: var(--color-accent); }
 .footer-bottom {
   display: flex;
   justify-content: space-between;

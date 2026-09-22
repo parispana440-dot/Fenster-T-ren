@@ -850,7 +850,8 @@ section { padding: 88px 0; }
 }
 .feature-row.reverse .feature-visual { order: 2; }
 @media (max-width: 900px) {
-  .feature-row, .feature-row.reverse .feature-visual { grid-template-columns: 1fr; order: 0; }
+  /* Einspaltig ist der Spaltenabstand von 60px als Zeilenabstand zu viel. */
+  .feature-row, .feature-row.reverse .feature-visual { grid-template-columns: 1fr; order: 0; gap: 28px; }
 }
 .feature-visual {
   background: var(--color-bg-alt);
@@ -886,6 +887,14 @@ section { padding: 88px 0; }
 }
 .feature-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .feature-photo.wide { aspect-ratio: 16/9; }
+/* Querformat im Seitenverhältnis der Kamera: das Foto wird nicht
+   beschnitten, es sitzt genau im Feld. */
+.feature-photo.vier-drei { aspect-ratio: 4/3; }
+@media (max-width: 900px) {
+  /* Einspaltig steht das Bild sonst hinter dem Knopf und damit am Ende des
+     Abschnitts. Vor dem Text gelesen führt es in das Thema ein. */
+  .feature-row .feature-photo { order: -1; }
+}
 
 /* Lamella profile gallery (e.g. Raffstore Z90/S90/C80) */
 .lamella-card {

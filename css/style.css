@@ -751,39 +751,6 @@ section { padding: 88px 0; }
   .feature-visual-photo { padding: 20px; }
   .feature-visual-photo img { max-height: 320px; }
 }
-.map-embed {
-  position: relative;
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-  line-height: 0;
-}
-.map-embed iframe { display: block; }
-.map-consent {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 28px;
-  text-align: center;
-  line-height: 1.5;
-  background: var(--color-bg-alt);
-  background-image:
-    repeating-linear-gradient(90deg, rgba(62,65,64,0.05) 0 1px, transparent 1px 42px),
-    repeating-linear-gradient(0deg, rgba(62,65,64,0.05) 0 1px, transparent 1px 42px);
-}
-.map-consent svg { width: 34px; height: 34px; color: var(--color-accent); }
-.map-consent p {
-  margin: 0;
-  max-width: 340px;
-  font-size: 0.86rem;
-  color: var(--color-text-muted);
-}
-.map-consent a { text-decoration: underline; }
 .feature-photo {
   border-radius: 10px;
   overflow: hidden;
@@ -1370,4 +1337,386 @@ main:focus { outline: none; }
 @media (max-width: 380px) {
   .hero-slide-nav-inner { gap: 16px; }
   .hero-slide-tab { min-width: 100px; font-size: 0.76rem; }
+}
+
+/* ===========================================================================
+   Einwilligungs-Banner
+   =========================================================================== */
+.ce-huelle {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(22, 32, 43, 0.55);
+  backdrop-filter: blur(3px);
+  animation: ceEinblenden 0.28s ease both;
+}
+@keyframes ceEinblenden { from { opacity: 0; } to { opacity: 1; } }
+
+.ce-karte {
+  width: 100%;
+  max-width: 620px;
+  background: var(--color-white);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  padding: 30px 32px 24px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  animation: ceAufsteigen 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ceAufsteigen { from { transform: translateY(22px); } to { transform: translateY(0); } }
+
+.ce-kopf { display: flex; gap: 16px; align-items: flex-start; }
+.ce-marke {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+}
+.ce-marke svg { width: 23px; height: 23px; }
+.ce-karte h2 {
+  margin: 2px 0 8px;
+  font-size: 1.22rem;
+  line-height: 1.3;
+}
+#ce-text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.ce-liste { list-style: none; margin: 24px 0 0; padding: 0; }
+.ce-zweck {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border);
+}
+.ce-zweck strong { display: block; font-size: 0.93rem; margin-bottom: 3px; }
+.ce-zweck strong label { display: inline; font-size: inherit; font-weight: inherit; margin: 0; cursor: pointer; }
+.ce-zweck p { margin: 0; font-size: 0.84rem; line-height: 1.55; color: var(--color-text-muted); }
+.ce-fest {
+  align-self: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-eco);
+  white-space: nowrap;
+}
+
+/* Schalter */
+.ce-schalter { position: relative; display: block; width: 44px; height: 25px; flex: none; cursor: pointer; margin: 0; }
+.ce-schalter input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.ce-schalter > span {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #cdd5dd;
+  transition: background 0.22s;
+  pointer-events: none;
+}
+.ce-schalter > span::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.22s;
+}
+.ce-schalter input:checked + span { background: var(--color-accent-dark); }
+.ce-schalter input:checked + span::after { transform: translateX(19px); }
+.ce-schalter input:focus-visible + span { outline: 2px solid var(--color-accent-dark); outline-offset: 2px; }
+.ce-schalter-fest > span { background: var(--color-eco); }
+.ce-schalter-fest > span::after { transform: translateX(19px); }
+
+/* Schaltflächen: Ablehnen und Zustimmen gleichwertig (Art. 7 Abs. 3 DSGVO) */
+.ce-aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+.ce-btn {
+  flex: 1 1 auto;
+  min-width: 150px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+/* Ablehnen und Zustimmen sind bewusst gleich stark gestaltet: gleiche Größe,
+   gleiche Füllung, vergleichbarer Kontrast. Ein optisch schwächerer
+   Ablehnen-Knopf gilt den deutschen Aufsichtsbehörden als unzulässige
+   Beeinflussung der Einwilligung (Art. 7 Abs. 3 DSGVO). */
+.ce-btn-ablehnen {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border: 1px solid var(--color-ink);
+}
+.ce-btn-ablehnen:hover { background: #0d1620; border-color: #0d1620; }
+.ce-btn-schlicht {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+}
+.ce-btn-schlicht:hover { border-color: var(--color-ink); background: var(--color-bg); }
+.ce-btn-voll {
+  background: var(--color-accent-dark);
+  color: var(--color-white);
+  border: 1px solid var(--color-accent-dark);
+}
+.ce-btn-voll:hover { background: #1f6491; border-color: #1f6491; }
+.ce-btn:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+
+.ce-fuss {
+  margin: 16px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+.ce-fuss a { color: var(--color-accent-dark); }
+
+body.ce-offen { overflow: hidden; }
+
+@media (max-width: 560px) {
+  .ce-huelle { padding: 0; align-items: flex-end; }
+  .ce-karte { border-radius: 14px 14px 0 0; padding: 24px 20px 20px; max-height: 92vh; }
+  .ce-kopf { gap: 13px; }
+  .ce-marke { width: 38px; height: 38px; border-radius: 10px; }
+  .ce-marke svg { width: 20px; height: 20px; }
+  .ce-karte h2 { font-size: 1.1rem; }
+  .ce-zweck { grid-template-columns: auto 1fr; gap: 12px; }
+  .ce-fest { grid-column: 2; margin-top: -2px; }
+  .ce-btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ce-huelle, .ce-karte { animation: none; }
+  .ce-schalter > span, .ce-schalter > span::after { transition: none; }
+}
+
+/* ===========================================================================
+   Standortkarte
+   =========================================================================== */
+.karte-box {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #eef1f4;
+}
+.karte-flaeche { width: 100%; height: 100%; }
+
+/* Der Kartenanbieter liefert bunte Kacheln. Entsättigt und aufgehellt fügen
+   sie sich in den hellen Grauton der Website ein, sodass allein das
+   Haus-Symbol im Firmenblau heraussticht. */
+.karte-box .leaflet-tile-pane {
+  filter: grayscale(1) brightness(1.06) contrast(0.92);
+}
+.karte-box .leaflet-container {
+  background: #eef1f4;
+  font-family: var(--font-body);
+}
+.karte-box .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.86);
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  padding: 2px 7px;
+}
+.karte-box .leaflet-control-attribution a { color: var(--color-accent-dark); }
+.karte-box .leaflet-bar a {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-border);
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+.karte-box .leaflet-bar a:hover { background: var(--color-accent-light); color: var(--color-accent-dark); }
+.karte-box .leaflet-bar { border: 1px solid var(--color-border); box-shadow: var(--shadow-md); }
+
+/* Haus-Symbol */
+.karte-marker { position: relative; }
+/* Tropfenform: ein um 45 Grad gedrehtes Quadrat mit drei runden Ecken.
+   Die vierte, spitze Ecke zeigt dadurch nach unten auf die Adresse.
+   Unterste Spitze liegt bei 19 + 19*wurzel(2) = rund 46 px, was dem
+   iconAnchor in karte.js entspricht. */
+.karte-marker-haus {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 38px;
+  height: 38px;
+  margin-left: -19px;
+  border-radius: 50% 50% 50% 3px;
+  transform: rotate(-45deg);
+  display: grid;
+  place-items: center;
+  background: var(--color-accent-dark);
+  border: 2.5px solid #fff;
+  box-shadow: 0 4px 12px rgba(22, 32, 43, 0.38);
+  color: #fff;
+  transition: background 0.18s, transform 0.18s;
+}
+.karte-marker:hover .karte-marker-haus { background: var(--color-accent); transform: rotate(-45deg) scale(1.08); }
+.karte-marker-haus svg { width: 19px; height: 19px; transform: rotate(45deg); }
+.karte-marker-schatten {
+  position: absolute;
+  left: 50%;
+  top: 46px;
+  width: 22px;
+  height: 7px;
+  margin-left: -11px;
+  border-radius: 50%;
+  background: rgba(22, 32, 43, 0.3);
+  filter: blur(2.5px);
+}
+.karte-marker-puls {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 38px;
+  height: 38px;
+  margin-left: -19px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  opacity: 0;
+  animation: kartePuls 2.8s ease-out infinite;
+}
+@keyframes kartePuls {
+  0%   { transform: scale(0.65); opacity: 0.75; }
+  70%  { transform: scale(1.75); opacity: 0; }
+  100% { transform: scale(1.75); opacity: 0; }
+}
+.karte-marker:focus-visible .karte-marker-haus { outline: 3px solid var(--color-ink); outline-offset: 3px; }
+.karte-marker:focus:not(:focus-visible) .karte-marker-haus { outline: none; }
+.karte-box { --karte-hoehe: 460px; }
+
+/* Popup */
+.karte-box .karte-popup-huelle .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(22, 32, 43, 0.26);
+  padding: 0;
+  border: 1px solid var(--color-border);
+}
+.karte-box .karte-popup-huelle .leaflet-popup-content { margin: 0; }
+.karte-box .karte-popup-huelle .leaflet-popup-tip-container { width: 22px; height: 12px; }
+.karte-box .karte-popup-huelle .leaflet-popup-tip {
+  width: 14px;
+  height: 14px;
+  margin: -8px auto 0;
+  padding: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 0;
+  border-left: 0;
+  box-shadow: none;
+}
+.karte-box .karte-popup-huelle a.leaflet-popup-close-button {
+  color: var(--color-text-muted);
+  padding: 9px 9px 0 0;
+  font-size: 19px;
+}
+.karte-box .karte-popup-huelle a.leaflet-popup-close-button:hover { color: var(--color-ink); background: none; }
+
+.karte-popup { width: 272px; max-width: 100%; padding: 18px 20px 16px; box-sizing: border-box; }
+.karte-popup-marke {
+  margin: 0 0 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+.karte-popup-name {
+  margin: 0 0 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.04rem;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+.karte-popup-adresse {
+  margin: 0 0 13px;
+  font-style: normal;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.karte-popup-daten {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 12px;
+  font-size: 0.85rem;
+  padding-top: 13px;
+  border-top: 1px solid var(--color-border);
+}
+.karte-popup-daten dt { color: var(--color-text-muted); }
+.karte-popup-daten dd { margin: 0; color: var(--color-ink); }
+.karte-popup-daten a { color: var(--color-accent-dark); font-weight: 500; text-decoration: none; }
+.karte-popup-daten a:hover { text-decoration: underline; }
+.karte-popup-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 15px;
+  padding: 9px 15px;
+  border-radius: 7px;
+  background: var(--color-accent-dark);
+  color: #fff !important;
+  font-size: 0.83rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.karte-popup-route:hover { background: #1f6491; }
+.karte-popup-route svg { width: 11px; height: 11px; }
+
+/* Platzhalter ohne Einwilligung */
+.karte-hinweis {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+  padding: 30px 26px;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 13px, rgba(22,32,43,0.022) 13px, rgba(22,32,43,0.022) 26px),
+    #eef1f4;
+}
+.karte-hinweis > svg { width: 34px; height: 34px; color: var(--color-accent-dark); }
+.karte-hinweis p { margin: 0; font-size: 0.95rem; color: var(--color-ink); }
+.karte-hinweis-text { max-width: 430px; font-size: 0.85rem !important; line-height: 1.6; color: var(--color-text-muted) !important; }
+.karte-hinweis-knoepfe { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 6px; }
+
+@media (max-width: 620px) {
+  /* Muss das geöffnete Popup (rund 312 px) plus das Haus-Symbol fassen,
+     sonst schiebt Leaflet beim Aufklappen das Symbol aus dem Bild. */
+  .karte-box { height: 440px; }
+  .karte-hinweis { padding: 24px 18px; }
+  .karte-hinweis-knoepfe .btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .karte-marker-puls { animation: none; opacity: 0; }
 }

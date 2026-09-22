@@ -33,6 +33,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 <link rel="stylesheet" href="css/style.css">
+<script src="js/einwilligung.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -497,13 +498,24 @@
         <h2>Sie finden uns in Isernhagen</h2>
         <p style="max-width:660px;">Borsigstraße 7, 30916 Isernhagen – gut erreichbar aus dem gesamten Großraum Hannover. Ein Besuchstermin ist auf Anfrage jederzeit möglich; bitte kündigen Sie ihn kurz an, damit auch jemand für Sie da ist.</p>
       </div>
-      <div class="map-embed" data-map-consent
-           data-map-src="https://www.google.com/maps?q=Borsigstra%C3%9Fe%207%2C%2030916%20Isernhagen&amp;output=embed">
-        <div class="map-consent">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-          <p>Wir laden die Karte erst, wenn Sie zustimmen. Beim Laden werden Daten an Google übertragen – Näheres in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-          <button type="button" class="btn btn-primary btn-sm">Karte laden</button>
-        </div>
+      <!-- Standortkarte. Die Koordinate ist der einzige Ort, an dem die
+           Position hinterlegt ist – siehe VOR-LIVEGANG.md, Punkt 15.
+           Der Routen-Link arbeitet mit der Anschrift und funktioniert
+           deshalb unabhängig von der Koordinate. -->
+      <div class="karte-box"
+           data-karte
+           data-lat="52.4283"
+           data-lon="9.8146"
+           data-zoom="16"
+           data-marke="Ihr Fachbetrieb vor Ort"
+           data-name="Assos GmbH &amp; Co. KG"
+           data-strasse="Borsigstraße 7"
+           data-ort="30916 Isernhagen"
+           data-tel="0511 700 226 21"
+           data-tel-link="+4951170022621"
+           data-mail="info@assos-projekt.de"
+           data-zeiten="Mo–Fr 08:00–17:00 Uhr"
+           data-route="https://www.google.com/maps/dir/?api=1&amp;destination=Borsigstra%C3%9Fe+7%2C+30916+Isernhagen">
       </div>
     </div>
   </section>
@@ -549,7 +561,7 @@
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> Assos GmbH &amp; Co. KG. Alle Rechte vorbehalten.</span>
       <span>
-        <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="#" data-einwilligung-oeffnen>Cookie-Einstellungen</a>
       </span>
     </div>
   </div>
@@ -557,5 +569,6 @@
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script src="js/main.js"></script>
+<script src="js/karte.js" defer></script>
 </body>
 </html>

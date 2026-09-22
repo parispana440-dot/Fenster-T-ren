@@ -97,24 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Map embeds load only after the visitor agrees (no data to Google before that)
-  document.querySelectorAll('[data-map-consent]').forEach(function (box) {
-    var button = box.querySelector('button');
-    if (!button) return;
-    button.addEventListener('click', function () {
-      var frame = document.createElement('iframe');
-      frame.src = box.dataset.mapSrc;
-      frame.title = 'Standort Assos GmbH & Co. KG';
-      frame.width = '100%';
-      frame.height = '100%';
-      frame.style.border = '0';
-      frame.loading = 'lazy';
-      frame.referrerPolicy = 'no-referrer-when-downgrade';
-      box.innerHTML = '';
-      box.appendChild(frame);
-    });
-  });
-
   // Hero slideshow: auto-advancing slides with clickable progress-bar tabs
   document.querySelectorAll('[data-hero-slideshow]').forEach(function (root) {
     var slides = Array.prototype.slice.call(root.querySelectorAll('.hero-slide'));

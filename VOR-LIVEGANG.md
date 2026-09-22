@@ -126,11 +126,35 @@ sind Aktualität, Regelmäßigkeit und dass Sie antworten.
 Praktischer Weg: nach jeder Montage eine kurze Nachricht mit dem direkten
 Bewertungslink.
 
-### 12. Exakte Koordinaten nachtragen
-Im JSON-LD steht bewusst **keine** Geo-Koordinate. Eine falsche Koordinate wäre
-schlimmer als keine – Google leitet den Standort sonst zuverlässig aus der
-Adresse ab. Sobald das Unternehmensprofil steht, trage ich die dort bestätigte
-Position nach.
+### 12. Koordinate der Karte bestätigen — BITTE ZUERST PRÜFEN
+Die Karte auf `kontakt.html` setzt das Haus-Symbol auf **52.4283 / 9.8146**.
+Diese Koordinate ist **von mir geschätzt** und nicht überprüft: Ich konnte aus
+dieser Arbeitsumgebung heraus keinen Geokodierungsdienst erreichen. Sie zeigt
+das Gewerbegebiet Isernhagen Süd, möglicherweise aber nicht exakt die
+Borsigstraße 7.
+
+So bestätigen oder korrigieren Sie sie in zwanzig Sekunden:
+
+1. In Google Maps die Borsigstraße 7 suchen
+2. Mit der rechten Maustaste auf das Gebäude klicken
+3. Ganz oben stehen zwei Zahlen, z. B. `52,42831, 9,81462` — anklicken kopiert sie
+4. In `kontakt.html` im Block `<div class="karte-box" ...>` eintragen:
+   `data-lat="52.42831"` und `data-lon="9.81462"` (Punkt statt Komma!)
+
+Nur diese eine Stelle bestimmt die Position. Der Knopf „Route planen" arbeitet
+mit der Anschrift und führt deshalb auch dann richtig, wenn die Koordinate noch
+nicht stimmt.
+
+Sobald die Koordinate bestätigt ist, trage ich sie zusätzlich als `geo` in die
+strukturierten Daten ein — dort steht sie bewusst noch nicht, weil eine falsche
+Angabe schlechter wäre als gar keine.
+
+### 12a. Kartenkacheln bei wachsendem Besuch
+Die Karte bezieht ihre Ausschnitte von den öffentlichen Servern der
+OpenStreetMap Foundation. Das ist für eine Firmenwebsite in dieser Größe
+üblich und kostenlos. Sollte die Seite einmal sehr viel Zuspruch bekommen,
+gehört ein eigener Kachel-Zugang dazu (z. B. MapTiler, kostenloses Kontingent,
+Server in der EU). Zu ändern wäre dann genau eine Zeile in `js/karte.js`.
 
 ### 13. Social-Media-Profile für `sameAs`
 Sobald Instagram und Facebook existieren, gehören die URLs nicht nur in den

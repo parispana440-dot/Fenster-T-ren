@@ -1933,3 +1933,75 @@ body.ce-offen { overflow: hidden; }
   .hero { padding: 36px 0 34px; }
   .hero-badge { height: 158px; }
 }
+
+/* ---------- Materialentscheidung auf den Produktseiten ---------- */
+/* Der Besucher hat sich beim Aufruf dieser Seite meist schon festgelegt.
+   Deshalb steht hier keine neutrale Gegenüberstellung, sondern die Frage,
+   ob seine Wahl trägt - einschließlich der Fälle, in denen ein anderes
+   Material besser passt. */
+.materialcheck {
+  display: grid;
+  /* Drei gleich hohe Spalten: der Ja-Fall zuerst, daneben die beiden Fälle,
+     in denen wir zu einem anderen Material raten würden. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+.materialcheck-ja {
+  background: var(--color-eco-light);
+  border: 1px solid #cfe4d9;
+  border-left: 3px solid var(--color-eco);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.materialcheck-ja h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  color: #1d6b4c;
+}
+.materialcheck-ja .check-list li::before {
+  border-left-color: var(--color-eco);
+  border-bottom-color: var(--color-eco);
+}
+.materialcheck-alt { display: contents; }
+.materialcheck-karte {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.materialcheck-karte h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+.materialcheck-karte ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.materialcheck-karte li {
+  position: relative;
+  padding-left: 17px;
+  margin-bottom: 7px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+.materialcheck-karte li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 1.5px;
+  background: var(--color-border-strong, #c3ccd4);
+}
+.materialcheck-karte .card-link { margin: 10px -4px -4px; }
+@media (max-width: 1000px) {
+  .materialcheck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .materialcheck-ja { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .materialcheck { grid-template-columns: 1fr; gap: 16px; }
+  .materialcheck-ja { grid-column: auto; padding: 22px 22px; }
+}

@@ -15,6 +15,9 @@
   --color-accent: #3895d3;
   --color-accent-dark: #2675ab;
   --color-accent-light: #e5f1fa;
+  /* Markenblau auf dunklem Grund: #3895d3 kommt auf der Hero-Fläche nur auf
+     2,8:1 und ist damit zu schwach. Diese Aufhellung hält dort 4,5:1 ein. */
+  --color-accent-auf-dunkel: #7ec7f2;
   /* Zweitfarbe: steht ausschließlich für Energieeffizienz, Förderung und Nachhaltigkeit */
   --color-success: #2f7d5c;
   --color-eco: #2f7d5c;
@@ -521,11 +524,11 @@ section { padding: 88px 0; }
   align-items: center;
 }
 .hero h1, .hero h2, .hero h3 { color: var(--color-white); }
-.hero .eyebrow { color: var(--color-accent); }
+.hero .eyebrow { color: var(--color-accent-auf-dunkel); }
 .hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.78); max-width: 540px; }
 .hero-actions { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
 .hero-stats { display: flex; gap: 32px; margin-top: 30px; flex-wrap: wrap; }
-.hero-stats div strong { display: block; font-family: var(--font-heading); font-size: 1.7rem; color: var(--color-accent); }
+.hero-stats div strong { display: block; font-family: var(--font-heading); font-size: 1.7rem; color: var(--color-accent-auf-dunkel); }
 .hero-stats div span { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
 
 .hero-visual {
@@ -606,33 +609,54 @@ section { padding: 88px 0; }
 .hero .container { position: relative; z-index: 2; }
 
 @media (max-width: 900px) {
-  /* Im Hochformat würde ein Hintergrundbild nur einen schmalen senkrechten
-     Streifen des Hauses zeigen. Deshalb läuft das Foto hier als Band über
-     die volle Breite oberhalb des Textes – in einem flacheren Ausschnitt,
-     damit es nicht zu viel Höhe kostet.
-     Es gehört bewusst zu beiden Folien: so springt beim Wechsel nichts. */
+  /* Im Hochformat würde ein formatfüllendes Hintergrundbild nur einen
+     schmalen senkrechten Streifen des Hauses zeigen. Das Foto steht hier
+     deshalb über dem Text - im 4:3-Ausschnitt, der das Haus vollständig
+     zeigt, und randlos direkt unter dem Kopfbereich.
+     Statt einer harten Kante läuft das Bild nach unten aus: die Maske
+     blendet es aus, sodass der Verlauf des Heros darunter durchkommt.
+     Dadurch gibt es keine sichtbare Naht zwischen Foto und Fläche.
+     Das Foto gehört bewusst zu beiden Folien - so springt beim Wechsel
+     nichts. */
   .hero-foto-ebene {
     position: relative;
     inset: auto;
     opacity: 1;
-    aspect-ratio: 1430 / 650;
-    margin: -48px 0 30px;
+    aspect-ratio: 1000 / 707;
+    /* Der negative Rand zieht den Text in den bereits klar ausgeblendeten
+       Bereich; dort liegt kein Bildinhalt mehr hinter der Schrift. */
+    margin: 0 0 -18px;
     transition: none;
   }
   .hero-foto-ebene::before {
     background-image: url('../img/haus-hero-mobil.webp');
-    background-position: center;
+    background-position: center top;
+    -webkit-mask-image: linear-gradient(to bottom,
+      #000 0%, #000 66%, rgba(0,0,0,0.42) 82%, transparent 93%);
+            mask-image: linear-gradient(to bottom,
+      #000 0%, #000 66%, rgba(0,0,0,0.42) 82%, transparent 93%);
   }
-  .hero-foto-ebene::after {
-    background: linear-gradient(to bottom,
-      rgba(18, 24, 30, 0.10) 0%,
-      rgba(18, 24, 30, 0.00) 28%,
-      rgba(18, 24, 30, 0.00) 72%,
-      rgba(18, 24, 30, 0.35) 100%);
+  /* Die waagerechte Abdunklung der Breitbildfassung entfällt: hier steht
+     keine Schrift auf dem Foto. */
+  .hero-foto-ebene::after { background: none; }
+}
+/* Zwischenbereich: auf Tabletts im Hochformat ergäbe das 4:3-Format ein
+   fast 600px hohes Bild - der Knopf rutschte weit unter die Kante. Dort
+   läuft deshalb der breite Ausschnitt in begrenzter Höhe. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero-foto-ebene {
+    aspect-ratio: auto;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 400px;
+  }
+  .hero-foto-ebene::before {
+    background-image: url('../img/haus-hero.webp');
+    background-position: center 42%;
   }
 }
 @media (max-width: 480px) {
-  .hero-foto-ebene { margin: -36px 0 26px; }
+  .hero-foto-ebene { margin-bottom: -16px; }
 }
 .hero-slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; }
 
@@ -1985,7 +2009,8 @@ body.ce-offen { overflow: hidden; }
 /* Grenze bei 900px, weil das Hero-Raster dort ohnehin einspaltig wird und
    die Grafiken dann in voller Breite unter dem Text stehen würden. */
 @media (max-width: 900px) {
-  .hero { padding: 48px 0 42px; }
+  /* oben ohne Polster: dort schließt das Foto direkt an den Kopf an */
+  .hero { padding: 0 0 42px; }
   .hero-inner { gap: 30px; }
 
   /* Fensterraster: rein dekorativ, entfällt auf schmalen Geräten */
@@ -1994,21 +2019,35 @@ body.ce-offen { overflow: hidden; }
   .hero-stats { gap: 16px 18px; }
   .hero-stats div strong { font-size: 1.4rem; }
 
-  /* Fördersiegel deutlich kleiner, bleibt aber als Blickfang erhalten */
+  /* Beide Folien liegen im selben Rasterfeld, also ist das Feld so hoch wie
+     die längere. Mittig ausgerichtet bekam die kürzere Förderungs-Folie
+     dadurch einen breiten Leerraum über dem Siegel. Oben ausgerichtet
+     beginnt jede Folie direkt unter dem Foto. */
+  .hero-slide { align-items: flex-start; }
+
+  /* Das Siegel ist die Kernaussage der Folie - es steht linksbündig über
+     der Überschrift und nimmt so viel Breite ein, dass die 15 % auf
+     Armlänge lesbar sind. */
   .hero-badge {
     aspect-ratio: auto;
-    height: 190px;
+    height: auto;
+    width: min(64%, 250px);
     padding: 0;
     order: -1;
-    margin-bottom: 2px;
+    margin: 0 0 14px;
   }
-  .hero-badge svg { height: 100%; width: auto; }
+  .hero-badge svg { width: 100%; height: auto; }
 
   .hero-slide-nav { padding-top: 18px; }
 }
 @media (max-width: 480px) {
-  .hero { padding: 36px 0 34px; }
-  .hero-badge { height: 158px; }
+  .hero { padding: 0 0 34px; }
+  .hero-badge { width: min(70%, 232px); }
+  /* Das Foto kostet Höhe. Damit der Angebotsknopf auf einem üblichen
+     Telefon ohne Scrollen sichtbar bleibt, rücken Fließtext und Knöpfe
+     ein Stück zusammen - ohne die Lesbarkeit anzutasten. */
+  .hero .lead { line-height: 1.55; }
+  .hero-actions { margin-top: 16px; }
 }
 
 /* ---------- Materialentscheidung auf den Produktseiten ---------- */

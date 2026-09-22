@@ -1336,28 +1336,38 @@ main:focus { outline: none; }
 .faq-item.open .faq-answer-inner { visibility: visible; }
 
 /* ---------- Slideshow: Pause-Schalter (WCAG 2.2.2) ---------- */
+/* Reiner Symbolknopf. Der Name für Screenreader steckt im aria-label,
+   das das Skript beim Umschalten mitführt. */
 .hero-slide-pause {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
+  align-self: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.22);
   color: rgba(255,255,255,0.82);
-  border-radius: 999px;
-  padding: 6px 14px 6px 11px;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 500;
+  border-radius: 50%;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 .hero-slide-pause:hover { background: rgba(255,255,255,0.16); color: #fff; border-color: rgba(255,255,255,0.4); }
 .hero-slide-pause:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.hero-slide-pause svg { width: 12px; height: 12px; flex: none; }
-.hero-slide-pause .icon-play { display: none; }
+.hero-slide-pause svg { width: 13px; height: 13px; flex: none; }
+/* Das Play-Dreieck wirkt mittig gesetzt leicht nach links gerückt */
+.hero-slide-pause .icon-play { display: none; margin-left: 2px; }
 .hero-slide-pause[aria-pressed="true"] .icon-play { display: block; }
 .hero-slide-pause[aria-pressed="true"] .icon-pause { display: none; }
-@media (max-width: 620px) {
-  .hero-slide-pause { font-size: 0.74rem; padding: 6px 12px 6px 10px; }
-  .hero-slide-pause .pause-text { display: none; }
+@media (max-width: 420px) {
+  /* Ohne das fehlen bei 390 px wenige Pixel und der Knopf rutscht in eine
+     zweite Zeile - die engeren Abstände halten alles auf einer Höhe. */
+  .hero-slide-nav-inner { gap: 18px; }
+  .hero-slide-tab { min-width: 108px; }
+}
+@media (max-width: 380px) {
+  .hero-slide-nav-inner { gap: 16px; }
+  .hero-slide-tab { min-width: 100px; font-size: 0.76rem; }
 }

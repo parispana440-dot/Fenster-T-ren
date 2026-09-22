@@ -158,10 +158,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function pauseKnopfAktualisieren() {
       if (!pauseKnopf) return;
       pauseKnopf.setAttribute('aria-pressed', angehalten ? 'true' : 'false');
-      var text = pauseKnopf.querySelector('.pause-text');
+      // Der Knopf zeigt nur ein Symbol - Name und Titel tragen die Bedeutung
       var beschriftung = angehalten ? 'Automatischen Wechsel fortsetzen' : 'Automatischen Wechsel anhalten';
-      if (text) text.textContent = beschriftung;
       pauseKnopf.setAttribute('aria-label', beschriftung);
+      pauseKnopf.setAttribute('title', beschriftung);
     }
 
     tabs.forEach(function (tab, i) {

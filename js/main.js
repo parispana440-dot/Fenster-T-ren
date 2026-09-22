@@ -124,6 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var duration = 8000;
     var current = 0;
     var timer = null;
+    var pauseKnopf = root.querySelector('.hero-slide-pause');
+    // Wer Bewegung reduziert haben moechte, bekommt keinen automatischen Wechsel
+    var ruheModus = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var angehalten = ruheModus.matches;
 
     function show(index) {
       slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === index); });
@@ -140,9 +144,24 @@ document.addEventListener('DOMContentLoaded', function () {
       current = index;
     }
 
-    function restart() {
+    function stoppen() {
       clearInterval(timer);
+      timer = null;
+    }
+
+    function restart() {
+      stoppen();
+      if (angehalten) return;
       timer = setInterval(function () { show((current + 1) % slides.length); }, duration);
+    }
+
+    function pauseKnopfAktualisieren() {
+      if (!pauseKnopf) return;
+      pauseKnopf.setAttribute('aria-pressed', angehalten ? 'true' : 'false');
+      var text = pauseKnopf.querySelector('.pause-text');
+      var beschriftung = angehalten ? 'Automatischen Wechsel fortsetzen' : 'Automatischen Wechsel anhalten';
+      if (text) text.textContent = beschriftung;
+      pauseKnopf.setAttribute('aria-label', beschriftung);
     }
 
     tabs.forEach(function (tab, i) {
@@ -152,19 +171,191 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+    if (pauseKnopf) {
+      pauseKnopf.addEventListener('click', function () {
+        angehalten = !angehalten;
+        pauseKnopfAktualisieren();
+        restart();
+      });
+    }
+
+    // Der Wechsel haelt an, solange jemand mit dem Bereich arbeitet, und laeuft
+    // danach weiter - sonst springt der Inhalt unter der Hand weg.
+    root.addEventListener('mouseenter', stoppen);
+    root.addEventListener('mouseleave', restart);
+    root.addEventListener('focusin', stoppen);
+    root.addEventListener('focusout', function (e) {
+      if (!root.contains(e.relatedTarget)) restart();
+    });
+    // Im Hintergrundtab nicht weiterlaufen
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stoppen(); else restart();
+    });
+    ruheModus.addEventListener('change', function (e) {
+      angehalten = e.matches;
+      pauseKnopfAktualisieren();
+      restart();
+    });
+
+    pauseKnopfAktualisieren();
     restart();
   });
 
-  // Contact / quote request forms: client-side only (no backend configured yet)
+  // ---------------------------------------------------------------------------
+  // Kontakt- und Angebotsformular
+  //
+  // Solange am <form> kein data-endpoint hinterlegt ist, gibt es keinen Server,
+  // der die Anfrage entgegennimmt. Dann oeffnet das Formular das E-Mail-Programm
+  // des Besuchers mit einer fertig ausgefuellten Nachricht. Es wird in diesem
+  // Fall ausdruecklich NICHT behauptet, die Anfrage sei bereits eingegangen.
+  //
+  // Sobald ein Versanddienst eingerichtet ist (z. B. Web3Forms), genuegt es,
+  // am <form> data-endpoint="https://..." zu ergaenzen - dann wird regulaer
+  // per fetch() abgeschickt. Der uebrige Code bleibt unveraendert.
+  // ---------------------------------------------------------------------------
+  var MELDUNGEN = {
+    valueMissing: 'Bitte füllen Sie dieses Feld aus.',
+    typeMismatch: 'Bitte prüfen Sie diese Eingabe.',
+    email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein, z. B. name@beispiel.de.',
+    checkbox: 'Bitte bestätigen Sie diesen Punkt, damit wir Ihre Anfrage bearbeiten dürfen.',
+    tooShort: 'Bitte schreiben Sie etwas mehr, damit wir Ihr Vorhaben einschätzen können.'
+  };
+
+  function fehlertextFuer(feld) {
+    var v = feld.validity;
+    if (v.valueMissing) {
+      if (feld.type === 'checkbox') return MELDUNGEN.checkbox;
+      return MELDUNGEN.valueMissing;
+    }
+    if (v.typeMismatch && feld.type === 'email') return MELDUNGEN.email;
+    if (v.tooShort) return MELDUNGEN.tooShort;
+    return MELDUNGEN.typeMismatch;
+  }
+
+  function fehlerAnzeigen(feld, text) {
+    var feldBox = feld.closest('.field') || feld.parentElement;
+    var hinweis = feldBox.querySelector('.field-error');
+    if (!hinweis) {
+      hinweis = document.createElement('p');
+      hinweis.className = 'field-error';
+      hinweis.id = (feld.id || feld.name) + '-fehler';
+      feldBox.appendChild(hinweis);
+    }
+    hinweis.textContent = text;
+    feld.setAttribute('aria-invalid', 'true');
+    feld.setAttribute('aria-describedby', hinweis.id);
+    feldBox.classList.add('has-error');
+  }
+
+  function fehlerLoeschen(feld) {
+    var feldBox = feld.closest('.field') || feld.parentElement;
+    var hinweis = feldBox.querySelector('.field-error');
+    if (hinweis) hinweis.remove();
+    feld.removeAttribute('aria-invalid');
+    feld.removeAttribute('aria-describedby');
+    feldBox.classList.remove('has-error');
+  }
+
+  function statusSetzen(form, text, art) {
+    var status = form.querySelector('.form-status');
+    if (!status) return;
+    status.textContent = text;
+    status.classList.remove('ok', 'warn', 'err');
+    status.classList.add('show', art);
+  }
+
+  function mailtoBauen(form) {
+    var daten = new FormData(form);
+    var zeilen = [];
+    form.querySelectorAll('input, select, textarea').forEach(function (feld) {
+      if (!feld.name || feld.name === 'website' || feld.name === 'dsgvo') return;
+      if (feld.type === 'checkbox' && !feld.checked) return;
+      var beschriftung = '';
+      var label = form.querySelector('label[for="' + feld.id + '"]');
+      if (label) beschriftung = label.textContent.replace(/\s*\*\s*$/, '').trim();
+      if (!beschriftung) beschriftung = feld.name;
+      var wert = feld.type === 'checkbox' ? feld.value || 'ja' : feld.value;
+      if (!wert) return;
+      zeilen.push(beschriftung + ': ' + wert);
+    });
+    var betreff = form.dataset.betreff || 'Anfrage über die Website';
+    return 'mailto:info@assos-projekt.de'
+      + '?subject=' + encodeURIComponent(betreff)
+      + '&body=' + encodeURIComponent(zeilen.join('\n') + '\n\n--\nGesendet über assos-projekt.de');
+  }
+
   document.querySelectorAll('form[data-form]').forEach(function (form) {
+    // Eingaben korrigieren blendet den jeweiligen Fehler sofort wieder aus
+    form.addEventListener('input', function (e) {
+      if (e.target.matches('input, select, textarea') && e.target.checkValidity()) {
+        fehlerLoeschen(e.target);
+      }
+    });
+    form.addEventListener('change', function (e) {
+      if (e.target.matches('input[type="checkbox"]') && e.target.checkValidity()) {
+        fehlerLoeschen(e.target);
+      }
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var status = form.querySelector('.form-status');
-      if (status) {
-        status.textContent = 'Vielen Dank! Ihre Anfrage wurde erfasst. Wir melden uns zeitnah bei Ihnen.';
-        status.classList.add('show', 'ok');
+
+      // Pflichtfelder pruefen
+      var ersterFehler = null;
+      form.querySelectorAll('input, select, textarea').forEach(function (feld) {
+        if (feld.type === 'hidden' || feld.disabled) return;
+        if (feld.checkValidity()) {
+          fehlerLoeschen(feld);
+        } else {
+          fehlerAnzeigen(feld, fehlertextFuer(feld));
+          if (!ersterFehler) ersterFehler = feld;
+        }
+      });
+
+      if (ersterFehler) {
+        statusSetzen(form, 'Bitte ergänzen Sie die markierten Felder – dann können wir Ihre Anfrage bearbeiten.', 'err');
+        ersterFehler.focus();
+        ersterFehler.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        return;
       }
-      form.reset();
+
+      // Spamfalle: von Menschen nie ausgefuellt, von einfachen Bots schon
+      var falle = form.querySelector('input[name="website"]');
+      if (falle && falle.value) return;
+
+      var knopf = form.querySelector('button[type="submit"]');
+      var endpunkt = form.dataset.endpoint;
+
+      if (!endpunkt) {
+        // Kein Versanddienst hinterlegt: E-Mail-Programm mit fertiger Nachricht oeffnen
+        window.location.href = mailtoBauen(form);
+        statusSetzen(form,
+          'Ihr E-Mail-Programm öffnet sich mit der fertig ausgefüllten Nachricht – bitte dort noch auf „Senden" klicken. '
+          + 'Falls sich nichts öffnet, erreichen Sie uns direkt unter 0511 700 226 21 oder info@assos-projekt.de.',
+          'warn');
+        return;
+      }
+
+      var urspruenglich = knopf ? knopf.textContent : '';
+      if (knopf) { knopf.disabled = true; knopf.textContent = 'Wird gesendet …'; }
+      statusSetzen(form, 'Ihre Anfrage wird übermittelt …', 'warn');
+
+      fetch(endpunkt, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function (antwort) {
+        if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
+        statusSetzen(form, 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns zeitnah bei Ihnen.', 'ok');
+        form.reset();
+      }).catch(function () {
+        statusSetzen(form,
+          'Die Übermittlung hat leider nicht geklappt. Bitte rufen Sie uns an unter 0511 700 226 21 '
+          + 'oder schreiben Sie an info@assos-projekt.de – wir kümmern uns darum.',
+          'err');
+      }).then(function () {
+        if (knopf) { knopf.disabled = false; knopf.textContent = urspruenglich; }
+      });
     });
   });
 });

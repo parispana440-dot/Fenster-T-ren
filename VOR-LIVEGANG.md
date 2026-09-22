@@ -5,16 +5,32 @@ Sie ersetzt die früheren Hinweistexte, die versehentlich öffentlich auf den Se
 
 ## Muss erledigt werden
 
-### 1. Formulare an einen Versand anbinden
-Kontakt- und Angebotsformular zeigen aktuell nur eine Bestätigung an, senden aber nichts.
-Jede Anfrage geht verloren.
+### 1. Formulare an einen Versanddienst anbinden
+**Stand jetzt:** Die Formulare prüfen alle Pflichtfelder und öffnen beim Absenden
+das E-Mail-Programm des Besuchers mit einer fertig ausgefüllten Nachricht. Es geht
+also nichts mehr verloren und es wird auch nichts Falsches behauptet – aber der
+Besucher muss in seinem Mailprogramm noch auf „Senden" klicken. Auf dem Handy
+klappt das zuverlässig, an manchen Büro-Rechnern ohne eingerichtetes Mailprogramm
+nicht.
 
-- Möglichkeit A: Web3Forms (kostenlos bis 250 Anfragen/Monat, kein Konto nötig)
-- Möglichkeit B: Formspree (kostenlos bis 50 Anfragen/Monat, mit Dashboard)
-- Möglichkeit C: Eigenes PHP-Skript – geht nur bei klassischem Webhosting, nicht bei GitHub Pages
+**Der saubere Zustand** ist ein Versanddienst, der die Anfrage direkt zustellt.
+Der Anschluss ist vorbereitet und dauert zwei Minuten:
 
-Nach der Anbindung: In der Datenschutzerklärung Abschnitt 4 den Auftragsverarbeiter ergänzen
-und einen Auftragsverarbeitungsvertrag (AVV) mit dem Anbieter abschließen.
+1. Auf web3forms.com die eigene E-Mail-Adresse eintragen → es kommt ein
+   Zugriffsschlüssel per Mail (kostenlos bis 250 Anfragen/Monat, kein Konto nötig)
+2. In `kontakt.html` und `angebot.html` beim `<form>` ergänzen:
+   `data-endpoint="https://api.web3forms.com/submit"`
+3. In beiden Formularen direkt vor dem Absenden-Knopf einfügen:
+   `<input type="hidden" name="access_key" value="DER-SCHLÜSSEL">`
+
+Mehr ist nicht nötig – das Skript erkennt den Endpunkt selbst, schickt dann
+regulär ab, zeigt einen Sende- und einen Fehlerzustand und nennt im Fehlerfall
+Telefonnummer und E-Mail als Ausweg.
+
+Nach der Anbindung:
+- In der Datenschutzerklärung, Abschnitt 4, den Absatz „Hinweis zum aktuellen
+  Stand" entfernen und den Auftragsverarbeiter (Web3Forms) eintragen
+- Einen Auftragsverarbeitungsvertrag (AVV) mit dem Anbieter abschließen
 
 ### 2. Öffnungszeiten bestätigen
 Auf `kontakt.html` stehen jetzt „Mo–Fr 08:00–17:00 Uhr" ohne Platzhalter-Hinweis.
@@ -25,9 +41,14 @@ Bitte einmal bestätigen, dass diese Zeiten stimmen, oder mir die richtigen nenn
 Benötigt: Projektfotos (auch Handyfotos von Baustellen wirken authentisch), kurze
 Beschreibungen, gern Kennzahlen wie Anzahl Wohneinheiten oder erzielte Energieeinsparung.
 
-### 4. Social-Media-Profile verlinken
-Im Footer sind Instagram und Facebook mit Platzhalter-Links (`#`) hinterlegt.
-Sobald die Profile existieren, die echten URLs eintragen.
+### 4. Social-Media-Profile ergänzen
+Die Platzhalter-Links auf Instagram und Facebook sind entfernt – sie zeigten ins
+Leere, was auf einer Seite, die Vertrauen aufbauen soll, schlechter wirkt als gar
+kein Eintrag. An ihrer Stelle steht jetzt im Footer die Spalte „Direkter Draht"
+mit Telefon, E-Mail und Angebotslink.
+
+Sobald echte Profile existieren, gehören sie an zwei Stellen eingetragen: in den
+Footer und in das Feld `sameAs` der strukturierten Daten (siehe Punkt 13).
 
 ## Rechtlich prüfen lassen
 
@@ -52,10 +73,16 @@ Das betrifft die Angebots- und Auftragsunterlagen, nicht die Website selbst.
 Dort steht derzeit GitHub Pages als Hoster. Bei einem Wechsel zu einem eigenen
 Webhosting muss der neue Anbieter dort eingetragen und ein AVV geschlossen werden.
 
-### 8. Absolute Links prüfen
-Die 404-Seite und interne Verlinkungen arbeiten mit relativen Pfaden. Bei einer
-eigenen Domain (z. B. www.assos-projekt.de) funktioniert das weiterhin, bei einem
-Unterverzeichnis sollte es einmal nachgeprüft werden.
+### 8. 404-Seite – erledigt, aber gut zu wissen
+Die 404-Seite lädt CSS, Schriften und Logos über absolute Pfade und fällt bei
+Bedarf automatisch auf relative zurück. Sie sieht damit sowohl unter einer
+eigenen Domain als auch im GitHub-Unterverzeichnis richtig aus.
+
+Die Navigationslinks darauf sind bewusst relativ geblieben. Bei einer Fehlseite
+direkt unter der Domain (der Normalfall, z. B. ein Tippfehler in der Adresse)
+stimmen sie. Nur bei einer sehr tief verschachtelten Fantasie-Adresse zeigen sie
+daneben – das lässt sich ohne Server nicht lösen und fällt praktisch nicht ins
+Gewicht.
 
 ### 9. Domain in SEO-Dateien eintragen
 Die Website ist durchgängig auf `https://www.assos-projekt.de/` vorbereitet

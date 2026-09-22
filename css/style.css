@@ -198,11 +198,13 @@ section { padding: 88px 0; }
   transition: all 0.18s ease;
 }
 .btn-primary {
-  background: var(--color-accent);
+  /* Weiß auf dem hellen Akzentblau erreicht nur 3,28:1 und verfehlt damit
+     WCAG AA. Der dunklere Ton kommt auf 4,98:1 bei gleicher Anmutung. */
+  background: var(--color-accent-dark);
   color: var(--color-white);
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-dark);
 }
-.btn-primary:hover { background: var(--color-accent-dark); border-color: var(--color-accent-dark); color: var(--color-white); }
+.btn-primary:hover { background: #1f6491; border-color: #1f6491; color: var(--color-white); }
 .btn-outline {
   background: transparent;
   color: var(--color-ink);
@@ -996,9 +998,53 @@ textarea { resize: vertical; min-height: 120px; }
 .checkbox-field input { width: auto; margin-top: 4px; }
 .checkbox-field label { margin: 0; font-weight: 400; font-size: 0.85rem; color: var(--color-text-muted); }
 .form-note { font-size: 0.82rem; color: var(--color-text-muted); margin-top: 10px; }
-.form-status { margin-top: 16px; font-size: 0.9rem; font-weight: 600; display: none; }
+.form-status {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  display: none;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+}
 .form-status.show { display: block; }
-.form-status.ok { color: var(--color-success); }
+.form-status.ok   { color: #1d6b4c; background: var(--color-eco-light); border-left-color: var(--color-eco); }
+.form-status.warn { color: #7a5200; background: #fdf4e3; border-left-color: #c98a00; }
+.form-status.err  { color: #9b2226; background: #fdeced; border-left-color: #c1121f; }
+
+/* Inline-Fehler an einzelnen Feldern */
+.field-error {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #9b2226;
+}
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: #c1121f;
+  background: #fffafa;
+}
+.field.has-error input:focus,
+.field.has-error select:focus,
+.field.has-error textarea:focus {
+  outline: 2px solid #c1121f;
+  outline-offset: 1px;
+}
+.checkbox-field.has-error label { color: #9b2226; }
+.checkbox-field.has-error .field-error { flex-basis: 100%; }
+.checkbox-field { flex-wrap: wrap; }
+
+/* Spamfalle: fuer Menschen unsichtbar, fuer Bots ein ausfuellbares Feld */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 
 /* Contact info tiles */
 /* Kontaktseite */
@@ -1267,4 +1313,51 @@ main:focus { outline: none; }
   padding: 7px 15px;
   font-size: 0.9rem;
   color: var(--color-ink);
+}
+
+/* ---------- Checkbox-Gruppe als echte Feldgruppe ---------- */
+.check-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.check-group legend {
+  display: block;
+  padding: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-ink);
+}
+
+/* ---------- FAQ: zugeklappte Antworten aus dem Tab-Lauf nehmen ---------- */
+/* Ohne das wandert der Tastaturfokus in Text, den niemand sehen kann. */
+.faq-answer-inner { visibility: hidden; }
+.faq-item.open .faq-answer-inner { visibility: visible; }
+
+/* ---------- Slideshow: Pause-Schalter (WCAG 2.2.2) ---------- */
+.hero-slide-pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.82);
+  border-radius: 999px;
+  padding: 6px 14px 6px 11px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.hero-slide-pause:hover { background: rgba(255,255,255,0.16); color: #fff; border-color: rgba(255,255,255,0.4); }
+.hero-slide-pause:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.hero-slide-pause svg { width: 12px; height: 12px; flex: none; }
+.hero-slide-pause .icon-play { display: none; }
+.hero-slide-pause[aria-pressed="true"] .icon-play { display: block; }
+.hero-slide-pause[aria-pressed="true"] .icon-pause { display: none; }
+@media (max-width: 620px) {
+  .hero-slide-pause { font-size: 0.74rem; padding: 6px 12px 6px 10px; }
+  .hero-slide-pause .pause-text { display: none; }
 }

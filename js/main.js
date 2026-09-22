@@ -2,7 +2,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.main-nav');
-  var isMobileNav = window.matchMedia('(max-width: 900px)');
+  // Muss mit der Schwelle des Navigationsblocks in style.css übereinstimmen
+  var isMobileNav = window.matchMedia('(max-width: 1200px)');
 
   function collapseSubmenus() {
     document.querySelectorAll('.nav-item-mega.mobile-open').forEach(function (item) {

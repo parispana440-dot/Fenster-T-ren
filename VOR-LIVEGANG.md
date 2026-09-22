@@ -55,6 +55,55 @@ Footer und in das Feld `sameAs` der strukturierten Daten (siehe Punkt 13).
 Diese Punkte sollte ein Anwalt oder Steuerberater bestätigen – sie können nicht
 allein aus der Website heraus beurteilt werden.
 
+### 4a. Erlaubnis nach § 34c GewO — WICHTIG vor dem Livegang
+Die neue Seite `bauen-immobilien.html` nennt auch Leistungen rund um
+Immobilien. Hier ist eine Grenze zu beachten, die leicht übersehen wird:
+
+**Erlaubnispflichtig nach § 34c GewO sind unter anderem**
+- die Vermittlung von Kauf- oder Mietverträgen über Immobilien (Maklertätigkeit)
+- die Tätigkeit als Bauträger (Bauen im eigenen Namen auf fremde Rechnung)
+- die Baubetreuung (wirtschaftliche Vorbereitung und Durchführung für andere)
+- die Verwaltung von Wohnungseigentum und Mietwohnungen
+
+Wer solche Leistungen ohne Erlaubnis **anbietet oder bewirbt**, verstößt gegen
+eine Marktverhaltensregel im Sinne des UWG. Das ist abmahnfähig, zusätzlich
+droht ein Bußgeld von bis zu 5.000 €.
+
+**Was ich deshalb getan habe:** Der vierte Leistungsblock heißt bewusst
+„Immobilien einschätzen & vorbereiten" und beschreibt die Einordnung des
+Marktwerts, die wertsteigernden Maßnahmen und deren Ausführung. Eine
+Vermittlung gegen Provision wird an keiner Stelle behauptet.
+
+**Was Sie klären müssen:**
+
+| Fall | Was zu tun ist |
+|---|---|
+| Sie haben die Erlaubnis bereits | Sagen Sie mir Bescheid – dann formuliere ich den Abschnitt offensiver („Wir vermitteln Ihre Immobilie"). Zusätzlich muss ins Impressum: der Hinweis auf die Erlaubnis nach § 34c GewO und die zuständige Aufsichtsbehörde. Fehlt das, ist auch das abmahnfähig. |
+| Sie haben sie nicht | Text bleibt wie er ist. Vermitteln Sie nicht selbst, sondern arbeiten Sie mit einem Makler zusammen. |
+| Unklar | Kurze Rückfrage bei der IHK Hannover – die Auskunft ist kostenlos. |
+
+### 4b. Berufsbezeichnungen Architekt, Bauingenieur, Statiker
+„Architekt" und „Bauingenieur" sind in Deutschland geschützte Berufsbezeichnungen,
+die an eine Kammermitgliedschaft gebunden sind. Auch die Bauvorlageberechtigung –
+also das Recht, den Bauantrag einzureichen – hängt daran.
+
+Auf der Website steht deshalb: „Für Planung, Statik und Bauleitung arbeiten wir
+mit Architektinnen und Architekten, Bauingenieuren und Statikern zusammen, die
+wir seit Jahren kennen." Das ist korrekt, egal ob diese Fachleute angestellt
+oder Partner sind.
+
+**Wenn diese Fachkräfte bei Ihnen angestellt sind**, dürfen wir deutlicher
+werden („unsere Architekten", „eigene Statik") – das wirkt stärker. Sagen Sie
+mir in dem Fall, wer fest zum Unternehmen gehört, dann passe ich die
+Formulierungen an. Ohne Anstellungsverhältnis wäre „eigene Architekten"
+irreführend.
+
+### 4c. Angaben zur Erfahrung
+An mehreren Stellen steht „seit über 15 Jahren". Das stammt aus Ihrer
+Beschreibung. Bitte einmal gegenprüfen, dass sich das belegen lässt – etwa
+über die Historie des Unternehmens oder der handelnden Personen. Angaben zur
+Unternehmensdauer werden in Wettbewerbsstreitigkeiten regelmäßig angegriffen.
+
 ### 5. Komplementär-GmbH im Impressum
 Im Impressum ist bisher nur die KG genannt (HRA 206366, Amtsgericht Hannover).
 Bei einer GmbH & Co. KG wird üblicherweise zusätzlich die Komplementär-GmbH

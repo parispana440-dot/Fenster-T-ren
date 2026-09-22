@@ -114,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function show(index) {
       slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === index); });
+      // Das Objektfoto gehört zur ersten Folie, liegt technisch aber auf der
+      // Sektion, damit es bis an die Bildschirmränder reicht.
+      root.classList.toggle('zeigt-foto', index === 0);
       tabs.forEach(function (tab, i) {
         tab.classList.toggle('is-active', i === index);
         var fill = tab.querySelector('.hero-slide-tab-fill');

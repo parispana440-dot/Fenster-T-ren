@@ -27,6 +27,8 @@
 <meta name="geo.region" content="DE-NI">
 <meta name="geo.placename" content="Isernhagen">
 <!-- /SEO -->
+<link rel="preload" href="img/haus-hero.webp" as="image" media="(min-width: 901px)">
+<link rel="preload" href="img/haus-hero-mobil.webp" as="image" media="(max-width: 900px)">
 <link rel="preload" href="css/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="css/fonts/jost-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
@@ -374,7 +376,8 @@
 
 <main id="inhalt" tabindex="-1">
 
-  <section class="hero" data-hero-slideshow>
+  <section class="hero zeigt-foto" data-hero-slideshow>
+    <div class="hero-foto-ebene" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-slides">
 
@@ -393,17 +396,6 @@
                 <div><strong>2–4</strong><span>Wochen Lieferzeit ab Auftrag</span></div>
                 <div><strong>1</strong><span>Ansprechpartner für Planung bis Montage</span></div>
               </div>
-            </div>
-            <div class="hero-visual" aria-hidden="true">
-              <svg viewBox="0 0 220 260" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="10" width="200" height="240" rx="4" stroke="#3895d3" stroke-width="2"/>
-                <line x1="110" y1="10" x2="110" y2="250" stroke="#3895d3" stroke-width="2"/>
-                <line x1="10" y1="130" x2="210" y2="130" stroke="#3895d3" stroke-width="2"/>
-                <rect x="24" y="24" width="72" height="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
-                <rect x="124" y="24" width="72" height="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
-                <rect x="24" y="144" width="72" height="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
-                <rect x="124" y="144" width="72" height="92" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
-              </svg>
             </div>
           </div>
         </div>

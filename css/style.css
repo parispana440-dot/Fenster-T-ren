@@ -229,9 +229,16 @@ section { padding: 88px 0; }
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  padding: 16px 24px;
-  max-width: var(--container-w);
+  gap: 32px;
+  /* Bewusst breiter als der Inhalt darunter: die Kopfzeile ist eine Leiste,
+     kein zentrierter Block. Logo und Knopf rücken dadurch nach außen und die
+     Navigation bekommt Luft. */
+  padding: 16px 40px;
+  max-width: 1440px;
   margin: 0 auto;
+}
+@media (max-width: 1400px) {
+  .header-inner { padding: 16px 28px; }
 }
 .logo {
   display: flex;
@@ -267,13 +274,12 @@ section { padding: 88px 0; }
   flex: none;
 }
 
-.main-nav ul { display: flex; gap: 16px; align-items: stretch; height: 100%; }
+.main-nav ul { display: flex; gap: 26px; align-items: stretch; height: 100%; }
 .main-nav li { display: flex; align-items: center; }
 .main-nav a {
   color: var(--color-ink);
   font-weight: 500;
-  /* Sieben Einträge brauchen etwas weniger Laufweite als sechs */
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
@@ -412,7 +418,9 @@ section { padding: 88px 0; }
   .main-nav ul { flex-direction: column; align-items: flex-start; height: auto; gap: 0; padding: 20px 24px; }
   .main-nav li { display: block; width: 100%; border-bottom: 1px solid var(--color-border); }
   .main-nav a { display: block; padding: 16px 0; white-space: normal; font-size: 1rem; }
-  .header-cta .btn-primary { display: none; }
+  /* Im Klappmenü-Modus bleibt oben genug Raum für den Knopf; erst auf
+     schmalen Handys weicht er dem Logo. */
+  .header-cta .btn-primary { display: inline-flex; }
 
   /* Untermenü startet eingeklappt und öffnet sich erst auf Tippen.
      0fr -> 1fr animiert die Höhe, ohne dass sie in Pixeln bekannt sein muss. */
@@ -1230,49 +1238,44 @@ textarea { resize: vertical; min-height: 120px; }
 }
 main:focus { outline: none; }
 
-/* ---------- Telefonnummer im Kopfbereich ---------- */
-.header-phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-ink);
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 8px 4px;
+/* ---------- Rufnummer im Klappmenü ---------- */
+/* Im Kopfbereich stand sie vorher rechts und machte die Leiste eng. Auf dem
+   Handy bleibt der Anruf aber der kürzeste Weg zu uns, deshalb steht sie
+   jetzt gut sichtbar im aufgeklappten Menü. */
+/* .main-nav li setzt display:flex und hat höhere Spezifität - deshalb muss
+   die Ausblendung hier ebenso spezifisch sein. */
+.main-nav li.nav-anruf { display: none; }
+@media (max-width: 1200px) {
+  .main-nav li.nav-anruf { display: block; }
+  .main-nav ul .nav-anruf { border-bottom: none; padding: 18px 0 4px; }
+  .nav-anruf a {
+    display: flex !important;
+    align-items: center;
+    gap: 11px;
+    padding: 14px 16px !important;
+    border-radius: 10px;
+    background: var(--color-accent-light);
+    color: var(--color-accent-dark);
+    font-weight: 600;
+    font-size: 1.02rem;
+    text-decoration: none;
+  }
+  .nav-anruf a:hover { background: #d7e9f7; }
+  .nav-anruf svg { width: 19px; height: 19px; flex: none; }
+  .nav-anruf small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.76rem;
+    color: var(--color-text-muted);
+    margin-top: 1px;
+  }
 }
-.header-phone svg { width: 17px; height: 17px; flex: none; color: var(--color-accent); }
-.header-phone:hover { color: var(--color-accent-dark); }
-.header-phone:hover svg { color: var(--color-accent-dark); }
-.header-phone small {
-  display: block;
-  font-weight: 400;
-  font-size: 0.72rem;
-  color: var(--color-muted);
-  letter-spacing: 0.01em;
-}
-@media (max-width: 1080px) {
-  .header-phone small { display: none; }
-}
-@media (max-width: 900px) {
-  .header-phone { font-size: 0.88rem; gap: 6px; padding: 8px 2px; }
+@media (max-width: 600px) {
   .header-cta .btn-primary { display: none; }
 }
 @media (max-width: 480px) {
-  /* Auf dem Handy hat die Rufnummer Vorrang vor der Wortmarken-Unterzeile */
   .logo { font-size: 1.36rem; gap: 9px; }
-  .logo small { display: none; }
   .logo-mark { width: 32px; height: 29px; }
-}
-@media (max-width: 400px) {
-  .header-phone { font-size: 0.8rem; letter-spacing: -0.01em; }
-  .header-phone svg { width: 15px; height: 15px; }
-}
-@media (max-width: 340px) {
-  .header-phone span { display: none; }
-  .header-phone { padding: 10px 6px; }
-  .header-phone svg { width: 20px; height: 20px; }
 }
 
 /* ---------- Einsatzgebiet ---------- */

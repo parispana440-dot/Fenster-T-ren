@@ -168,17 +168,23 @@ section { padding: 88px 0; }
 .section-ink { background: var(--color-ink); color: rgba(255,255,255,0.9); }
 .section-ink h2, .section-ink h3 { color: var(--color-white); }
 .section-ink p { color: rgba(255,255,255,0.7); }
+/* Die globale Linkfarbe ist ein dunkles Blau - auf dunklem Grund ergab das
+   nur 2,07:1. Der helle Ton kommt auf 6,45:1. */
+.section-ink a:not(.btn) { color: #9ed4f0; text-decoration: underline; text-underline-offset: 3px; }
+.section-ink a:not(.btn):hover { color: #ffffff; }
 
 .eyebrow {
   display: inline-block;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent-dark);
+  /* Kleiner Versaltext braucht 4,5:1; accent-dark lag je nach Untergrund
+     knapp darunter. */
+  color: #246ea0;
   font-weight: 700;
   margin-bottom: 14px;
 }
-.section-ink .eyebrow { color: var(--color-accent); }
+.section-ink .eyebrow { color: #9ed4f0; }   /* 6,45:1 statt 3,15:1 */
 
 .section-head { max-width: 680px; margin-bottom: 48px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
@@ -373,7 +379,8 @@ section { padding: 88px 0; }
   text-transform: uppercase;
   vertical-align: middle;
   color: var(--color-white);
-  background: var(--color-accent);
+  /* Weiß auf dem hellen Akzent ergab nur 3,28:1 - bei 10,5px Schrift zu wenig. */
+  background: var(--color-accent-dark);
 }
 .mega-badge-best { background: var(--color-ink); }
 
@@ -725,7 +732,7 @@ section { padding: 88px 0; }
   align-items: center;
   gap: 6px;
   background: var(--color-accent-light);
-  color: var(--color-accent-dark);
+  color: #1f6491;
   font-size: 0.78rem;
   font-weight: 700;
   padding: 5px 12px;
@@ -803,7 +810,7 @@ section { padding: 88px 0; }
 .usecase-card .usecase-tag {
   display: inline-block;
   background: var(--color-accent-light);
-  color: var(--color-accent-dark);
+  color: #1f6491;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -1175,8 +1182,9 @@ textarea { resize: vertical; min-height: 120px; }
 .footer-grid a:hover { color: var(--color-accent); }
 .footer-logo { display: flex; align-items: center; gap: 12px; color: var(--color-white); font-family: var(--font-wordmark); font-weight: 600; font-size: 1.45rem; letter-spacing: 0.17em; margin-bottom: 16px; }
 .footer-logo-mark { width: 30px; height: 27px; object-fit: contain; flex: none; }
-.footer-grid a.social-link { display: flex; align-items: center; gap: 10px; }
-.footer-grid a.social-link svg { width: 17px; height: 17px; flex: none; color: rgba(255,255,255,0.5); }
+/* Gilt für Links wie für die noch inaktiven Einträge (span) gleichermaßen. */
+.footer-grid .social-link { display: flex; align-items: center; gap: 10px; }
+.footer-grid .social-link svg { width: 17px; height: 17px; flex: none; color: rgba(255,255,255,0.5); }
 .footer-grid a.social-link:hover svg { color: var(--color-accent); }
 .footer-bottom {
   display: flex;
@@ -1223,7 +1231,7 @@ textarea { resize: vertical; min-height: 120px; }
   left: -9999px;
   top: 0;
   z-index: 999;
-  background: var(--color-accent);
+  background: var(--color-accent-dark);   /* 4,98:1 statt 3,28:1 */
   color: #fff;
   padding: 12px 20px;
   border-radius: 0 0 var(--radius) 0;
@@ -1855,4 +1863,73 @@ body.ce-offen { overflow: hidden; }
   display: inline-block;
   padding: 5px 2px;
   margin: -5px 0;
+}
+
+/* ---------- Social-Media-Profile, die es noch nicht gibt ---------- */
+/* Bewusst kein <a href="#">: ein Link, der nirgendwohin führt, ist für
+   Besucher wie für Suchmaschinen ein Defekt. Der Eintrag bleibt sichtbar,
+   ist aber erkennbar noch nicht aktiv. */
+.social-bald {
+  cursor: default;
+  opacity: 0.62;
+}
+.social-bald:hover { color: inherit; }
+.social-bald small {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* ---------- Hero auf dem Handy kompakter ---------- */
+/* Der Hero ist so hoch wie seine höchste Folie. Die beiden dekorativen
+   Grafiken brauchten je rund 400px und erzeugten auf der Förderungs-Folie
+   einen großen Leerraum. Auf dem Handy zählt, dass Aussage und Knopf ohne
+   Scrollen sichtbar sind - nicht die Illustration. */
+/* Im schmalen Zweispalter brechen die drei Kennzahlen untereinander und
+   machen die erste Folie unnötig hoch. */
+@media (max-width: 1100px) {
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 22px;
+    margin-top: 24px;
+  }
+  .hero-stats div:last-child { grid-column: 1 / -1; }
+  .hero-stats div strong { font-size: 1.46rem; }
+  .hero-stats div span { font-size: 0.79rem; line-height: 1.45; }
+}
+
+/* Grenze bei 900px, weil das Hero-Raster dort ohnehin einspaltig wird und
+   die Grafiken dann in voller Breite unter dem Text stehen würden. */
+@media (max-width: 900px) {
+  .hero { padding: 48px 0 42px; }
+  .hero-inner { gap: 30px; }
+
+  /* Fensterraster: rein dekorativ, entfällt auf schmalen Geräten */
+  .hero-visual { display: none; }
+
+  .hero-stats { gap: 16px 18px; }
+  .hero-stats div strong { font-size: 1.4rem; }
+
+  /* Fördersiegel deutlich kleiner, bleibt aber als Blickfang erhalten */
+  .hero-badge {
+    aspect-ratio: auto;
+    height: 190px;
+    padding: 0;
+    order: -1;
+    margin-bottom: 2px;
+  }
+  .hero-badge svg { height: 100%; width: auto; }
+
+  .hero-slide-nav { padding-top: 18px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: 36px 0 34px; }
+  .hero-badge { height: 158px; }
 }

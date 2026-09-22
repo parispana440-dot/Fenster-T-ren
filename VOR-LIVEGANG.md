@@ -57,12 +57,72 @@ Die 404-Seite und interne Verlinkungen arbeiten mit relativen Pfaden. Bei einer
 eigenen Domain (z. B. www.assos-projekt.de) funktioniert das weiterhin, bei einem
 Unterverzeichnis sollte es einmal nachgeprüft werden.
 
-### 9. Sitemap-URLs eintragen
-Sobald die endgültige Domain feststeht, in `sitemap.xml` die Platzhalter-Domain
-durch die echte ersetzen und die Sitemap in der Google Search Console einreichen.
+### 9. Domain in SEO-Dateien eintragen
+Die Website ist durchgängig auf `https://www.assos-projekt.de/` vorbereitet
+(abgeleitet aus der E-Mail-Adresse). Weicht die echte Domain davon ab, muss sie
+an genau diesen Stellen ersetzt werden:
+
+- `sitemap.xml` (23 Einträge)
+- `robots.txt` (Sitemap-Zeile)
+- in jeder HTML-Datei: `<link rel="canonical">`, `og:url`, `og:image`,
+  `twitter:image` sowie die URLs im JSON-LD-Block
+
+Ein Suchen-und-Ersetzen über alle Dateien erledigt das in einem Schritt.
+Danach die Sitemap in der Google Search Console einreichen.
+
+## SEO: was ohne Sie nicht weitergeht
+
+Die Website ist technisch vollständig für Suchmaschinen vorbereitet. Die
+folgenden Punkte sind der Teil, der außerhalb der Website liegt – und laut
+allen aktuellen Auswertungen der deutlich größere Hebel für lokale Anfragen.
+
+### 10. Google-Unternehmensprofil anlegen
+**Das ist der wichtigste offene Punkt überhaupt.** Auswertungen für 2026 ordnen
+rund ein Drittel der Platzierung in der Kartenbox ("Local Pack") allein dem
+Unternehmensprofil zu. Ohne Profil erscheint der Betrieb dort gar nicht – egal
+wie gut die Website ist.
+
+Beim Anlegen wichtig:
+- Name, Adresse und Telefonnummer **zeichengenau** wie im Impressum:
+  Assos GmbH & Co. KG · Borsigstraße 7 · 30916 Isernhagen · 0511 700 226 21
+- Hauptkategorie: „Fensterbauer" oder „Bauunternehmen" – die Hauptkategorie
+  ist einer der drei stärksten Rankingfaktoren
+- mindestens 10 Fotos, danach monatlich 1–2 ergänzen
+- Öffnungszeiten identisch zu `kontakt.html` und zum JSON-LD auf der Website
+- Nach dem Anlegen: die Profil-URL nennen, damit ich sie als `sameAs` in die
+  strukturierten Daten eintrage
+
+### 11. Bewertungen einsammeln
+Bewertungssignale sind von 16 % (2023) auf 20 % (2026) gestiegen – der stärkste
+Zuwachs aller Faktoren. Als Schwelle gelten rund 25 Google-Bewertungen. Wichtig
+sind Aktualität, Regelmäßigkeit und dass Sie antworten.
+Praktischer Weg: nach jeder Montage eine kurze Nachricht mit dem direkten
+Bewertungslink.
+
+### 12. Exakte Koordinaten nachtragen
+Im JSON-LD steht bewusst **keine** Geo-Koordinate. Eine falsche Koordinate wäre
+schlimmer als keine – Google leitet den Standort sonst zuverlässig aus der
+Adresse ab. Sobald das Unternehmensprofil steht, trage ich die dort bestätigte
+Position nach.
+
+### 13. Social-Media-Profile für `sameAs`
+Sobald Instagram und Facebook existieren, gehören die URLs nicht nur in den
+Footer, sondern auch in den `sameAs`-Eintrag der strukturierten Daten. Das
+hilft Google, die Profile demselben Unternehmen zuzuordnen.
+
+### 14. Öffnungszeiten bestätigen (hängt mit Punkt 2 zusammen)
+Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
+`kontakt.html`, im Kopfbereich jeder Seite und in den strukturierten Daten.
+Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
+Google-Unternehmensprofil.
 
 ## Später sinnvoll
 
-- Google-Unternehmensprofil anlegen und pflegen (größter Hebel für lokale Anfragen)
-- Kundenbewertungen einsammeln und auf der Startseite einbinden
+- Kundenbewertungen auf der Startseite einbinden (sobald vorhanden)
 - Foto und persönlicher Text des Geschäftsführers auf `ueber-uns.html`
+- Echte Projektfotos auf `referenzen.html` – das ist gleichzeitig der beste
+  Weg zu Inhalten, die sich von Wettbewerbern unterscheiden
+- Bewusst **keine** eigenen Unterseiten je Ort ("Fenster Burgwedel",
+  "Fenster Langenhagen"). Google stuft solche Seiten seit Jahren als
+  Brückenseiten ein und straft sie ab; die Einsatzgebiet-Sektion auf
+  `kontakt.html` deckt denselben Zweck regelkonform ab.

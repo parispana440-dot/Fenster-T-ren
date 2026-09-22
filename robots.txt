@@ -1,0 +1,31 @@
+# robots.txt – Assos GmbH & Co. KG
+# https://www.assos-projekt.de/
+
+User-agent: *
+Allow: /
+
+# Klassische Suchmaschinen
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# KI-Assistenten: ausdrücklich erlaubt, damit Antworten zu Fenstern,
+# Türen und Förderung auf unsere eigenen Inhalte zurückgreifen können.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.assos-projekt.de/sitemap.xml

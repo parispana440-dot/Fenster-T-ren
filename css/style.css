@@ -901,11 +901,22 @@ section { padding: 88px 0; }
 /* Querformat im Seitenverhältnis der Kamera: das Foto wird nicht
    beschnitten, es sitzt genau im Feld. */
 .feature-photo.vier-drei { aspect-ratio: 4/3; }
+.feature-photo.vier-fuenf { aspect-ratio: 4/5; }
 @media (max-width: 900px) {
   /* Einspaltig steht das Bild sonst hinter dem Knopf und damit am Ende des
      Abschnitts. Vor dem Text gelesen führt es in das Thema ein. */
   .feature-row .feature-photo,
   .feature-row .vergleich { order: -1; }
+}
+/* Auf einem Tablett im Hochformat füllt ein hochkantes Foto über die volle
+   Spaltenbreite fast den ganzen Bildschirm. Statt es zu beschneiden, wird
+   es schmaler und bleibt mittig - Querformate sind davon ausgenommen. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .feature-row .feature-photo:not(.wide):not(.vier-drei) {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ---------- Bildvergleich vorher / nachher ---------- */

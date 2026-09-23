@@ -216,24 +216,23 @@ Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
 Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
 Google-Unternehmensprofil.
 
-### 15. Angaben zum reinen Holzfenster bestätigen
-Auf `holzfenster.html` steht jetzt neben der Holz-Aluminium-Ausführung auch
-das durchgehende Holzfenster. Drei Angaben dort stammen aus der Logik des
-Aufbaus, nicht aus einem Datenblatt Ihres Lieferanten:
+### 15. Angaben zum Holzfenster bestätigen
+Die Holz-Aluminium-Ausführung ist aus dem Angebot genommen; `holzfenster.html`
+beschreibt jetzt nur noch das durchgehende Holzfenster. Zwei Angaben dort sind
+aus der Holz-Aluminium-Fassung übernommen und gehören gegen das
+Lieferprogramm geprüft:
 
-- **Uw-Wert**: Im Datenblatt steht „auf dem Niveau der
-  Holz-Aluminium-Ausführung". Das ist fachlich plausibel, weil die
-  hinterlüftete Aluminiumschale thermisch kaum beiträgt. Sobald Sie eine
-  konkrete Zahl vom Hersteller haben, sollte sie dort stehen — eine Zahl
-  wirkt stärker als eine Umschreibung.
-- **Einbruchschutz bis RC2**: hängt am Beschlag, nicht am Material. Bitte
-  gegen das Lieferprogramm prüfen.
-- **Holzarten und Oberflächen**: derzeit identisch zur
-  Holz-Aluminium-Ausführung übernommen.
+- **Uw-Wert „ab 0,79 W/(m²K)"** — dieser Wert stand vorher für das
+  Holz-Aluminium-System. Für ein Holzfenster derselben Profiltiefe ist er
+  plausibel, weil die hinterlüftete Aluminiumschale thermisch kaum beiträgt.
+  Bestätigen Sie ihn bitte, er steht auch in zwei FAQ-Antworten auf derselben
+  Seite und in der Kurzfassung für die Suche.
+- **Einbruchschutz bis RC2** — hängt am Beschlag, nicht am Material.
 
-Ebenfalls offen: ein Profilschnitt der **Holz-Aluminium**-Ausführung mit
-sichtbarer Aluminiumschale. Das aktuelle Bild in diesem Abschnitt ist noch
-das alte, kleine Katalogbild.
+Bei den Holzarten steht weiterhin „u. a. Kiefer, Lärche, Meranti und Eiche".
+Meranti ist ein tropisches Laubholz; die Aussage zur Herkunft nennt deshalb
+jetzt ausdrücklich nur die heimischen Arten als europäisch. Falls Sie Meranti
+gar nicht führen, streichen Sie es besser aus der Aufzählung.
 
 ## Später sinnvoll
 

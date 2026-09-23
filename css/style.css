@@ -2049,9 +2049,16 @@ body.ce-offen { overflow: hidden; }
 
   .hero-slide-nav { padding-top: 18px; }
 }
+/* Auf dem Telefon entfällt das Siegel. In der schmalen Spalte lässt es
+   sich nicht so skalieren, dass es gleichzeitig kräftig wirkt und wenig
+   Höhe kostet - und es trägt nichts bei, was nicht schon dasteht: die
+   15 % stehen in der Überschrift und noch einmal in der Liste darunter.
+   Ab 601px, also auf Tablett und Bildschirm, bleibt es unverändert. */
+@media (max-width: 600px) {
+  .hero-badge { display: none; }
+}
 @media (max-width: 480px) {
   .hero { padding: 0 0 34px; }
-  .hero-badge { width: min(70%, 232px); }
   /* Das Foto kostet Höhe. Damit der Angebotsknopf auf einem üblichen
      Telefon ohne Scrollen sichtbar bleibt, rücken Fließtext und Knöpfe
      ein Stück zusammen - ohne die Lesbarkeit anzutasten. */

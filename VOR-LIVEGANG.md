@@ -253,6 +253,34 @@ verarbeitet oder vertreibt, die bereits in Verkehr gebracht wurde, muss zwar
 keine eigene Sorgfaltserklärung abgeben, aber die Referenznummer des
 Inverkehrbringers aufbewahren und die Rückverfolgbarkeit sichern.
 
+### 17. Förderbegleitung: drei Punkte für Ihren Berater
+Die Website bewirbt jetzt ausdrücklich, dass Sie Antrag, Nachweise und Fristen
+übernehmen und mit einem Leistungsvertrag unter aufschiebender Bedingung
+arbeiten. Das ist der richtige Weg — das BAFA verlangt bei Antragstellung
+ausdrücklich einen Liefer- oder Leistungsvertrag, dessen Wirksamkeit von der
+Förderzusage abhängt. Drei Dinge sollten dazu stehen, bevor die Seite live geht:
+
+1. **Vertragsmuster.** Die aufschiebende Bedingung muss tatsächlich im
+   Vertragstext stehen und an die Förderzusage geknüpft sein. Eine Klausel, die
+   nur auf „Förderfähigkeit" abstellt, reicht nicht. Das Verbraucher-Widerrufs-
+   recht bleibt davon unberührt und gilt zusätzlich (siehe Punkt zur
+   Widerrufsbelehrung).
+2. **BAFA-Vollmacht.** Für die Antragstellung als bevollmächtigte Person
+   braucht das BAFA das unterschriebene Vollmachtsformular. Wer bevollmächtigt
+   ist, übernimmt die Aufgaben und Pflichten des Antragstellers und ist
+   Ansprechpartner der Behörde — das ist keine reine Serviceleistung, sondern
+   eine Verantwortung. Formular unter www.bafa.de/beg.
+3. **Rechtsdienstleistungsgesetz.** Das Stellen eines Förderantrags für Kunden
+   dürfte als Nebenleistung zum Hauptgeschäft nach § 5 RDG zulässig sein. Da
+   die Website damit wirbt, lohnt eine kurze anwaltliche Bestätigung.
+
+Inhaltlich geprüft und aktuell: 15 % Grundförderung, iSFP-Bonus von 5 % erst
+oberhalb von 30.000 € förderfähiger Kosten (Änderung vom 21.07.2026), Uw
+höchstens 0,95 W/(m²K), Energieeffizienz-Experte mit Technischer
+Projektbeschreibung verpflichtend, Verwendungsnachweis sechs Monate nach Ende
+des Bewilligungszeitraums. Fördersätze ändern sich erfahrungsgemäß mehrmals
+pro Jahr — die Förderseite gehört auf eine Wiedervorlage.
+
 ## Später sinnvoll
 
 - Kundenbewertungen auf der Startseite einbinden (sobald vorhanden)

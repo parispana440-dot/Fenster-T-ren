@@ -98,6 +98,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // ---------------------------------------------------- Bildvergleich
+  // Zwei deckungsgleiche Aufnahmen desselben Objekts. Die obere Lage wird
+  // per clip-path beschnitten; die Position steckt in der CSS-Variablen
+  // --pos. Bedient wird sie von einem echten <input type="range">, das
+  // unsichtbar über der Fläche liegt - damit sind Tastatur, Fingergeste
+  // und Vorlesesoftware ohne Eigenbau abgedeckt.
+  document.querySelectorAll('[data-vergleich]').forEach(function (figur) {
+    var buehne = figur.querySelector('.vergleich-buehne');
+    var regler = figur.querySelector('.vergleich-regler');
+    if (!buehne || !regler) return;
+
+    var markeLinks = figur.querySelector('.vergleich-marke-links');
+    var markeRechts = figur.querySelector('.vergleich-marke-rechts');
+    var masse = { breite: 0, links: 0, rechts: 0 };
+
+    // Die Beschriftungen liegen in ihrer jeweiligen Bildhälfte. Wandert die
+    // Kante über eine von ihnen hinweg, wäre sie halb abgeschnitten - dann
+    // wird sie stattdessen ausgeblendet. Die Schwellen stehen in Pixeln,
+    // weil die Beschriftung eine feste Breite hat, die Bühne aber nicht.
+    function messen() {
+      masse.breite = buehne.clientWidth;
+      masse.links = markeLinks ? markeLinks.offsetWidth : 0;
+      masse.rechts = markeRechts ? markeRechts.offsetWidth : 0;
+    }
+
+    function setzen() {
+      var wert = Number(regler.value);
+      if (!isFinite(wert)) wert = 50;
+      buehne.style.setProperty('--pos', wert + '%');
+
+      if (!masse.breite) messen();
+      var kante = masse.breite * wert / 100;
+      // Randabstand der Beschriftung plus etwas Luft, damit nichts anstößt
+      figur.classList.toggle('marke-links-aus', kante < masse.links + 26);
+      figur.classList.toggle('marke-rechts-aus', kante > masse.breite - masse.rechts - 26);
+    }
+
+    regler.addEventListener('input', setzen);
+    regler.addEventListener('change', setzen);
+    window.addEventListener('resize', function () { messen(); setzen(); });
+    messen();
+    setzen();
+
+    // Erst jetzt Kante und Griff zeigen: ohne Skript bliebe der Regler
+    // wirkungslos, und ein Bedienelement, das nichts tut, führt in die Irre.
+    figur.classList.add('ist-bereit');
+  });
+
   // Hero slideshow: auto-advancing slides with clickable progress-bar tabs
   document.querySelectorAll('[data-hero-slideshow]').forEach(function (root) {
     var slides = Array.prototype.slice.call(root.querySelectorAll('.hero-slide'));

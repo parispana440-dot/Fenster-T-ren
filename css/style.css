@@ -893,7 +893,174 @@ section { padding: 88px 0; }
 @media (max-width: 900px) {
   /* Einspaltig steht das Bild sonst hinter dem Knopf und damit am Ende des
      Abschnitts. Vor dem Text gelesen führt es in das Thema ein. */
-  .feature-row .feature-photo { order: -1; }
+  .feature-row .feature-photo,
+  .feature-row .vergleich { order: -1; }
+}
+
+/* ---------- Bildvergleich vorher / nachher ---------- */
+/* Beide Aufnahmen stammen vom selben Standort und sind deckungsgleich
+   zugeschnitten. Die obere Lage (Rohbau) wird von rechts her
+   weggeschnitten; --pos ist die Position der Trennkante.
+   Bedient wird das Ganze über ein echtes Schieberegler-Feld: das bringt
+   Tastatur, Vorlesesoftware und Fingerbedienung ohne Eigenbau mit. */
+.vergleich { margin: 0; }
+.vergleich-buehne {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--color-bg-alt);
+  --pos: 50%;
+}
+.vergleich-bild {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Beim Ziehen darf der Browser nicht das Bild "aufnehmen" wollen. */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+/* Der Rohbau liegt oben und wird beschnitten. Die Beschriftung sitzt im
+   selben Feld und verschwindet dadurch zusammen mit ihrer Bildhälfte. */
+.vergleich-vorher {
+  position: absolute;
+  inset: 0;
+  -webkit-clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+          clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+.vergleich-marke {
+  position: absolute;
+  top: 14px;
+  z-index: 3;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(18, 24, 30, 0.78);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.vergleich-marke-links { left: 14px; }
+.vergleich-marke-rechts { right: 14px; }
+/* Wandert die Kante über eine Beschriftung hinweg, verschwindet diese -
+   ein halb abgeschnittenes Wort sähe nach Fehler aus. */
+.vergleich-marke { transition: opacity 0.18s ease; }
+.vergleich.marke-links-aus .vergleich-marke-links,
+.vergleich.marke-rechts-aus .vergleich-marke-rechts { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .vergleich-marke { transition: none; }
+}
+
+.vergleich-kante {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 1px rgba(18, 24, 30, 0.22);
+  /* Die Bedienung liegt auf dem Feld darunter. */
+  pointer-events: none;
+}
+.vergleich-griff {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: 0 2px 12px rgba(18, 24, 30, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  color: var(--color-ink);
+}
+.vergleich-griff svg { width: 15px; height: 15px; display: block; }
+
+/* Das Feld deckt die ganze Flaeche ab: ein Tippen setzt die Kante dorthin,
+   ein Ziehen bewegt sie mit. Sichtbar ist davon nichts - gezeichnet wird
+   der Griff oben. */
+.vergleich-regler {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  opacity: 0;
+  cursor: ew-resize;
+  /* Senkrecht wischen bleibt Scrollen, waagerecht bedient den Vergleich. */
+  touch-action: pan-y;
+  -webkit-appearance: none;
+          appearance: none;
+}
+/* Der Griff des Feldes bleibt unsichtbar und schmal. Waere er breit, liefe
+   die Trennkante dem Finger um seine halbe Breite hinterher: ein
+   Schieberegler bildet den Wert auf die Bahn minus Griffbreite ab. */
+.vergleich-regler::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1px;
+  height: 100%;
+  background: transparent;
+}
+.vergleich-regler::-moz-range-thumb {
+  width: 1px;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+/* Ohne Skript bewegt sich nichts - dann bleibt die feste Hälfte-Hälfte-
+   Ansicht stehen, und das Bedienelement wäre irreführend. */
+.vergleich-regler,
+.vergleich-kante { display: none; }
+.vergleich.ist-bereit .vergleich-regler,
+.vergleich.ist-bereit .vergleich-kante { display: block; }
+/* Tastaturfokus muss sichtbar sein - gezeigt wird er am Griff. */
+.vergleich-regler:focus-visible ~ .vergleich-kante .vergleich-griff {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 3px;
+  /* Heller Saum aussen herum: der Fokus bleibt auch vor dunklen
+     Bildstellen eindeutig erkennbar. */
+  box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.92), 0 2px 12px rgba(18, 24, 30, 0.38);
+}
+/* Der Bedienhinweis erscheint nur, wenn der Regler auch wirklich wirkt. */
+.vergleich-hinweis { display: none; }
+.vergleich.ist-bereit .vergleich-hinweis { display: inline; }
+/* Auf schmalen Geräten ist die Bühne nur rund 270px breit. Bliebe die
+   Beschriftung so groß wie am Bildschirm, läge sie bei mittiger Kante
+   schon unter ihr - und würde nach der Regel oben ausgeblendet. */
+@media (max-width: 600px) {
+  .vergleich-marke {
+    top: 10px;
+    padding: 4px 9px;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+  }
+  .vergleich-marke-links { left: 10px; }
+  .vergleich-marke-rechts { right: 10px; }
+}
+.vergleich figcaption {
+  margin-top: 12px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
 }
 
 /* Lamella profile gallery (e.g. Raffstore Z90/S90/C80) */

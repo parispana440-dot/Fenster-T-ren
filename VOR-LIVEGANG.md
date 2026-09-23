@@ -216,23 +216,42 @@ Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
 Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
 Google-Unternehmensprofil.
 
-### 15. Angaben zum Holzfenster bestätigen
-Die Holz-Aluminium-Ausführung ist aus dem Angebot genommen; `holzfenster.html`
-beschreibt jetzt nur noch das durchgehende Holzfenster. Zwei Angaben dort sind
-aus der Holz-Aluminium-Fassung übernommen und gehören gegen das
-Lieferprogramm geprüft:
+### 15. Uw-Wert des Holzfensters gegen das Datenblatt halten
+Der Wert „ab 0,79 W/(m²K)" auf `holzfenster.html` stammt ursprünglich aus der
+Holz-Aluminium-Fassung. Nachrecherchiert: Für ein **reines** Holzfenster ist er
+erreichbar — mit entsprechender Dreifachverglasung werden genau 0,79 W/(m²K)
+genannt, ein Massivholzfenster mit 92 mm Bautiefe kommt auf 0,75. Der Uw-Wert
+entsteht aus Rahmen und Glas; die hinterlüftete Aluminiumschale trägt thermisch
+kaum bei, weshalb beide Bauarten bei gleicher Profiltiefe nah beieinander
+liegen.
 
-- **Uw-Wert „ab 0,79 W/(m²K)"** — dieser Wert stand vorher für das
-  Holz-Aluminium-System. Für ein Holzfenster derselben Profiltiefe ist er
-  plausibel, weil die hinterlüftete Aluminiumschale thermisch kaum beiträgt.
-  Bestätigen Sie ihn bitte, er steht auch in zwei FAQ-Antworten auf derselben
-  Seite und in der Kurzfassung für die Suche.
-- **Einbruchschutz bis RC2** — hängt am Beschlag, nicht am Material.
+Zu tun bleibt: den Wert einmal gegen das Datenblatt Ihres Lieferanten halten
+und die Profiltiefe dazu festhalten. Er steht an vier Stellen — im Datenblatt,
+in zwei FAQ-Antworten und in der Kurzfassung für die Suche.
 
-Bei den Holzarten steht weiterhin „u. a. Kiefer, Lärche, Meranti und Eiche".
-Meranti ist ein tropisches Laubholz; die Aussage zur Herkunft nennt deshalb
-jetzt ausdrücklich nur die heimischen Arten als europäisch. Falls Sie Meranti
-gar nicht führen, streichen Sie es besser aus der Aufzählung.
+Offen ist außerdem der **Einbruchschutz bis RC2**: der hängt am Beschlag, nicht
+am Material, und gehört gegen das Lieferprogramm geprüft.
+
+### 16. Meranti ist aus dem Angebot genommen — bitte gegenprüfen
+Bei den Holzarten stand „u. a. Kiefer, Lärche, Meranti und Eiche". Meranti ist
+ein tropisches Laubholz und wird von Umweltschutzorganisationen als die
+bedenklichste Holzart im Fensterbau eingestuft, weil ein großer Teil aus
+illegalem Einschlag in Indonesien und Malaysia stammt. Das passte nicht zur
+eigenen Aussage „aus bewirtschafteten europäischen Wäldern", die direkt daneben
+stand.
+
+Die Aufzählung nennt jetzt Kiefer, Lärche und Eiche — auf `holzfenster.html`
+und auf `holztueren.html`. Lärche und Eiche erreichen eine vergleichbare
+Witterungsbeständigkeit. Die FAQ-Antwort zur Holzart sagt ausdrücklich, dass
+Sie Tropenhölzer nicht führen; das ist ein Verkaufsargument, kein Mangel.
+
+**Wenn Sie Meranti tatsächlich anbieten**, sagen Sie Bescheid — dann formuliere
+ich es als Option auf Anfrage statt es zu verschweigen. Dabei zu bedenken: Die
+EU-Entwaldungsverordnung (EUDR) gilt ab **30. Dezember 2026**, für Klein- und
+Kleinstunternehmen ab **30. Juni 2027**. Holz fällt darunter. Wer Ware weiter
+verarbeitet oder vertreibt, die bereits in Verkehr gebracht wurde, muss zwar
+keine eigene Sorgfaltserklärung abgeben, aber die Referenznummer des
+Inverkehrbringers aufbewahren und die Rückverfolgbarkeit sichern.
 
 ## Später sinnvoll
 

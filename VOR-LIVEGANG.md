@@ -216,6 +216,25 @@ Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
 Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
 Google-Unternehmensprofil.
 
+### 15. Angaben zum reinen Holzfenster bestätigen
+Auf `holzfenster.html` steht jetzt neben der Holz-Aluminium-Ausführung auch
+das durchgehende Holzfenster. Drei Angaben dort stammen aus der Logik des
+Aufbaus, nicht aus einem Datenblatt Ihres Lieferanten:
+
+- **Uw-Wert**: Im Datenblatt steht „auf dem Niveau der
+  Holz-Aluminium-Ausführung". Das ist fachlich plausibel, weil die
+  hinterlüftete Aluminiumschale thermisch kaum beiträgt. Sobald Sie eine
+  konkrete Zahl vom Hersteller haben, sollte sie dort stehen — eine Zahl
+  wirkt stärker als eine Umschreibung.
+- **Einbruchschutz bis RC2**: hängt am Beschlag, nicht am Material. Bitte
+  gegen das Lieferprogramm prüfen.
+- **Holzarten und Oberflächen**: derzeit identisch zur
+  Holz-Aluminium-Ausführung übernommen.
+
+Ebenfalls offen: ein Profilschnitt der **Holz-Aluminium**-Ausführung mit
+sichtbarer Aluminiumschale. Das aktuelle Bild in diesem Abschnitt ist noch
+das alte, kleine Katalogbild.
+
 ## Später sinnvoll
 
 - Kundenbewertungen auf der Startseite einbinden (sobald vorhanden)

@@ -979,6 +979,12 @@ section { padding: 88px 0; }
   transform: translate(-50%, -50%);
   width: 46px;
   height: 46px;
+  /* Die Kante selbst ist durchlässig, der Griff nicht: nur hier wird
+     gezogen. Während des Ziehens fängt er auch senkrechte Gesten ab,
+     sonst scrollte die Seite unter dem Finger weg. */
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
   border-radius: 50%;
   background: var(--color-white);
   box-shadow: 0 2px 12px rgba(18, 24, 30, 0.38);
@@ -988,11 +994,15 @@ section { padding: 88px 0; }
   gap: 1px;
   color: var(--color-ink);
 }
-.vergleich-griff svg { width: 15px; height: 15px; display: block; }
+.vergleich-griff svg { width: 15px; height: 15px; display: block; pointer-events: none; }
+.vergleich.wird-gezogen .vergleich-griff { cursor: grabbing; }
+/* Während des Ziehens nichts markieren und keine Bilder aufnehmen. */
+.vergleich.wird-gezogen { user-select: none; -webkit-user-select: none; }
 
-/* Das Feld deckt die ganze Flaeche ab: ein Tippen setzt die Kante dorthin,
-   ein Ziehen bewegt sie mit. Sichtbar ist davon nichts - gezeichnet wird
-   der Griff oben. */
+/* Das Schieberegler-Feld trägt die Bedienung über die Tastatur und meldet
+   den Stand an Vorlesesoftware. Mit dem Zeiger wird es nicht bedient: ein
+   Klick irgendwo ins Bild soll die Kante nicht versetzen. Bewegt wird sie
+   ausschließlich am Griff - der Rest der Fläche bleibt unberührbar. */
 .vergleich-regler {
   position: absolute;
   inset: 0;
@@ -1004,27 +1014,9 @@ section { padding: 88px 0; }
   background: none;
   border: none;
   opacity: 0;
-  cursor: ew-resize;
-  /* Senkrecht wischen bleibt Scrollen, waagerecht bedient den Vergleich. */
-  touch-action: pan-y;
+  pointer-events: none;
   -webkit-appearance: none;
           appearance: none;
-}
-/* Der Griff des Feldes bleibt unsichtbar und schmal. Waere er breit, liefe
-   die Trennkante dem Finger um seine halbe Breite hinterher: ein
-   Schieberegler bildet den Wert auf die Bahn minus Griffbreite ab. */
-.vergleich-regler::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 1px;
-  height: 100%;
-  background: transparent;
-}
-.vergleich-regler::-moz-range-thumb {
-  width: 1px;
-  height: 100%;
-  border: none;
-  border-radius: 0;
-  background: transparent;
 }
 /* Ohne Skript bewegt sich nichts - dann bleibt die feste Hälfte-Hälfte-
    Ansicht stehen, und das Bedienelement wäre irreführend. */

@@ -135,6 +135,54 @@ document.addEventListener('DOMContentLoaded', function () {
       figur.classList.toggle('marke-rechts-aus', kante > masse.breite - masse.rechts - 26);
     }
 
+    function wertSetzen(neuerWert) {
+      var w = Math.max(0, Math.min(100, neuerWert));
+      regler.value = String(Math.round(w));
+      setzen();
+    }
+
+    // Gezogen wird ausschließlich am Griff. Ein Klick irgendwo ins Bild darf
+    // die Kante nicht versetzen - deshalb hängen die Zeigerereignisse hier
+    // und nicht auf der Fläche. Der Zeiger wird für die Dauer des Ziehens
+    // festgehalten, damit es auch weitergeht, wenn er das Bild verlässt.
+    var griff = figur.querySelector('.vergleich-griff');
+    if (griff) {
+      var zieht = false;
+
+      function ausPosition(x) {
+        var feld = buehne.getBoundingClientRect();
+        if (!feld.width) return;
+        wertSetzen((x - feld.left) / feld.width * 100);
+      }
+
+      griff.addEventListener('pointerdown', function (e) {
+        zieht = true;
+        figur.classList.add('wird-gezogen');
+        try { griff.setPointerCapture(e.pointerId); } catch (err) {}
+        // Der Regler bleibt das eigentliche Bedienelement: wer eben noch
+        // gezogen hat, kann direkt mit den Pfeiltasten weitermachen.
+        try { regler.focus({ preventScroll: true }); } catch (err) { regler.focus(); }
+        e.preventDefault();
+      });
+
+      griff.addEventListener('pointermove', function (e) {
+        if (!zieht) return;
+        ausPosition(e.clientX);
+        e.preventDefault();
+      });
+
+      function loslassen(e) {
+        if (!zieht) return;
+        zieht = false;
+        figur.classList.remove('wird-gezogen');
+        try { griff.releasePointerCapture(e.pointerId); } catch (err) {}
+      }
+      griff.addEventListener('pointerup', loslassen);
+      griff.addEventListener('pointercancel', loslassen);
+      // Ein Doppelklick auf den Griff soll nichts markieren.
+      griff.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    }
+
     regler.addEventListener('input', setzen);
     regler.addEventListener('change', setzen);
     window.addEventListener('resize', function () { messen(); setzen(); });

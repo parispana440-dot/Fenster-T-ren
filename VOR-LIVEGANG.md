@@ -223,42 +223,53 @@ Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
 Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
 Google-Unternehmensprofil.
 
-### 15. Uw-Wert des Holzfensters gegen das Datenblatt halten
-Der Wert „ab 0,79 W/(m²K)" auf `holzfenster.html` stammt ursprünglich aus der
+### 15. Uw-Wert des Holzfensters — vom Auftraggeber bestätigt
+Der Wert „ab 0,79 W/(m²K)" auf `holzfenster.html` stammte ursprünglich aus der
 Holz-Aluminium-Fassung. Nachrecherchiert: Für ein **reines** Holzfenster ist er
 erreichbar — mit entsprechender Dreifachverglasung werden genau 0,79 W/(m²K)
 genannt, ein Massivholzfenster mit 92 mm Bautiefe kommt auf 0,75. Der Uw-Wert
 entsteht aus Rahmen und Glas; die hinterlüftete Aluminiumschale trägt thermisch
-kaum bei, weshalb beide Bauarten bei gleicher Profiltiefe nah beieinander
-liegen.
+kaum bei, weshalb beide Bauarten bei gleicher Profiltiefe nah beieinander liegen.
 
-Zu tun bleibt: den Wert einmal gegen das Datenblatt Ihres Lieferanten halten
-und die Profiltiefe dazu festhalten. Er steht an vier Stellen — im Datenblatt,
-in zwei FAQ-Antworten und in der Kurzfassung für die Suche.
+Der Auftraggeber hat den Wert am 25.09.2026 als zutreffend bestätigt. Er steht
+an vier Stellen: im Datenblatt, in zwei FAQ-Antworten und in der Kurzfassung für
+die Suche.
 
-Offen ist außerdem der **Einbruchschutz bis RC2**: der hängt am Beschlag, nicht
-am Material, und gehört gegen das Lieferprogramm geprüft.
+Offen bleibt der **Einbruchschutz bis RC2**: der hängt am Beschlag, nicht am
+Material, und gehört gegen das Lieferprogramm geprüft.
 
-### 16. Meranti ist aus dem Angebot genommen — bitte gegenprüfen
+### 16. Holzherkunft wird auf der Website nicht mehr genannt
 Bei den Holzarten stand „u. a. Kiefer, Lärche, Meranti und Eiche". Meranti ist
-ein tropisches Laubholz und wird von Umweltschutzorganisationen als die
-bedenklichste Holzart im Fensterbau eingestuft, weil ein großer Teil aus
-illegalem Einschlag in Indonesien und Malaysia stammt. Das passte nicht zur
-eigenen Aussage „aus bewirtschafteten europäischen Wäldern", die direkt daneben
-stand.
+ein tropisches Laubholz, das von Umweltschutzorganisationen als bedenklichste
+Holzart im Fensterbau eingestuft wird. Es ist auf Weisung des Auftraggebers
+dauerhaft aus dem Angebot der Website genommen; genannt werden nur noch Kiefer,
+Lärche und Eiche.
 
-Die Aufzählung nennt jetzt Kiefer, Lärche und Eiche — auf `holzfenster.html`
-und auf `holztueren.html`. Lärche und Eiche erreichen eine vergleichbare
-Witterungsbeständigkeit. Die FAQ-Antwort zur Holzart sagt ausdrücklich, dass
-Sie Tropenhölzer nicht führen; das ist ein Verkaufsargument, kein Mangel.
+**Auf Weisung vom 25.09.2026 nennt die Website an keiner Stelle mehr, woher das
+Holz stammt.** Entfernt wurden auf `holzfenster.html`:
 
-**Wenn Sie Meranti tatsächlich anbieten**, sagen Sie Bescheid — dann formuliere
-ich es als Option auf Anfrage statt es zu verschweigen. Dabei zu bedenken: Die
-EU-Entwaldungsverordnung (EUDR) gilt ab **30. Dezember 2026**, für Klein- und
-Kleinstunternehmen ab **30. Juni 2027**. Holz fällt darunter. Wer Ware weiter
-verarbeitet oder vertreibt, die bereits in Verkehr gebracht wurde, muss zwar
-keine eigene Sorgfaltserklärung abgeben, aber die Referenznummer des
-Inverkehrbringers aufbewahren und die Rückverfolgbarkeit sichern.
+- „stammt bei unseren Lieferanten aus bewirtschafteten europäischen Wäldern"
+  (Nachhaltigkeitskachel und FAQ zur Holzart, insgesamt drei Fundstellen
+  einschließlich der strukturierten Daten)
+- „Tropenhölzer führen wir nicht" — dieselbe Art von Aussage, nur verneint, und
+  damit ebenso belegpflichtig
+
+Hintergrund: Angaben zur Herkunft eines Rohstoffs sind Werbeaussagen im Sinne
+des UWG. Wer sie trifft, muss sie im Streitfall belegen können — und zwar über
+die gesamte Lieferkette. Ohne Herkunftsnachweise der Lieferanten ist Schweigen
+die sichere Wahl. Die Holzarten selbst zu nennen ist davon unberührt; das ist
+eine Produkteigenschaft, keine Herkunftsangabe.
+
+**Falls die Herkunft später doch beworben werden soll**, braucht es vorher
+Nachweise der Lieferanten — etwa FSC- oder PEFC-Zertifikate oder eine schriftliche
+Herkunftsbestätigung. Dann kann die Aussage zurück auf die Seite.
+
+Zu bedenken bleibt unabhängig davon: Die EU-Entwaldungsverordnung (EUDR) gilt ab
+**30. Dezember 2026**, für Klein- und Kleinstunternehmen ab **30. Juni 2027**.
+Holz fällt darunter. Wer Ware weiter verarbeitet oder vertreibt, die bereits in
+Verkehr gebracht wurde, muss zwar keine eigene Sorgfaltserklärung abgeben, aber
+die Referenznummer des Inverkehrbringers aufbewahren und die Rückverfolgbarkeit
+sichern.
 
 ### 17. Förderbegleitung: drei Punkte für Ihren Berater
 Die Website bewirbt jetzt ausdrücklich, dass Sie Antrag, Nachweise und Fristen

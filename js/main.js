@@ -222,9 +222,17 @@ document.addEventListener('DOMContentLoaded', function () {
       kasten.querySelector('.lk-zu').focus();
     }
 
+    // Das Deckbild zeigt eine der Aufnahmen aus der Liste. Die Galerie startet
+    // genau dort, damit der Klick zum Bild passt - welche Stelle das ist,
+    // entscheidet allein das href im Markup.
+    var deckstelle = 0;
+    for (var i = 0; i < bilder.length; i++) {
+      if (bilder[i].quelle === deckbild.getAttribute('href')) { deckstelle = i; break; }
+    }
+
     deckbild.addEventListener('click', function (e) {
       e.preventDefault();
-      oeffnen(bilder.length - 1); // das Deckbild ist die letzte, neueste Aufnahme
+      oeffnen(deckstelle);
     });
     liste.querySelectorAll('a[href]').forEach(function (a, i) {
       a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(i); });

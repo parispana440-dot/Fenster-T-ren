@@ -1566,6 +1566,18 @@ textarea { resize: vertical; min-height: 120px; }
   margin-top: 8px;
 }
 
+/* Muster-Widerrufsformular zum Ausdrucken oder Abtippen. Die Ausfuelllinien
+   sind gezeichnet, nicht aus Unterstrichen gesetzt - eine Kette aus "____"
+   bricht nicht um und schob das Handy-Layout in die Breite. */
+.wr-formular p { margin: 14px 0 4px; }
+.wr-formular .wr-linie {
+  display: block;
+  height: 1.5em;
+  border-bottom: 1px solid var(--color-border);
+}
+.wr-formular .wr-linie + .wr-linie { margin-top: 6px; }
+.wr-formular .wr-hinweis { margin-top: 16px; font-size: 0.85rem; color: var(--color-text-muted); }
+
 /* Spamfalle: fuer Menschen unsichtbar, fuer Bots ein ausfuellbares Feld */
 .hp-field {
   position: absolute;

@@ -144,11 +144,44 @@ Bei einer GmbH & Co. KG wird üblicherweise zusätzlich die Komplementär-GmbH
 mit eigener HRB-Nummer und deren Geschäftsführer angegeben. Bitte prüfen lassen,
 ob und in welcher Form das hier nötig ist.
 
-### 6. Widerrufsbelehrung für Fernabsatzverträge
-Wenn Verträge mit Privatkunden per Telefon, E-Mail oder über das Formular zustande
-kommen, handelt es sich um Fernabsatzverträge. Verbraucher haben dann ein
-14-tägiges Widerrufsrecht, über das vor Vertragsschluss in Textform belehrt werden muss.
-Das betrifft die Angebots- und Auftragsunterlagen, nicht die Website selbst.
+### 6. AGB und Widerrufsbelehrung — veröffentlicht, aber bitte prüfen lassen
+Beide Texte stehen seit dem 25.09.2026 als eigene Seiten auf der Website
+(`agb.html`, `widerruf.html`) und sind aus der Fußzeile jeder Seite erreichbar.
+Vorlage waren die vom Auftraggeber gelieferten PDF-Dateien; der Wortlaut ist
+unverändert übernommen. **Zwei Ausnahmen**, beide klein:
+
+- In AGB § 2 Abs. 3 c stand „mit dem Beginn der auf seinen Wunsch erfolgenden
+  **vertragswidrigen** Leistung". Gemeint ist ersichtlich „vertragsgemäßen" —
+  in der veröffentlichten Fassung steht das Wort korrekt. Bitte im eigenen
+  Vertragsmuster ebenfalls berichtigen.
+- Die Widerrufsbelehrung verweist auf ein „beigefügtes Muster-Widerrufsformular",
+  das in der Vorlage fehlte. Es ist nach dem gesetzlichen Muster (Anlage 2 zu
+  Art. 246a § 1 Abs. 2 EGBGB) ergänzt worden und steht unten auf
+  `widerruf.html`.
+
+**Drei Punkte für den Anwalt — vor dem Livegang:**
+
+1. **Die Widerrufsbelehrung widerspricht sich.** Sie beginnt mit „Sie haben das
+   Recht, binnen vierzehn Tagen … zu widerrufen" und erklärt anschließend, das
+   Recht ende mit der Auftragserteilung. Bei Maßanfertigungen nach
+   § 312g Abs. 2 Nr. 1 BGB besteht von vornherein **kein** Widerrufsrecht — es
+   „endet" nicht, es entsteht gar nicht erst. Ein bestehendes Widerrufsrecht
+   kann der Verbraucher zudem nicht durch Zustimmung abbedingen. Eine
+   Belehrung, die das so darstellt, ist angreifbar.
+2. **Reichweite der Ausnahme.** § 312g Abs. 2 Nr. 1 BGB betrifft die Lieferung
+   von Waren. Bei Verträgen mit Montage liegt je nach Ausgestaltung ein
+   Werkvertrag vor; ob die Ausnahme dann greift, ist nicht pauschal zu
+   beantworten und gehört geprüft.
+3. **Abgleich mit dem Förderkonzept.** AGB § 2 Abs. 2 lässt den Vertrag durch
+   Auftragsbestätigung oder beginnende Ausführung zustande kommen. Die
+   Förderseite wirbt dagegen mit einem Leistungsvertrag unter aufschiebender
+   Bedingung (siehe Punkt 17). Beides muss zusammenpassen, sonst steht im
+   Vertrag etwas anderes als auf der Website.
+
+Unabhängig davon gilt weiterhin: Kommen Verträge mit Privatkunden per Telefon,
+E-Mail oder Formular zustande, handelt es sich um Fernabsatzverträge. Über das
+Widerrufsrecht ist **vor Vertragsschluss in Textform** zu belehren — das
+betrifft die Angebots- und Auftragsunterlagen, nicht die Website allein.
 
 ## Bei Umzug auf eigenes Hosting anpassen
 

@@ -32,9 +32,14 @@ Nach der Anbindung:
   Stand" entfernen und den Auftragsverarbeiter (Web3Forms) eintragen
 - Einen Auftragsverarbeitungsvertrag (AVV) mit dem Anbieter abschließen
 
-### 2. Öffnungszeiten bestätigen
-Auf `kontakt.html` stehen jetzt „Mo–Fr 08:00–17:00 Uhr" ohne Platzhalter-Hinweis.
-Bitte einmal bestätigen, dass diese Zeiten stimmen, oder mir die richtigen nennen.
+### 2. Öffnungszeiten — vom Auftraggeber bestätigt
+Gültig sind **Montag bis Freitag, 09:00–15:00 Uhr** (Stand 25.09.2026).
+Sie stehen an 31 Stellen: im Kopfbereich jeder der 25 Seiten, ausgeschrieben
+auf `kontakt.html`, in der Karten-Infobox und in den strukturierten Daten von
+`index.html` und `kontakt.html`.
+
+Wenn sich die Zeiten je ändern, müssen alle diese Stellen mit — und danach das
+Google-Unternehmensprofil, weil Google die Angaben gegeneinander abgleicht.
 
 ### 3. Referenzen-Seite: die obere Reihe fehlt noch
 Der Bereich „Bauvorhaben und Sanierungen" ist fertig – drei Bildergalerien mit
@@ -214,11 +219,10 @@ Sobald Instagram und Facebook existieren, gehören die URLs nicht nur in den
 Footer, sondern auch in den `sameAs`-Eintrag der strukturierten Daten. Das
 hilft Google, die Profile demselben Unternehmen zuzuordnen.
 
-### 14. Öffnungszeiten bestätigen (hängt mit Punkt 2 zusammen)
-Die Zeiten „Mo–Fr 08:00–17:00" stehen inzwischen an drei Stellen: auf
-`kontakt.html`, im Kopfbereich jeder Seite und in den strukturierten Daten.
-Wenn sie nicht stimmen, müssen alle drei geändert werden – und später auch das
-Google-Unternehmensprofil.
+### 14. Öffnungszeiten in den strukturierten Daten — erledigt
+Siehe Punkt 2. Die Zeiten „Mo–Fr 09:00–15:00" stehen auch im JSON-LD von
+`index.html` und `kontakt.html`. Beim Anlegen des Google-Unternehmensprofils
+müssen sie dort zeichengenau übereinstimmen.
 
 ### 15. Uw-Wert des Holzfensters — vom Auftraggeber bestätigt
 Der Wert „ab 0,79 W/(m²K)" auf `holzfenster.html` stammte ursprünglich aus der

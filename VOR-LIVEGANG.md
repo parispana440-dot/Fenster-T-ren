@@ -19,14 +19,23 @@ war aus der Arbeitsumgebung nicht möglich, weil deren Ausgangsfilter
 
 **Noch zu erledigen:**
 
-1. **AVV abschließen — vor dem Livegang.** Die Datenschutzerklärung sagt in
-   Abschnitt 4 bereits, dass ein Vertrag zur Auftragsverarbeitung nach
-   Art. 28 DSGVO vorliegt. Solange er nicht unterschrieben ist, steht dort
-   eine unwahre Angabe. Entweder den AVV abschließen oder den Halbsatz
-   vorübergehend entfernen — die Seite darf so nicht live gehen.
-   Beim Abschluss den vollständigen Namen und Sitz des Anbieters notieren und
-   in Abschnitt 4 eintragen; dort steht bisher nur „Web3Forms", weil die
-   Firmierung nicht belastbar war.
+1. **AVV abschließen — vor dem Livegang.** Web3Forms verarbeitet die Anfragen
+   in unserem Auftrag; dafür verlangt Art. 28 DSGVO einen schriftlichen
+   Vertrag zur Auftragsverarbeitung. Er ist noch nicht abgeschlossen.
+
+   Die Datenschutzerklärung behauptet deshalb **nicht**, dass einer vorliegt —
+   auf ausdrückliche Weisung des Auftraggebers vom 25.09.2026: lieber eine
+   Lücke als eine Unwahrheit. Das heilt den fehlenden Vertrag aber nicht, es
+   verhindert nur eine zusätzliche Falschangabe.
+
+   **Sobald der AVV unterschrieben ist**, gehört in Abschnitt 4 hinter den Satz
+   „… und nutzt sie nicht für eigene Zwecke." dieser Zusatz:
+
+   > Ein Vertrag zur Auftragsverarbeitung nach Art.&nbsp;28 DSGVO liegt vor.
+
+   Dabei außerdem den vollständigen Namen und Sitz des Anbieters aus dem
+   Vertrag übernehmen und in Abschnitt 4 eintragen; dort steht bisher nur
+   „Web3Forms", weil die Firmierung nicht belastbar zu ermitteln war.
 2. **Domain im Web3Forms-Konto eintragen**, sobald sie feststeht. Der
    Zugriffsschlüssel steht im Quelltext — das ist beim Dienst so vorgesehen
    und erlaubt nur den Versand an die eigene Adresse, nicht das Auslesen.

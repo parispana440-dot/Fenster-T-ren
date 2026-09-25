@@ -935,7 +935,9 @@ section { padding: 88px 0; }
   font-size: 0.8rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--color-accent-dark);
+  /* Das Markenblau kommt auf dem hellblauen Feld nur auf 4,34:1 und
+     verfehlt bei dieser Schriftgröße die 4,5:1. Dieser Ton hält 5,86:1. */
+  color: #22608c;
 }
 .we-einheit svg { width: 15px; height: 15px; flex: none; }
 .we-summe { margin: 22px 0 0; }

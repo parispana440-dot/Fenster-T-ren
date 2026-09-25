@@ -140,7 +140,8 @@
   <section>
     <div class="container feature-row" style="align-items:flex-start;">
 
-      <form data-form data-betreff="Angebotsanfrage über die Website" novalidate>
+      <form data-form data-betreff="Angebotsanfrage über die Website"
+            data-endpoint="https://api.web3forms.com/submit" novalidate>
         <div class="field">
           <label for="objektart">Objektart *</label>
           <select id="objektart" name="objektart" required>
@@ -229,6 +230,18 @@
             <div class="hp-field" aria-hidden="true">
               <label for="a-website">Bitte dieses Feld frei lassen</label>
               <input type="text" id="a-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <!-- Angaben fuer den Versanddienst Web3Forms. Der Zugriffsschluessel ist
+                 kein Geheimnis: er berechtigt ausschliesslich dazu, an unsere eigene
+                 Adresse zu senden, nicht dazu, etwas auszulesen. Siehe VOR-LIVEGANG.md,
+                 Punkt 1. "botcheck" ist die Spamfalle des Dienstes und wird auf dem
+                 Server geprueft - die eigene Falle "website" greift nur im Browser. -->
+            <input type="hidden" name="access_key" value="785d39a9-08ec-4121-92e8-70a8c5b69699">
+            <input type="hidden" name="subject" value="Neue Angebotsanfrage über die Website">
+            <input type="hidden" name="from_name" value="Website assos-projekt.de">
+            <div class="hp-field" aria-hidden="true">
+              <label for="a-botcheck">Bitte dieses Feld nicht anklicken</label>
+              <input type="checkbox" id="a-botcheck" name="botcheck" tabindex="-1">
             </div>
         <button type="submit" class="btn btn-primary btn-block">Anfrage senden</button>
         <div class="form-status" role="status"></div>

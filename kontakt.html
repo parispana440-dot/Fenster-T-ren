@@ -433,7 +433,8 @@
         <div class="contact-form-card">
           <h2 class="mt-0">Schreiben Sie uns</h2>
           <p>Je mehr wir über Ihr Vorhaben wissen, desto konkreter können wir antworten. Pflichtfelder sind mit * markiert – alles andere ist freiwillig.</p>
-          <form data-form data-betreff="Nachricht über das Kontaktformular" novalidate>
+          <form data-form data-betreff="Nachricht über das Kontaktformular"
+                data-endpoint="https://api.web3forms.com/submit" novalidate>
             <div class="form-grid">
               <div class="field">
                 <label for="c-name">Name *</label>
@@ -477,6 +478,18 @@
             <div class="hp-field" aria-hidden="true">
               <label for="c-website">Bitte dieses Feld frei lassen</label>
               <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <!-- Angaben fuer den Versanddienst Web3Forms. Der Zugriffsschluessel ist
+                 kein Geheimnis: er berechtigt ausschliesslich dazu, an unsere eigene
+                 Adresse zu senden, nicht dazu, etwas auszulesen. Siehe VOR-LIVEGANG.md,
+                 Punkt 1. "botcheck" ist die Spamfalle des Dienstes und wird auf dem
+                 Server geprueft - die eigene Falle "website" greift nur im Browser. -->
+            <input type="hidden" name="access_key" value="785d39a9-08ec-4121-92e8-70a8c5b69699">
+            <input type="hidden" name="subject" value="Neue Nachricht über das Kontaktformular">
+            <input type="hidden" name="from_name" value="Website assos-projekt.de">
+            <div class="hp-field" aria-hidden="true">
+              <label for="c-botcheck">Bitte dieses Feld nicht anklicken</label>
+              <input type="checkbox" id="c-botcheck" name="botcheck" tabindex="-1">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Nachricht senden</button>
             <div class="form-status" role="status"></div>

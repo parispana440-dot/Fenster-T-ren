@@ -5,32 +5,38 @@ Sie ersetzt die früheren Hinweistexte, die versehentlich öffentlich auf den Se
 
 ## Muss erledigt werden
 
-### 1. Formulare an einen Versanddienst anbinden
-**Stand jetzt:** Die Formulare prüfen alle Pflichtfelder und öffnen beim Absenden
-das E-Mail-Programm des Besuchers mit einer fertig ausgefüllten Nachricht. Es geht
-also nichts mehr verloren und es wird auch nichts Falsches behauptet – aber der
-Besucher muss in seinem Mailprogramm noch auf „Senden" klicken. Auf dem Handy
-klappt das zuverlässig, an manchen Büro-Rechnern ohne eingerichtetes Mailprogramm
-nicht.
+### 1. Formulare — angebunden, zwei Punkte bleiben offen
+Beide Formulare (`kontakt.html` und `angebot.html`) senden seit dem 25.09.2026
+über **Web3Forms** an `info@assos-projekt.de`. Hinterlegt sind am `<form>` der
+Endpunkt `https://api.web3forms.com/submit` sowie die versteckten Felder
+`access_key`, `subject`, `from_name` und die Spamfalle `botcheck`.
 
-**Der saubere Zustand** ist ein Versanddienst, der die Anfrage direkt zustellt.
-Der Anschluss ist vorbereitet und dauert zwei Minuten:
+Getestet mit abgefangener Antwort: Erfolgsfall (Dank, Formular leert sich),
+Fehlerfall (Hinweis auf Telefon und E-Mail, Eingaben bleiben stehen),
+Pflichtfeldprüfung, korrekte Betreffzeilen. Ein Versand gegen den echten Dienst
+war aus der Arbeitsumgebung nicht möglich, weil deren Ausgangsfilter
+`api.web3forms.com` blockiert.
 
-1. Auf web3forms.com die eigene E-Mail-Adresse eintragen → es kommt ein
-   Zugriffsschlüssel per Mail (kostenlos bis 250 Anfragen/Monat, kein Konto nötig)
-2. In `kontakt.html` und `angebot.html` beim `<form>` ergänzen:
-   `data-endpoint="https://api.web3forms.com/submit"`
-3. In beiden Formularen direkt vor dem Absenden-Knopf einfügen:
-   `<input type="hidden" name="access_key" value="DER-SCHLÜSSEL">`
+**Noch zu erledigen:**
 
-Mehr ist nicht nötig – das Skript erkennt den Endpunkt selbst, schickt dann
-regulär ab, zeigt einen Sende- und einen Fehlerzustand und nennt im Fehlerfall
-Telefonnummer und E-Mail als Ausweg.
+1. **AVV abschließen — vor dem Livegang.** Die Datenschutzerklärung sagt in
+   Abschnitt 4 bereits, dass ein Vertrag zur Auftragsverarbeitung nach
+   Art. 28 DSGVO vorliegt. Solange er nicht unterschrieben ist, steht dort
+   eine unwahre Angabe. Entweder den AVV abschließen oder den Halbsatz
+   vorübergehend entfernen — die Seite darf so nicht live gehen.
+   Beim Abschluss den vollständigen Namen und Sitz des Anbieters notieren und
+   in Abschnitt 4 eintragen; dort steht bisher nur „Web3Forms", weil die
+   Firmierung nicht belastbar war.
+2. **Domain im Web3Forms-Konto eintragen**, sobald sie feststeht. Der
+   Zugriffsschlüssel steht im Quelltext — das ist beim Dienst so vorgesehen
+   und erlaubt nur den Versand an die eigene Adresse, nicht das Auslesen.
+   Ohne Domainbindung kann aber jeder, der den Schlüssel kopiert, das Postfach
+   zuspammen. Die Einstellung findet sich im Konto unter den Einstellungen
+   des Zugriffsschlüssels.
 
-Nach der Anbindung:
-- In der Datenschutzerklärung, Abschnitt 4, den Absatz „Hinweis zum aktuellen
-  Stand" entfernen und den Auftragsverarbeiter (Web3Forms) eintragen
-- Einen Auftragsverarbeitungsvertrag (AVV) mit dem Anbieter abschließen
+**Erster echter Test nach dem Livegang:** einmal über jedes Formular eine
+Anfrage an sich selbst schicken und prüfen, ob sie ankommt — und ob die
+Antwort-Adresse auf den Absender zeigt, sodass sich direkt antworten lässt.
 
 ### 2. Öffnungszeiten — vom Auftraggeber bestätigt
 Gültig sind **Montag bis Freitag, 09:00–15:00 Uhr** (Stand 25.09.2026).

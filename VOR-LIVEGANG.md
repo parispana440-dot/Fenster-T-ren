@@ -224,7 +224,7 @@ Siehe Punkt 2. Die Zeiten „Mo–Fr 09:00–15:00" stehen auch im JSON-LD von
 `index.html` und `kontakt.html`. Beim Anlegen des Google-Unternehmensprofils
 müssen sie dort zeichengenau übereinstimmen.
 
-### 15. Uw-Wert des Holzfensters — vom Auftraggeber bestätigt
+### 15. Holzfenster: Uw-Wert und RC2 — vom Auftraggeber bestätigt
 Der Wert „ab 0,79 W/(m²K)" auf `holzfenster.html` stammte ursprünglich aus der
 Holz-Aluminium-Fassung. Nachrecherchiert: Für ein **reines** Holzfenster ist er
 erreichbar — mit entsprechender Dreifachverglasung werden genau 0,79 W/(m²K)
@@ -236,8 +236,10 @@ Der Auftraggeber hat den Wert am 25.09.2026 als zutreffend bestätigt. Er steht
 an vier Stellen: im Datenblatt, in zwei FAQ-Antworten und in der Kurzfassung für
 die Suche.
 
-Offen bleibt der **Einbruchschutz bis RC2**: der hängt am Beschlag, nicht am
-Material, und gehört gegen das Lieferprogramm geprüft.
+Der **Einbruchschutz bis RC2** ist ebenfalls bestätigt (25.09.2026): RC2-Beschläge
+sind auch für Holzfenster verfügbar. Die Zeile im Datenblatt bleibt damit stehen.
+RC2 hängt am Beschlag und an der Verankerung im Mauerwerk, nicht am Rahmenmaterial
+— die fachgerechte Montage gehört zur geprüften Konstruktion dazu.
 
 ### 16. Holzherkunft wird auf der Website nicht mehr genannt
 Bei den Holzarten stand „u. a. Kiefer, Lärche, Meranti und Eiche". Meranti ist

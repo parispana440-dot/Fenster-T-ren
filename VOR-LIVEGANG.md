@@ -88,21 +88,28 @@ Vermittlung gegen Provision wird an keiner Stelle behauptet.
 | Sie haben sie nicht | Text bleibt wie er ist. Vermitteln Sie nicht selbst, sondern arbeiten Sie mit einem Makler zusammen. |
 | Unklar | Kurze Rückfrage bei der IHK Hannover – die Auskunft ist kostenlos. |
 
-### 4b. Berufsbezeichnungen Architekt, Bauingenieur, Statiker
+### 4b. Berufsbezeichnungen Architekt, Bauingenieur, Statiker — geklärt
 „Architekt" und „Bauingenieur" sind in Deutschland geschützte Berufsbezeichnungen,
 die an eine Kammermitgliedschaft gebunden sind. Auch die Bauvorlageberechtigung –
 also das Recht, den Bauantrag einzureichen – hängt daran.
 
-Auf der Website steht deshalb: „Für Planung, Statik und Bauleitung arbeiten wir
-mit Architektinnen und Architekten, Bauingenieuren und Statikern zusammen, die
-wir seit Jahren kennen." Das ist korrekt, egal ob diese Fachleute angestellt
-oder Partner sind.
+Der Auftraggeber hat am 25.09.2026 mitgeteilt, dass diese Fachleute **nicht
+angestellt**, sondern feste Partner sind. Formulierungen wie „unsere Architekten"
+oder „eigene Statik" sind damit ausgeschlossen – sie wären irreführend.
 
-**Wenn diese Fachkräfte bei Ihnen angestellt sind**, dürfen wir deutlicher
-werden („unsere Architekten", „eigene Statik") – das wirkt stärker. Sagen Sie
-mir in dem Fall, wer fest zum Unternehmen gehört, dann passe ich die
-Formulierungen an. Ohne Anstellungsverhältnis wäre „eigene Architekten"
-irreführend.
+Die Passagen auf `ueber-uns.html` und `bauen-immobilien.html` sind entsprechend
+neu gefasst: „Planung, Statik und Bauleitung liegen bei einem festen Kreis von
+Architektinnen und Architekten, Bauingenieuren und Statikern, mit denen wir seit
+Jahren dieselben Bauvorhaben umsetzen."
+
+Das benennt die Dauerhaftigkeit der Zusammenarbeit, ohne ein
+Anstellungsverhältnis zu behaupten und ohne die geschützten Titel für das eigene
+Unternehmen zu beanspruchen. Die FAQ auf `bauen-immobilien.html` stellt
+zusätzlich klar, dass die Bauvorlage von der Planerin oder dem Planer eingereicht
+wird.
+
+**Sollte sich das ändern** – etwa durch eine Anstellung – kann die Formulierung
+offensiver werden. Bis dahin bleibt sie wie sie ist.
 
 ### 4c. Angaben zur Erfahrung — vom Auftraggeber bestätigt
 An mehreren Stellen steht „seit über 15 Jahren". Der Auftraggeber hat am
@@ -182,28 +189,18 @@ sind Aktualität, Regelmäßigkeit und dass Sie antworten.
 Praktischer Weg: nach jeder Montage eine kurze Nachricht mit dem direkten
 Bewertungslink.
 
-### 12. Koordinate der Karte bestätigen — BITTE ZUERST PRÜFEN
-Die Karte auf `kontakt.html` setzt das Haus-Symbol auf **52.4283 / 9.8146**.
-Diese Koordinate ist **von mir geschätzt** und nicht überprüft: Ich konnte aus
-dieser Arbeitsumgebung heraus keinen Geokodierungsdienst erreichen. Sie zeigt
-das Gewerbegebiet Isernhagen Süd, möglicherweise aber nicht exakt die
-Borsigstraße 7.
+### 12. Koordinate der Karte — erledigt
+Die Karte auf `kontakt.html` setzt das Haus-Symbol auf **52.43062 / 9.83599**.
+Diese Koordinate hat der Auftraggeber am 25.09.2026 genannt; sie hat die frühere
+Schätzung ersetzt.
 
-So bestätigen oder korrigieren Sie sie in zwanzig Sekunden:
+Sie ist zusätzlich als `geo` in die strukturierten Daten von `index.html` und
+`kontakt.html` eingetragen. Dort stand bis dahin bewusst nichts, weil eine
+falsche Angabe schlechter gewesen wäre als gar keine.
 
-1. In Google Maps die Borsigstraße 7 suchen
-2. Mit der rechten Maustaste auf das Gebäude klicken
-3. Ganz oben stehen zwei Zahlen, z. B. `52,42831, 9,81462` — anklicken kopiert sie
-4. In `kontakt.html` im Block `<div class="karte-box" ...>` eintragen:
-   `data-lat="52.42831"` und `data-lon="9.81462"` (Punkt statt Komma!)
-
-Nur diese eine Stelle bestimmt die Position. Der Knopf „Route planen" arbeitet
-mit der Anschrift und führt deshalb auch dann richtig, wenn die Koordinate noch
-nicht stimmt.
-
-Sobald die Koordinate bestätigt ist, trage ich sie zusätzlich als `geo` in die
-strukturierten Daten ein — dort steht sie bewusst noch nicht, weil eine falsche
-Angabe schlechter wäre als gar keine.
+Hinterlegt ist die Position an genau drei Stellen: `data-lat`/`data-lon` im
+Block `<div class="karte-box">` auf `kontakt.html` sowie im JSON-LD beider
+Seiten. Der Knopf „Route planen" arbeitet unabhängig davon mit der Anschrift.
 
 ### 12a. Kartenkacheln bei wachsendem Besuch
 Die Karte bezieht ihre Ausschnitte von den öffentlichen Servern der

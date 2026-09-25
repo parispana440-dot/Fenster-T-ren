@@ -104,11 +104,12 @@ mir in dem Fall, wer fest zum Unternehmen gehört, dann passe ich die
 Formulierungen an. Ohne Anstellungsverhältnis wäre „eigene Architekten"
 irreführend.
 
-### 4c. Angaben zur Erfahrung
-An mehreren Stellen steht „seit über 15 Jahren". Das stammt aus Ihrer
-Beschreibung. Bitte einmal gegenprüfen, dass sich das belegen lässt – etwa
-über die Historie des Unternehmens oder der handelnden Personen. Angaben zur
-Unternehmensdauer werden in Wettbewerbsstreitigkeiten regelmäßig angegriffen.
+### 4c. Angaben zur Erfahrung — vom Auftraggeber bestätigt
+An mehreren Stellen steht „seit über 15 Jahren". Der Auftraggeber hat am
+25.09.2026 bestätigt, dass sich das belegen lässt. Damit ist der Punkt
+erledigt; die Belege sollten für den Fall einer Nachfrage greifbar bleiben,
+weil Angaben zur Unternehmensdauer in Wettbewerbsstreitigkeiten regelmäßig
+angegriffen werden.
 
 ### 5. Komplementär-GmbH im Impressum
 Im Impressum ist bisher nur die KG genannt (HRA 206366, Amtsgericht Hannover).

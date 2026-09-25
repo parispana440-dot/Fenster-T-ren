@@ -891,6 +891,93 @@ section { padding: 88px 0; }
   text-align: center;
   color: var(--color-text-muted);
 }
+
+/* Rechenbeispiel "Förderung je Wohneinheit": zeigt, dass der Kostenrahmen
+   mit jeder Wohnung mitwächst. Kein Diagramm - die Zahlen sind echter Text,
+   das Haus darüber ist nur die Veranschaulichung dazu. */
+.we-rechnung {
+  aspect-ratio: auto;
+  display: block;
+  padding: 30px 28px 26px;
+  background: var(--color-white);
+}
+.we-titel {
+  margin: 0 0 20px;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.we-dach {
+  /* Walmdach statt spitzem Giebel: bei dieser Breite wirkt eine Spitze
+     zu flach, die abgeflachte Form liest sich auch schmal noch als Dach. */
+  height: 30px;
+  width: 100%;
+  background: #b9bfc5;
+  clip-path: polygon(26% 0, 74% 0, 100% 100%, 0 100%);
+}
+.we-geschosse {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 6px;
+  background: var(--color-bg-alt);
+  border-radius: 0 0 4px 4px;
+}
+.we-einheit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  background: var(--color-accent-light);
+  border: 1px solid #bcdcf2;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent-dark);
+}
+.we-einheit svg { width: 15px; height: 15px; flex: none; }
+.we-summe { margin: 22px 0 0; }
+.we-summe > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--color-border);
+}
+.we-summe dt { font-size: 0.9rem; color: var(--color-text); }
+.we-summe dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+.we-summe .ist-zuschuss dt { color: var(--color-eco); font-weight: 600; }
+.we-summe .ist-zuschuss dd {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-eco);
+}
+.we-fussnote {
+  margin: 14px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+@media (max-width: 520px) {
+  /* Nebeneinander bricht die Bezeichnung um und die Zeile franst aus.
+     Untereinander bleibt beides ruhig. */
+  .we-summe > div { flex-direction: column; align-items: flex-start; gap: 2px; }
+}
+@media (max-width: 420px) {
+  .we-rechnung { padding: 24px 20px 22px; }
+  .we-einheit { font-size: 0.74rem; padding: 8px; gap: 6px; }
+}
+
 .feature-visual-photo img { max-width: 100%; max-height: 420px; width: auto; height: auto; }
 @media (max-width: 900px) {
   .feature-visual-photo { padding: 20px; }

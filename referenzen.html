@@ -140,7 +140,7 @@
   <section>
     <div class="container">
       <div class="muted-note" style="margin-bottom:44px;">
-        Diese Seite befindet sich im Aufbau: Sobald Projektfotos vorliegen, ersetzen wir die Kategorien unten durch reale Bilder, Kurzbeschreibungen und Kennzahlen – bei Bauvorhaben auch als Baufortschritt vom Rohbau bis zur Übergabe.
+        Diese Seite wächst mit unseren Projekten: Wo bereits Aufnahmen vorliegen, öffnet ein Klick auf das Bild die Galerie zum Bauvorhaben. Die übrigen Kategorien ergänzen wir nach und nach um eigene Fotos und Kennzahlen.
       </div>
 
       <h2 style="margin:0 0 28px;">Fenster, Türen und Sonnenschutz</h2>
@@ -188,13 +188,26 @@
       <p style="max-width:660px; margin:0 0 28px; color:var(--color-text-muted);">Aus unserem Baubereich: komplette Bauvorhaben von der Planung bis zur Übergabe. Mehr dazu auf der Seite <a href="bauen-immobilien.html">Bauen &amp; Immobilien</a>.</p>
 
       <div class="grid grid-4">
-        <div class="gallery-item">
-          <div class="gallery-thumb">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20"/><path d="M4 20V9l8-6 8 6v11"/><path d="M10 20v-6h4v6"/></svg>
-          </div>
+        <div class="gallery-item" data-galerie>
+          <a class="gallery-thumb galerie-deckbild" href="img/ref-efh-4-fertig.webp"
+             aria-label="Bildergalerie öffnen: Neubau Einfamilienhaus, 4 Aufnahmen vom Baufortschritt">
+            <img src="img/ref-efh-thumb.webp"
+                 alt="Neubau eines Einfamilienhauses kurz vor der Fertigstellung: Dach gedeckt, Fenster eingebaut, Gerüst steht noch, davor ein angelegter Pool"
+                 width="640" height="480" loading="lazy" decoding="async">
+            <span class="galerie-marke" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M21 7v12a2 2 0 01-2 2H7"/></svg>
+              4 Bilder
+            </span>
+          </a>
           <div class="gallery-body">
             <h3>Neubau Einfamilienhaus</h3>
             <p>Von der Planung bis zur Schlüsselübergabe</p>
+            <ul class="galerie-liste" data-galerie-liste>
+              <li><a href="img/ref-efh-1-bodenplatte.webp">Bodenplatte mit Bewehrung, vor dem Betonieren</a></li>
+              <li><a href="img/ref-efh-2-rohbau.webp">Rohbau: die Außenwände stehen</a></li>
+              <li><a href="img/ref-efh-3-fenster.webp">Dach gedeckt, Fenster und Hebe-Schiebeelemente eingebaut</a></li>
+              <li><a href="img/ref-efh-4-fertig.webp">Kurz vor der Fertigstellung, mit angelegtem Pool</a></li>
+            </ul>
           </div>
         </div>
         <div class="gallery-item">

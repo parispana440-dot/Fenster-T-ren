@@ -1253,6 +1253,140 @@ section { padding: 88px 0; }
 }
 .gallery-thumb svg { width: 46px; height: 46px; opacity: 0.5; }
 .gallery-item .gallery-body { padding: 18px 20px; }
+
+/* ---------- Bildergalerie einer Referenz ---------- */
+/* Das Deckbild ist ein echter Verweis auf die große Aufnahme. Ohne Skript
+   führt es dorthin, die übrigen Aufnahmen stehen als Liste darunter. Mit
+   Skript übernimmt die Leuchtkasten-Ansicht und die Liste entfällt. */
+.galerie-deckbild {
+  position: relative;
+  display: block;
+  padding: 0;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+.galerie-deckbild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.galerie-deckbild:hover img,
+.galerie-deckbild:focus-visible img { transform: scale(1.04); }
+.galerie-marke {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(18, 24, 30, 0.78);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+.galerie-marke svg { width: 13px; height: 13px; }
+
+.galerie-liste {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+}
+.galerie-liste li { margin-top: 5px; }
+.gallery-item.ist-bereit .galerie-liste { display: none; }
+
+/* ---------- Leuchtkasten ---------- */
+.lk {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background: rgba(14, 18, 22, 0.94);
+  padding: 16px;
+}
+.lk-buehne {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  position: relative;
+}
+.lk-buehne img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+}
+.lk-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.86rem;
+  padding: 2px 4px 12px;
+}
+.lk-titel { font-family: var(--font-heading); font-weight: 600; color: var(--color-white); }
+.lk-fuss {
+  padding: 14px 4px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.lk-text {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+  max-width: 640px;
+}
+.lk-knopf {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.lk-knopf:hover { background: rgba(255, 255, 255, 0.2); }
+.lk-knopf svg { width: 20px; height: 20px; }
+.lk-knopf:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: 2px;
+}
+.lk-zu { width: 40px; height: 40px; }
+.lk-zu svg { width: 17px; height: 17px; }
+body.lk-offen { overflow: hidden; }
+
+@media (max-width: 600px) {
+  .lk { padding: 10px; }
+  .lk-text { font-size: 0.84rem; }
+  .lk-knopf { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galerie-deckbild img { transition: none; }
+  .galerie-deckbild:hover img,
+  .galerie-deckbild:focus-visible img { transform: none; }
+}
 .gallery-item h3 { margin: 0 0 4px; font-size: 1rem; font-family: var(--font-heading); }
 .gallery-item p { margin: 0; font-size: 0.86rem; }
 

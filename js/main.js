@@ -98,6 +98,139 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // ------------------------------------------------------ Bildergalerie
+  // Das Deckbild verweist auf die große Aufnahme, die übrigen stehen als
+  // Liste darunter. Ohne Skript bleibt beides nutzbar. Mit Skript übernimmt
+  // der Leuchtkasten: Liste ausblenden, Klick abfangen, Bilder erst dann laden.
+  document.querySelectorAll('[data-galerie]').forEach(function (karte) {
+    var deckbild = karte.querySelector('.galerie-deckbild');
+    var liste = karte.querySelector('[data-galerie-liste]');
+    if (!deckbild || !liste) return;
+
+    var bilder = Array.prototype.map.call(liste.querySelectorAll('a[href]'), function (a) {
+      return { quelle: a.getAttribute('href'), text: a.textContent.trim() };
+    });
+    if (bilder.length < 2) return;
+
+    var titel = (karte.querySelector('h3') || {}).textContent || 'Bildergalerie';
+    titel = titel.trim();
+    karte.classList.add('ist-bereit');
+
+    var kasten = null, stelle = 0, vorherigerFokus = null;
+
+    function svg(pfad) {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
+        + ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + pfad + '</svg>';
+    }
+
+    function zeigen() {
+      var b = bilder[stelle];
+      var bild = kasten.querySelector('.lk-bild');
+      bild.setAttribute('src', b.quelle);
+      bild.setAttribute('alt', titel + ' – ' + b.text);
+      kasten.querySelector('.lk-text').textContent = b.text;
+      kasten.querySelector('.lk-zaehler').textContent = 'Bild ' + (stelle + 1) + ' von ' + bilder.length;
+    }
+
+    function blaettern(richtung) {
+      stelle = (stelle + richtung + bilder.length) % bilder.length;
+      zeigen();
+    }
+
+    function fokusFesthalten(e) {
+      if (!kasten || e.key !== 'Tab') return;
+      var ziele = kasten.querySelectorAll('button');
+      if (!ziele.length) return;
+      var erstes = ziele[0], letztes = ziele[ziele.length - 1];
+      if (e.shiftKey && document.activeElement === erstes) {
+        e.preventDefault(); letztes.focus();
+      } else if (!e.shiftKey && document.activeElement === letztes) {
+        e.preventDefault(); erstes.focus();
+      }
+    }
+
+    function tasten(e) {
+      if (!kasten) return;
+      if (e.key === 'Escape') { e.preventDefault(); schliessen(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); blaettern(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); blaettern(1); }
+      else fokusFesthalten(e);
+    }
+
+    function schliessen() {
+      if (!kasten) return;
+      document.removeEventListener('keydown', tasten, true);
+      kasten.parentNode.removeChild(kasten);
+      kasten = null;
+      document.body.classList.remove('lk-offen');
+      if (vorherigerFokus && vorherigerFokus.focus) vorherigerFokus.focus();
+      vorherigerFokus = null;
+    }
+
+    function oeffnen(start) {
+      if (kasten) return;
+      stelle = start;
+      vorherigerFokus = document.activeElement;
+
+      kasten = document.createElement('div');
+      kasten.className = 'lk';
+      kasten.setAttribute('role', 'dialog');
+      kasten.setAttribute('aria-modal', 'true');
+      kasten.setAttribute('aria-label', 'Bildergalerie: ' + titel);
+      kasten.innerHTML =
+        '<div class="lk-kopf">'
+        + '<span class="lk-titel">' + titel + '</span>'
+        + '<span class="lk-zaehler" role="status" aria-live="polite"></span>'
+        + '<button type="button" class="lk-knopf lk-zu" aria-label="Galerie schließen">'
+        + svg('<path d="M18 6L6 18"/><path d="M6 6l12 12"/>') + '</button>'
+        + '</div>'
+        + '<div class="lk-buehne"><img class="lk-bild" alt=""></div>'
+        + '<div class="lk-fuss">'
+        + '<button type="button" class="lk-knopf lk-zurueck" aria-label="Vorheriges Bild">'
+        + svg('<path d="M15 6l-6 6 6 6"/>') + '</button>'
+        + '<p class="lk-text"></p>'
+        + '<button type="button" class="lk-knopf lk-weiter" aria-label="Nächstes Bild">'
+        + svg('<path d="M9 6l6 6-6 6"/>') + '</button>'
+        + '</div>';
+
+      document.body.appendChild(kasten);
+      document.body.classList.add('lk-offen');
+      zeigen();
+
+      kasten.querySelector('.lk-zu').addEventListener('click', schliessen);
+      kasten.querySelector('.lk-zurueck').addEventListener('click', function () { blaettern(-1); });
+      kasten.querySelector('.lk-weiter').addEventListener('click', function () { blaettern(1); });
+      // Ein Klick neben das Bild schließt - auf den Knöpfen und dem Bild nicht.
+      kasten.addEventListener('click', function (e) {
+        if (e.target === kasten || e.target.classList.contains('lk-buehne')) schliessen();
+      });
+
+      // Wischen auf dem Bild blättert.
+      var startX = null;
+      var buehne = kasten.querySelector('.lk-buehne');
+      buehne.addEventListener('touchstart', function (e) {
+        startX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      buehne.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var weg = e.changedTouches[0].clientX - startX;
+        startX = null;
+        if (Math.abs(weg) > 45) blaettern(weg < 0 ? 1 : -1);
+      }, { passive: true });
+
+      document.addEventListener('keydown', tasten, true);
+      kasten.querySelector('.lk-zu').focus();
+    }
+
+    deckbild.addEventListener('click', function (e) {
+      e.preventDefault();
+      oeffnen(bilder.length - 1); // das Deckbild ist die letzte, neueste Aufnahme
+    });
+    liste.querySelectorAll('a[href]').forEach(function (a, i) {
+      a.addEventListener('click', function (e) { e.preventDefault(); oeffnen(i); });
+    });
+  });
+
   // ---------------------------------------------------- Bildvergleich
   // Zwei deckungsgleiche Aufnahmen desselben Objekts. Die obere Lage wird
   // per clip-path beschnitten; die Position steckt in der CSS-Variablen

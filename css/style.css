@@ -902,6 +902,7 @@ section { padding: 88px 0; }
    beschnitten, es sitzt genau im Feld. */
 .feature-photo.vier-drei { aspect-ratio: 4/3; }
 .feature-photo.vier-fuenf { aspect-ratio: 4/5; }
+.feature-photo.quadrat { aspect-ratio: 1/1; }
 @media (max-width: 900px) {
   /* Einspaltig steht das Bild sonst hinter dem Knopf und damit am Ende des
      Abschnitts. Vor dem Text gelesen führt es in das Thema ein. */

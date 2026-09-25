@@ -492,6 +492,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var zeilen = [];
     form.querySelectorAll('input, select, textarea').forEach(function (feld) {
       if (!feld.name || feld.name === 'website' || feld.name === 'dsgvo') return;
+      // Versteckte Felder sind Angaben fuer den Versanddienst (Zugriffsschluessel,
+      // Betreff, Spamfalle) und keine Eingaben des Besuchers. Sie gehoeren nicht
+      // in den Text der E-Mail.
+      if (feld.type === 'hidden') return;
       if (feld.type === 'checkbox' && !feld.checked) return;
       var beschriftung = '';
       var label = form.querySelector('label[for="' + feld.id + '"]');

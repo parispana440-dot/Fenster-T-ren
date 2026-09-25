@@ -36,10 +36,16 @@ Nach der Anbindung:
 Auf `kontakt.html` stehen jetzt „Mo–Fr 08:00–17:00 Uhr" ohne Platzhalter-Hinweis.
 Bitte einmal bestätigen, dass diese Zeiten stimmen, oder mir die richtigen nennen.
 
-### 3. Referenzen-Seite mit echten Projekten füllen
-`referenzen.html` ist aktuell als „im Aufbau" gekennzeichnet, steht aber in der Hauptnavigation.
+### 3. Referenzen-Seite: die obere Reihe fehlt noch
+Der Bereich „Bauvorhaben und Sanierungen" ist fertig – drei Bildergalerien mit
+zusammen 16 Aufnahmen (Neubau Einfamilienhaus, Neubau Mehrfamilienhaus, Sanierung
+eines denkmalgeschützten Gebäudes).
+
+Offen ist die obere Reihe „Fenster, Türen und Sonnenschutz": Einfamilienhaus,
+Mehrfamilienhaus und Neubau-Projekt stehen dort noch mit Symbolen statt Fotos.
 Benötigt: Projektfotos (auch Handyfotos von Baustellen wirken authentisch), kurze
 Beschreibungen, gern Kennzahlen wie Anzahl Wohneinheiten oder erzielte Energieeinsparung.
+Ab zwei Aufnahmen je Projekt wird daraus automatisch wieder eine Galerie.
 
 ### 4. Social-Media-Profile ergänzen
 Die Platzhalter-Links auf Instagram und Facebook sind entfernt – sie zeigten ins
@@ -285,7 +291,7 @@ pro Jahr — die Förderseite gehört auf eine Wiedervorlage.
 
 - Kundenbewertungen auf der Startseite einbinden (sobald vorhanden)
 - Foto und persönlicher Text des Geschäftsführers auf `ueber-uns.html`
-- Echte Projektfotos auf `referenzen.html` – das ist gleichzeitig der beste
+- Weitere Projektfotos auf `referenzen.html` – das ist gleichzeitig der beste
   Weg zu Inhalten, die sich von Wettbewerbern unterscheiden
 - Bewusst **keine** eigenen Unterseiten je Ort ("Fenster Burgwedel",
   "Fenster Langenhagen"). Google stuft solche Seiten seit Jahren als

@@ -940,7 +940,26 @@ section { padding: 88px 0; }
   color: #22608c;
 }
 .we-einheit svg { width: 15px; height: 15px; flex: none; }
-.we-summe { margin: 22px 0 0; }
+.we-einheit.ist-erste {
+  /* Die erste Wohnung bringt den doppelten Rahmen mit - das darf man sehen. */
+  background: #d6eaf8;
+  border-color: #9ccbe8;
+}
+.we-staffel {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.we-summe { margin: 18px 0 0; }
+.we-summe dt small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+.we-summe .ist-zuschuss dt small { color: var(--color-eco); }
 .we-summe > div {
   display: flex;
   align-items: baseline;

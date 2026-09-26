@@ -908,47 +908,26 @@ section { padding: 88px 0; }
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
-.we-dach {
-  /* Walmdach statt spitzem Giebel: bei dieser Breite wirkt eine Spitze
-     zu flach, die abgeflachte Form liest sich auch schmal noch als Dach. */
-  height: 30px;
-  width: 100%;
-  background: #b9bfc5;
-  clip-path: polygon(26% 0, 74% 0, 100% 100%, 0 100%);
+.we-spanne {
+  margin: 0;
+  padding: 4px 0 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
 }
-.we-geschosse {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-  padding: 6px;
-  background: var(--color-bg-alt);
-  border-radius: 0 0 4px 4px;
+.we-spanne strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  /* Unterhalb von rund 360 px Kartenbreite bricht die feste Groesse um. */
+  font-size: clamp(1.5rem, 6.4vw, 2.05rem);
+  line-height: 1.15;
+  color: var(--color-eco);
 }
-.we-einheit {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 10px;
-  background: var(--color-accent-light);
-  border: 1px solid #bcdcf2;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  /* Das Markenblau kommt auf dem hellblauen Feld nur auf 4,34:1 und
-     verfehlt bei dieser Schriftgröße die 4,5:1. Dieser Ton hält 5,86:1. */
-  color: #22608c;
-}
-.we-einheit svg { width: 15px; height: 15px; flex: none; }
-.we-einheit.ist-erste {
-  /* Die erste Wohnung bringt den doppelten Rahmen mit - das darf man sehen. */
-  background: #d6eaf8;
-  border-color: #9ccbe8;
-}
-.we-staffel {
-  margin: 12px 0 0;
-  font-size: 0.8rem;
-  line-height: 1.5;
+.we-spanne span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  line-height: 1.45;
   color: var(--color-text-muted);
 }
 .we-summe { margin: 18px 0 0; }
@@ -979,7 +958,7 @@ section { padding: 88px 0; }
 .we-summe .ist-zuschuss dt { color: var(--color-eco); font-weight: 600; }
 .we-summe .ist-zuschuss dd {
   font-family: var(--font-heading);
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-eco);
 }
@@ -996,7 +975,6 @@ section { padding: 88px 0; }
 }
 @media (max-width: 420px) {
   .we-rechnung { padding: 24px 20px 22px; }
-  .we-einheit { font-size: 0.74rem; padding: 8px; gap: 6px; }
 }
 
 .feature-visual-photo img { max-width: 100%; max-height: 420px; width: auto; height: auto; }

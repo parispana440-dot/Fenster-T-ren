@@ -892,89 +892,736 @@ section { padding: 88px 0; }
   color: var(--color-text-muted);
 }
 
-/* Rechenbeispiel "Förderung je Wohneinheit": zeigt, dass der Kostenrahmen
-   mit jeder Wohnung mitwächst. Kein Diagramm - die Zahlen sind echter Text,
-   das Haus darüber ist nur die Veranschaulichung dazu. */
-.we-rechnung {
-  aspect-ratio: auto;
+.eco-figure {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.9rem;
+  color: var(--color-eco);
   display: block;
-  padding: 30px 28px 26px;
-  background: var(--color-white);
+  margin-bottom: 4px;
 }
-.we-titel {
-  margin: 0 0 20px;
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
+.section-ink { background: var(--color-ink); color: rgba(255,255,255,0.9); }
+.section-ink h2, .section-ink h3 { color: var(--color-white); }
+.section-ink p { color: rgba(255,255,255,0.7); }
+/* Die globale Linkfarbe ist ein dunkles Blau - auf dunklem Grund ergab das
+   nur 2,07:1. Der helle Ton kommt auf 6,45:1. */
+.section-ink a:not(.btn) { color: #9ed4f0; text-decoration: underline; text-underline-offset: 3px; }
+.section-ink a:not(.btn):hover { color: #ffffff; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  /* Kleiner Versaltext braucht 4,5:1; accent-dark lag je nach Untergrund
+     knapp darunter. */
+  color: #246ea0;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
-.we-spanne {
-  margin: 0;
-  padding: 4px 0 20px;
-  text-align: center;
+.section-ink .eyebrow { color: #9ed4f0; }   /* 6,45:1 statt 3,15:1 */
+
+.section-head { max-width: 680px; margin-bottom: 48px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-head.tight { margin-bottom: 30px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.btn-primary {
+  /* Weiß auf dem hellen Akzentblau erreicht nur 3,28:1 und verfehlt damit
+     WCAG AA. Der dunklere Ton kommt auf 4,98:1 bei gleicher Anmutung. */
+  background: var(--color-accent-dark);
+  color: var(--color-white);
+  border-color: var(--color-accent-dark);
+}
+.btn-primary:hover { background: #1f6491; border-color: #1f6491; color: var(--color-white); }
+.btn-outline {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-border);
+}
+.btn-outline:hover { border-color: var(--color-ink); color: var(--color-ink); }
+.section-ink .btn-outline, .hero .btn-outline { color: var(--color-white); border-color: rgba(255,255,255,0.35); }
+.section-ink .btn-outline:hover, .hero .btn-outline:hover { border-color: var(--color-white); color: var(--color-white); }
+.btn-sm { padding: 10px 18px; font-size: 0.85rem; }
+.btn-block { width: 100%; justify-content: center; }
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--color-border);
 }
-.we-spanne strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  /* Unterhalb von rund 360 px Kartenbreite bricht die feste Groesse um. */
-  font-size: clamp(1.5rem, 6.4vw, 2.05rem);
-  line-height: 1.15;
-  color: var(--color-eco);
-}
-.we-spanne span {
-  display: block;
-  margin-top: 8px;
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--color-text-muted);
-}
-.we-summe { margin: 18px 0 0; }
-.we-summe dt small {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--color-text-muted);
-}
-.we-summe .ist-zuschuss dt small { color: var(--color-eco); }
-.we-summe > div {
+.header-inner {
   display: flex;
-  align-items: baseline;
+  align-items: stretch;
   justify-content: space-between;
-  gap: 16px;
-  padding: 11px 0;
-  border-top: 1px solid var(--color-border);
+  gap: 32px;
+  /* Bewusst breiter als der Inhalt darunter: die Kopfzeile ist eine Leiste,
+     kein zentrierter Block. Logo und Knopf rücken dadurch nach außen und die
+     Navigation bekommt Luft. */
+  padding: 16px 40px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
-.we-summe dt { font-size: 0.9rem; color: var(--color-text); }
-.we-summe dd {
-  margin: 0;
-  font-variant-numeric: tabular-nums;
+@media (max-width: 1400px) {
+  .header-inner { padding: 16px 28px; }
+}
+.logo {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex: none;
+  gap: 12px;
+  font-family: var(--font-wordmark);
   font-weight: 600;
+  font-size: 1.62rem;
+  line-height: 1.05;
+  letter-spacing: 0.17em;
+  color: var(--color-ink);
+}
+.logo small {
+  display: block;
+  /* Ohne das bricht "FENSTER & TÜREN" um, sobald die Navigation breiter wird */
   white-space: nowrap;
-  color: var(--color-text);
-}
-.we-summe .ist-zuschuss dt { color: var(--color-eco); font-weight: 600; }
-.we-summe .ist-zuschuss dd {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-eco);
-}
-.we-fussnote {
-  margin: 14px 0 0;
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-family: var(--font-wordmark);
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--color-text-muted);
+  /* letter-spacing schiebt das letzte Zeichen nach rechts; optisch ausgleichen */
+  margin-top: 3px;
+  text-indent: 0.2em;
 }
-@media (max-width: 520px) {
-  /* Nebeneinander bricht die Bezeichnung um und die Zeile franst aus.
-     Untereinander bleibt beides ruhig. */
-  .we-summe > div { flex-direction: column; align-items: flex-start; gap: 2px; }
+.logo-mark {
+  width: 38px;
+  height: 34px;
+  object-fit: contain;
+  flex: none;
 }
-@media (max-width: 420px) {
-  .we-rechnung { padding: 24px 20px 22px; }
+
+.main-nav ul { display: flex; gap: 26px; align-items: stretch; height: 100%; }
+.main-nav li { display: flex; align-items: center; }
+.main-nav a {
+  color: var(--color-ink);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.mega-trigger { display: inline-flex; align-items: center; gap: 4px; }
+.mega-chevron { width: 12px; height: 12px; flex: none; transition: transform 0.15s ease; }
+.nav-item-mega:hover .mega-chevron,
+.nav-item-mega.mega-open .mega-chevron,
+.nav-item-mega:focus-within .mega-chevron {
+  transform: rotate(180deg);
+}
+.main-nav a:hover, .main-nav a[aria-current="page"] {
+  color: var(--color-accent-dark);
+  border-bottom-color: var(--color-accent);
+}
+/* Mega menu (Produkte) — full-width panel flush with the header, anchored so the
+   hoverable nav item spans the full header height (no gap = no premature close) */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  /* header-inner's own bottom padding (16px) sits below the stretched nav item and
+     above this panel; pull the box up through it (compensated by padding-top so the
+     visible content lands in the same place) so there's no dead hover zone between
+     the nav item and the panel. */
+  margin-top: -16px;
+  padding-top: 16px;
+  left: 0;
+  right: 0;
+  transform: translateY(6px);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 200;
+}
+/* Plain :hover always opens the menu (works with no JS at all). .mega-open is an
+   enhancement toggled by JS with a short close delay (see js/main.js) so a fast
+   diagonal move from the narrow "Produkte" tab toward a link on the far side of the
+   full-width panel doesn't get treated as "left the menu". :focus-within covers
+   keyboard use. */
+.nav-item-mega:hover .mega-menu,
+.nav-item-mega.mega-open .mega-menu,
+.nav-item-mega:focus-within .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+.mega-col { display: flex; flex-direction: column; min-width: 0; }
+.mega-heading {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--color-ink);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--color-border);
+  cursor: default;
+}
+.mega-menu a {
+  display: block;
+  padding: 7px 0;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  border-bottom: none;
+}
+.mega-menu a:hover, .mega-menu a:focus-visible {
+  color: var(--color-accent-dark);
+}
+/* Übersichtslink nur im Mobilmenü; am Desktop führt der Menüpunkt selbst dorthin */
+.mega-menu a.mega-overview { display: none; }
+.mega-badge {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--color-white);
+  /* Weiß auf dem hellen Akzent ergab nur 3,28:1 - bei 10,5px Schrift zu wenig. */
+  background: var(--color-accent-dark);
+}
+.mega-badge-best { background: var(--color-ink); }
+
+.header-cta { display: flex; align-items: center; align-self: center; gap: 16px; }
+/* Ohne das bricht "Angebot anfragen" bei enger Leiste auf zwei Zeilen um
+   und zieht den gesamten Kopfbereich in die Höhe. */
+.header-cta .btn { white-space: nowrap; }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-ink);
+  margin: 5px 0;
+  transition: 0.2s;
+}
+
+/* Ab hier übernimmt das Klappmenü. Die Schwelle liegt bei 1200px, weil die
+   Leiste mit sieben Einträgen, Rufnummer und Knopf 1103px braucht - darunter
+   würde sie umbrechen. */
+@media (max-width: 1200px) {
+  .nav-toggle { display: block; }
+  .site-header { backdrop-filter: none; }
+  .main-nav {
+    position: fixed;
+    top: 71px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-white);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+  }
+  .main-nav.open { transform: translateX(0); }
+  .main-nav ul { flex-direction: column; align-items: flex-start; height: auto; gap: 0; padding: 20px 24px; }
+  .main-nav li { display: block; width: 100%; border-bottom: 1px solid var(--color-border); }
+  .main-nav a { display: block; padding: 16px 0; white-space: normal; font-size: 1rem; }
+  /* Im Klappmenü-Modus bleibt oben genug Raum für den Knopf; erst auf
+     schmalen Handys weicht er dem Logo. */
+  .header-cta .btn-primary { display: inline-flex; }
+
+  /* Untermenü startet eingeklappt und öffnet sich erst auf Tippen.
+     0fr -> 1fr animiert die Höhe, ohne dass sie in Pixeln bekannt sein muss. */
+  .mega-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    background: none;
+    border: none;
+    box-shadow: none;
+    z-index: auto;
+    margin-top: 0;
+    padding-top: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s ease;
+  }
+  .nav-item-mega.mobile-open .mega-menu { grid-template-rows: 1fr; }
+  .mega-menu-grid {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .mega-col { margin-top: 14px; }
+  .mega-col:last-child { padding-bottom: 14px; }
+  .mega-heading { border-bottom: none; padding-bottom: 0; }
+  .mega-menu a { padding: 10px 0 10px 14px; }
+
+  .nav-item-mega > a.mega-trigger {
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  /* Pfeil zeigt den Zustand an; Hover/Fokus dürfen ihn auf Touch nicht drehen */
+  .mega-chevron {
+    display: block;
+    width: 14px;
+    height: 14px;
+    flex: none;
+    color: var(--color-text-muted);
+    transition: transform 0.32s ease;
+  }
+  .nav-item-mega:hover .mega-chevron,
+  .nav-item-mega.mega-open .mega-chevron,
+  .nav-item-mega:focus-within .mega-chevron { transform: none; }
+  .nav-item-mega.mobile-open > a.mega-trigger .mega-chevron { transform: rotate(180deg); }
+  .nav-item-mega.mobile-open > a.mega-trigger { color: var(--color-accent-dark); }
+
+  .mega-menu a.mega-overview {
+    display: block;
+    font-weight: 600;
+    color: var(--color-accent-dark);
+    padding: 12px 0 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-menu { transition: none; }
+  .mega-chevron { transition: none; }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-ink) 0%, #383b3f 55%, #1d3a4d 100%);
+  color: var(--color-white);
+  padding: 76px 0 68px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 64px);
+  opacity: 0.6;
+}
+.hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero h1, .hero h2, .hero h3 { color: var(--color-white); }
+.hero .eyebrow { color: var(--color-accent-auf-dunkel); }
+.hero p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.78); max-width: 540px; }
+.hero-actions { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 32px; margin-top: 30px; flex-wrap: wrap; }
+.hero-stats div strong { display: block; font-family: var(--font-heading); font-size: 1.7rem; color: var(--color-accent-auf-dunkel); }
+.hero-stats div span { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { aspect-ratio: 16/10; order: -1; }
+}
+
+/* Hero slideshow */
+.hero-slides { position: relative; display: grid; }
+.hero-slide {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+.hero-slide .hero-inner { width: 100%; }
+
+/* ---------- Objektfoto im Hero ----------
+   Das Foto ist querformatig (1,65:1); der frühere Platz war hochkant.
+   Über die volle Breite bleibt es nahezu unbeschnitten. Es liegt auf der
+   Sektion, nicht auf der Folie, damit es bis an die Bildschirmränder
+   reicht – die Folien selbst stehen im mittigen Container. Das Skript
+   setzt die Klasse, solange die erste Folie aktiv ist. */
+.hero-foto-ebene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+.hero.zeigt-foto .hero-foto-ebene { opacity: 1; }
+.hero-foto-ebene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/haus-hero.webp');
+  background-size: cover;
+  background-position: 62% 56%;
+}
+/* Verdunkelt die linke Hälfte, auf der der Text liegt. Die Schauseite –
+   überdachte Terrasse, Schiebetüren, Pool – liegt rechts und bleibt frei. */
+.hero-foto-ebene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Waagerecht statt schräg: nur so lässt sich die Deckkraft an jeder
+     Textkante zuverlässig berechnen. Der Text endet bei rund 52 % der
+     Breite, dort liegt die Deckkraft noch bei 0,88. */
+  background:
+    linear-gradient(to right,
+      rgba(18, 24, 30, 0.97) 0%,
+      rgba(18, 24, 30, 0.95) 38%,
+      rgba(18, 24, 30, 0.88) 53%,
+      rgba(18, 24, 30, 0.42) 70%,
+      rgba(18, 24, 30, 0.16) 100%),
+    linear-gradient(to bottom,
+      rgba(18, 24, 30, 0.34) 0%,
+      rgba(18, 24, 30, 0.00) 26%,
+      rgba(18, 24, 30, 0.00) 62%,
+      rgba(18, 24, 30, 0.42) 100%);
+}
+.hero .container { position: relative; z-index: 2; }
+
+@media (max-width: 900px) {
+  /* Im Hochformat würde ein formatfüllendes Hintergrundbild nur einen
+     schmalen senkrechten Streifen des Hauses zeigen. Das Foto steht hier
+     deshalb über dem Text - im 4:3-Ausschnitt, der das Haus vollständig
+     zeigt, und randlos direkt unter dem Kopfbereich.
+     Statt einer harten Kante läuft das Bild nach unten aus: die Maske
+     blendet es aus, sodass der Verlauf des Heros darunter durchkommt.
+     Dadurch gibt es keine sichtbare Naht zwischen Foto und Fläche.
+     Das Foto gehört bewusst zu beiden Folien - so springt beim Wechsel
+     nichts. */
+  .hero-foto-ebene {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    aspect-ratio: 1000 / 707;
+    /* Der negative Rand zieht den Text in den bereits klar ausgeblendeten
+       Bereich; dort liegt kein Bildinhalt mehr hinter der Schrift. */
+    margin: 0 0 -18px;
+    transition: none;
+  }
+  .hero-foto-ebene::before {
+    background-image: url('../img/haus-hero-mobil.webp');
+    background-position: center top;
+    -webkit-mask-image: linear-gradient(to bottom,
+      #000 0%, #000 66%, rgba(0,0,0,0.42) 82%, transparent 93%);
+            mask-image: linear-gradient(to bottom,
+      #000 0%, #000 66%, rgba(0,0,0,0.42) 82%, transparent 93%);
+  }
+  /* Die waagerechte Abdunklung der Breitbildfassung entfällt: hier steht
+     keine Schrift auf dem Foto. */
+  .hero-foto-ebene::after { background: none; }
+}
+/* Zwischenbereich: auf Tabletts im Hochformat ergäbe das 4:3-Format ein
+   fast 600px hohes Bild - der Knopf rutschte weit unter die Kante. Dort
+   läuft deshalb der breite Ausschnitt in begrenzter Höhe. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .hero-foto-ebene {
+    aspect-ratio: auto;
+    height: 40vh;
+    min-height: 300px;
+    max-height: 400px;
+  }
+  .hero-foto-ebene::before {
+    background-image: url('../img/haus-hero.webp');
+    background-position: center 42%;
+  }
+}
+@media (max-width: 480px) {
+  .hero-foto-ebene { margin-bottom: -16px; }
+}
+.hero-slide.is-active { opacity: 1; visibility: visible; pointer-events: auto; }
+
+.hero-slide-nav {
+  position: relative;
+  margin-top: 56px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+.hero-slide-nav-inner {
+  display: flex;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+.hero-slide-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 150px;
+  padding: 8px 0;
+  margin: -8px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.42);
+  transition: color 0.3s ease;
+}
+.hero-slide-tab:hover { color: rgba(255,255,255,0.75); }
+.hero-slide-tab.is-active { color: var(--color-white); }
+.hero-slide-tab-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.16);
+  overflow: hidden;
+}
+.hero-slide-tab-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+}
+.hero-slide-tab.is-active .hero-slide-tab-fill { animation: heroSlideProgress 8s linear forwards; }
+@keyframes heroSlideProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+/* Nur die erste Folie trägt die H1 der Seite; weitere Folien nutzen optisch gleiche H2 */
+.hero-slide h2.hero-title { font-size: clamp(2.1rem, 4vw, 3.2rem); font-weight: 700; }
+
+/* Förder-Slide: eigener Auftritt in der Nachhaltigkeitsfarbe */
+.hero-slide-foerderung .eyebrow { color: var(--color-eco-bright); }
+.hero-badge {
+  position: relative;
+  aspect-ratio: 4/5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.hero-badge::before {
+  content: "";
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,168,124,0.28) 0%, rgba(74,168,124,0.06) 55%, transparent 72%);
+}
+.hero-badge svg { position: relative; width: 100%; height: auto; }
+.hero-badge .badge-ring {
+  stroke-dasharray: 540;
+  stroke-dashoffset: 540;
+}
+.hero-slide.is-active .hero-badge .badge-ring { animation: badgeRingDraw 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards; }
+.hero-badge .badge-check {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+}
+.hero-slide.is-active .hero-badge .badge-check { animation: badgeCheckDraw 0.55s ease 1.35s forwards; }
+.hero-badge .badge-fade { opacity: 0; }
+.hero-slide.is-active .hero-badge .badge-fade { animation: badgeFadeIn 0.7s ease 0.7s forwards; }
+@keyframes badgeRingDraw { to { stroke-dashoffset: 0; } }
+@keyframes badgeCheckDraw { to { stroke-dashoffset: 0; } }
+@keyframes badgeFadeIn { to { opacity: 1; } }
+
+.hero-foerder-points {
+  display: flex;
+  gap: 26px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+.hero-foerder-points li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+}
+.hero-foerder-points svg { width: 17px; height: 17px; flex: none; color: var(--color-eco-bright); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; }
+  .hero-slide-tab.is-active .hero-slide-tab-fill { animation: none; width: 100%; }
+  .hero-badge .badge-ring { stroke-dashoffset: 0; }
+  .hero-badge .badge-check { stroke-dashoffset: 0; }
+  .hero-badge .badge-fade { opacity: 1; }
+  .hero-slide.is-active .hero-badge .badge-ring,
+  .hero-slide.is-active .hero-badge .badge-check,
+  .hero-slide.is-active .hero-badge .badge-fade { animation: none; }
+}
+@media (max-width: 700px) {
+  .hero-slide-nav-inner { gap: 26px; }
+  .hero-slide-tab { min-width: 120px; font-size: 0.82rem; }
+}
+
+/* Cards / grids */
+.grid { display: grid; gap: 28px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Drei Referenzkacheln bleiben auch auf dem Tablet nebeneinander.
+   Bei genau drei Karten wirkt 2 + 1 sonst wie ein Abbruch. */
+@media (min-width: 621px) and (max-width: 900px) {
+  .grid.raster-drei { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+}
+
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 30px 26px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  background: var(--color-accent-light);
+  color: var(--color-accent-dark);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.card-icon svg { width: 24px; height: 24px; }
+.card h3 { margin-bottom: 10px; }
+.card.compact { padding: 22px 22px; }
+.card.compact .card-icon { width: 40px; height: 40px; margin-bottom: 12px; }
+.card.compact .card-icon svg { width: 20px; height: 20px; }
+.card ul { margin-top: 14px; }
+.card ul li {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.card ul li::before {
+  content: "";
+  position: absolute; left: 0; top: 8px;
+  width: 8px; height: 8px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+.card-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; margin: 14px -4px -6px; padding: 6px 4px; font-size: 0.9rem; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-accent-light);
+  color: #1f6491;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 4px 6px 4px 0;
+}
+
+/* Two column feature */
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.feature-row.reverse .feature-visual { order: 2; }
+@media (max-width: 900px) {
+  /* Einspaltig ist der Spaltenabstand von 60px als Zeilenabstand zu viel. */
+  .feature-row, .feature-row.reverse .feature-visual { grid-template-columns: 1fr; order: 0; gap: 28px; }
+}
+.feature-visual {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.feature-visual-photo {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  aspect-ratio: auto;
+  display: flex;
+  /* Spaltenweise, damit unter das Bild eine Bildunterschrift passt. Steht
+     dort keine, ändert sich am mittigen Bild nichts. */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  margin: 0;
+}
+.feature-visual-photo figcaption {
+  margin-top: 16px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--color-text-muted);
 }
 
 .feature-visual-photo img { max-width: 100%; max-height: 420px; width: auto; height: auto; }

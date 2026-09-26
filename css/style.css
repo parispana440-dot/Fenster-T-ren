@@ -376,7 +376,7 @@ section { padding: 88px 0; }
   margin-left: 7px;
   padding: 2px 7px;
   border-radius: 999px;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -1102,7 +1102,7 @@ section { padding: 88px 0; }
   margin-left: 7px;
   padding: 2px 7px;
   border-radius: 999px;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -1792,7 +1792,7 @@ section { padding: 88px 0; }
   .vergleich-marke {
     top: 10px;
     padding: 4px 9px;
-    font-size: 0.66rem;
+    font-size: 0.75rem;
     letter-spacing: 0.04em;
   }
   .vergleich-marke-links { left: 10px; }
@@ -2831,7 +2831,7 @@ body.ce-offen { overflow: hidden; }
 .karte-popup { width: 272px; max-width: 100%; padding: 18px 20px 16px; box-sizing: border-box; }
 .karte-popup-marke {
   margin: 0 0 2px;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -3049,7 +3049,7 @@ body.ce-offen { overflow: hidden; }
   padding: 1px 7px;
   border: 1px solid currentColor;
   border-radius: 999px;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   opacity: 0.85;

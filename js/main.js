@@ -335,47 +335,77 @@ document.addEventListener('DOMContentLoaded', function () {
     figur.classList.add('ist-bereit');
   });
 
-  // Hero slideshow: auto-advancing slides with clickable progress-bar tabs
+  // ---------------------------------------------------------------------------
+  // Bildwechsel im Kopfbereich
+  //
+  // Die Uhr ist der Fortschrittsbalken: Ist seine Animation durchgelaufen, kommt
+  // die naechste Folie. Damit koennen Balken und Wechsel nicht auseinanderlaufen,
+  // und Anhalten heisst, dass auch der Balken sichtbar stehen bleibt.
+  //
+  // Vorher lief beides getrennt - ein Zeitgeber fuer den Wechsel, eine Animation
+  // fuer den Balken. Wurde der Zeitgeber angehalten, lief der Balken weiter bis
+  // ans Ende und blieb dort stehen: Die Schau sah kaputt aus, statt angehalten.
+  // ---------------------------------------------------------------------------
   document.querySelectorAll('[data-hero-slideshow]').forEach(function (root) {
     var slides = Array.prototype.slice.call(root.querySelectorAll('.hero-slide'));
     var tabs = Array.prototype.slice.call(root.querySelectorAll('.hero-slide-tab'));
     if (slides.length < 2 || tabs.length !== slides.length) return;
 
-    var duration = 8000;
+    var dauer = 8000;   // muss zu heroSlideProgress in style.css passen
     var current = 0;
-    var timer = null;
+    var wache = null;
     var pauseKnopf = root.querySelector('.hero-slide-pause');
     // Wer Bewegung reduziert haben moechte, bekommt keinen automatischen Wechsel
     var ruheModus = window.matchMedia('(prefers-reduced-motion: reduce)');
     var angehalten = ruheModus.matches;
 
-    function show(index) {
-      slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === index); });
-      // Das Objektfoto gehört zur ersten Folie, liegt technisch aber auf der
-      // Sektion, damit es bis an die Bildschirmränder reicht.
-      root.classList.toggle('zeigt-foto', index === 0);
-      tabs.forEach(function (tab, i) {
-        tab.classList.toggle('is-active', i === index);
-        var fill = tab.querySelector('.hero-slide-tab-fill');
-        if (!fill) return;
-        fill.style.animation = 'none';
-        if (i === index) {
-          void fill.offsetWidth;
-          fill.style.animation = '';
-        }
-      });
-      current = index;
+    function fuellung(i) {
+      var tab = tabs[i];
+      return tab ? tab.querySelector('.hero-slide-tab-fill') : null;
+    }
+
+    // Notnagel fuer den Fall, dass die Animation gar nicht laeuft (abgeschaltete
+    // Effekte, sehr alter Browser). Dann wechselt die Folie trotzdem.
+    function wacheStellen() {
+      window.clearTimeout(wache);
+      wache = window.setTimeout(function () {
+        if (!angehalten) zeigen((current + 1) % slides.length);
+      }, dauer + 2000);
     }
 
     function stoppen() {
-      clearInterval(timer);
-      timer = null;
+      var f = fuellung(current);
+      if (f) f.style.animationPlayState = 'paused';
+      window.clearTimeout(wache);
+      wache = null;
     }
 
-    function restart() {
-      stoppen();
+    function weiterlaufen() {
       if (angehalten) return;
-      timer = setInterval(function () { show((current + 1) % slides.length); }, duration);
+      var f = fuellung(current);
+      if (f) f.style.animationPlayState = 'running';
+      wacheStellen();
+    }
+
+    function zeigen(index) {
+      slides.forEach(function (slide, i) { slide.classList.toggle('is-active', i === index); });
+      // Das Objektfoto gehoert zur ersten Folie, liegt technisch aber auf der
+      // Sektion, damit es bis an die Bildschirmraender reicht.
+      root.classList.toggle('zeigt-foto', index === 0);
+      tabs.forEach(function (tab, i) {
+        tab.classList.toggle('is-active', i === index);
+        var f = tab.querySelector('.hero-slide-tab-fill');
+        if (!f) return;
+        f.style.animation = 'none';
+        f.style.animationPlayState = '';
+        if (i === index) {
+          void f.offsetWidth;   // erzwingt den Neustart der Animation
+          f.style.animation = '';
+          f.style.animationPlayState = angehalten ? 'paused' : 'running';
+        }
+      });
+      current = index;
+      if (angehalten) { window.clearTimeout(wache); wache = null; } else wacheStellen();
     }
 
     function pauseKnopfAktualisieren() {
@@ -388,40 +418,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     tabs.forEach(function (tab, i) {
-      tab.addEventListener('click', function () {
-        show(i);
-        restart();
-      });
+      var f = tab.querySelector('.hero-slide-tab-fill');
+      if (f) {
+        f.addEventListener('animationend', function () {
+          if (i === current && !angehalten) zeigen((current + 1) % slides.length);
+        });
+      }
+      tab.addEventListener('click', function () { zeigen(i); });
     });
 
     if (pauseKnopf) {
       pauseKnopf.addEventListener('click', function () {
         angehalten = !angehalten;
         pauseKnopfAktualisieren();
-        restart();
+        if (angehalten) stoppen(); else weiterlaufen();
       });
     }
 
-    // Der Wechsel haelt an, solange jemand mit dem Bereich arbeitet, und laeuft
-    // danach weiter - sonst springt der Inhalt unter der Hand weg.
-    root.addEventListener('mouseenter', stoppen);
-    root.addEventListener('mouseleave', restart);
+    // Anhalten nur dort, wo es wirklich stoert: ueber den Knoepfen und ueber der
+    // Folienleiste. Frueher hing das am gesamten Kopfbereich - wer die Maus
+    // irgendwo oben liegen liess, hielt die Schau damit dauerhaft an. Auf
+    // Tippgeraeten war es schlimmer: Eine Beruehrung loest "mouseenter" aus, ein
+    // "mouseleave" kommt danach nie, die Schau stand fuer immer.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      root.querySelectorAll('.hero-actions, .hero-slide-nav').forEach(function (zone) {
+        zone.addEventListener('mouseenter', stoppen);
+        zone.addEventListener('mouseleave', weiterlaufen);
+      });
+    }
+
+    // Wer sich mit der Tastatur durch den Bereich bewegt, soll den Inhalt nicht
+    // unter den Fingern wegspringen sehen
     root.addEventListener('focusin', stoppen);
     root.addEventListener('focusout', function (e) {
-      if (!root.contains(e.relatedTarget)) restart();
+      if (!root.contains(e.relatedTarget)) weiterlaufen();
     });
     // Im Hintergrundtab nicht weiterlaufen
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stoppen(); else restart();
+      if (document.hidden) stoppen(); else weiterlaufen();
     });
     ruheModus.addEventListener('change', function (e) {
       angehalten = e.matches;
       pauseKnopfAktualisieren();
-      restart();
+      if (angehalten) stoppen(); else weiterlaufen();
     });
 
     pauseKnopfAktualisieren();
-    restart();
+    zeigen(0);
   });
 
   // ---------------------------------------------------------------------------

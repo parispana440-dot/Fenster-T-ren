@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', function () {
       zeilen.push(beschriftung + ': ' + wert);
     });
     var betreff = form.dataset.betreff || 'Anfrage über die Website';
-    return 'mailto:info@assos-projekt.de'
+    return 'mailto:fenster@assos-projekt.de'
       + '?subject=' + encodeURIComponent(betreff)
       + '&body=' + encodeURIComponent(zeilen.join('\n') + '\n\n--\nGesendet über assos-projekt.de');
   }
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = mailtoBauen(form);
         statusSetzen(form,
           'Ihr E-Mail-Programm öffnet sich mit der fertig ausgefüllten Nachricht – bitte dort noch auf „Senden" klicken. '
-          + 'Falls sich nichts öffnet, erreichen Sie uns direkt unter 0511 700 226 21 oder info@assos-projekt.de.',
+          + 'Falls sich nichts öffnet, erreichen Sie uns direkt unter 0511 700 226 21 oder fenster@assos-projekt.de.',
           'warn');
         return;
       }
@@ -578,7 +578,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }).catch(function () {
         statusSetzen(form,
           'Die Übermittlung hat leider nicht geklappt. Bitte rufen Sie uns an unter 0511 700 226 21 '
-          + 'oder schreiben Sie an info@assos-projekt.de – wir kümmern uns darum.',
+          + 'oder schreiben Sie an fenster@assos-projekt.de – wir kümmern uns darum.',
           'err');
       }).then(function () {
         if (knopf) { knopf.disabled = false; knopf.textContent = urspruenglich; }

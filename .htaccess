@@ -1,0 +1,134 @@
+# ---------------------------------------------------------------------------
+# Serverkonfiguration fuer www.assos-projekt.de
+# Stand: 27.09.2026
+#
+# Diese Datei gehoert in dasselbe Verzeichnis wie index.html und muss dort
+# genau ".htaccess" heissen - mit Punkt am Anfang, ohne Dateiendung.
+#
+# FALLS DANACH "500 INTERNAL SERVER ERROR" ERSCHEINT:
+# Datei wieder in "htaccess.txt" umbenennen - die Website laeuft sofort wie
+# vorher. Kaputtgehen kann nichts. Der haeufigste Ausloeser ist die Zeile
+# "Options -Indexes"; die darf man ersatzlos streichen.
+# ---------------------------------------------------------------------------
+
+
+# === 1. Grundeinstellungen ==================================================
+
+# Eigene Fehlerseite statt der nackten Servermeldung.
+# Ohne diese Zeile wird 404.html nie angezeigt.
+ErrorDocument 404 /404.html
+
+# Welche Datei ausgeliefert wird, wenn nur ein Verzeichnis aufgerufen wird
+DirectoryIndex index.html
+
+# Verzeichnisse nicht auflisten, wenn keine index.html vorhanden ist.
+# (Bei "500 Internal Server Error" zuerst diese Zeile entfernen.)
+Options -Indexes
+
+# Alle Textdateien werden als UTF-8 ausgeliefert - sonst zeigen manche Server
+# aus Umlauten Zeichensalat
+AddDefaultCharset UTF-8
+
+# Zwei Dateitypen, die aeltere Server nicht von Haus aus kennen. Ohne die
+# Angabe werden Bilder und Schriften unter Umstaenden nicht angezeigt - und
+# die Speicherfristen weiter unten greifen nicht.
+AddType image/webp .webp
+AddType font/woff2 .woff2
+
+
+# === 2. Adressen vereinheitlichen und alte Adressen weiterleiten ============
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # --- 2a. Immer verschluesselt und immer mit www ---------------------------
+  # Damit gibt es die Website unter genau einer Adresse. Das ist die, die in
+  # allen Canonical-Angaben der Seiten steht.
+
+  # Unverschluesselt aufgerufen -> auf https umleiten
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://www.assos-projekt.de%{REQUEST_URI} [R=301,L]
+
+  # Ohne www aufgerufen -> auf die www-Fassung umleiten.
+  # Das faengt auch die technische 1blu-Adresse des Webspace ab.
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.assos-projekt.de%{REQUEST_URI} [R=301,L]
+
+
+  # --- 2b. Adressen der Vorgaenger-Website ----------------------------------
+  # Diese Seiten gibt es nicht mehr, stehen aber noch in Google und in
+  # Lesezeichen. Ohne Weiterleitung liefe jeder Klick darauf ins Leere.
+  # 301 heisst "dauerhaft umgezogen": Besucher landen auf der passenden neuen
+  # Seite, und Google ersetzt den alten Eintrag, statt ihn nur zu loeschen.
+
+  # Die einzelnen Bauvorhaben -> Referenzseite
+  # (dhh-bremen, efh-niedernwoehren, mfh-bahnhofstr-15c, mfh-empelde,
+  #  mfh-herderstr-11, mfh-rathenaustr-1, mfh-walsroder-str-106,
+  #  pizza-san-marino - deshalb ein Muster statt acht Einzelzeilen)
+  RewriteRule ^(dhh|efh|mfh|pizza)-[^/]*\.html$ /referenzen.html [R=301,L,NC]
+
+  # Uebersichtsseiten
+  RewriteRule ^projekte\.html$          /referenzen.html        [R=301,L,NC]
+  RewriteRule ^unsere-leistungen\.html$ /bauen-immobilien.html  [R=301,L,NC]
+
+  # Die alten PDF-Dateien lagen im Ordner /files/
+  RewriteRule ^files/.*agb.*$      /agb.html      [R=301,L,NC]
+  RewriteRule ^files/.*widerruf.*$ /widerruf.html [R=301,L,NC]
+  RewriteRule ^files/             /              [R=301,L]
+
+  # Hilfsdateien des alten Baukastenprogramms
+  RewriteRule ^(imlogin|imsearch)\.php$ / [R=301,L,NC]
+
+  # Waehrend des Umzugs lag die Website eine Zeit lang unter /neu/.
+  # Falls eine dieser Adressen irgendwo gelandet ist, faengt das sie ab.
+  RewriteRule ^neu/(.*)$ /$1 [R=301,L]
+</IfModule>
+
+
+# === 3. Zwischenspeicherung im Browser ======================================
+# Wie lange darf der Browser eine Datei behalten, bevor er sie neu holt?
+# Bilder und Schriften aendern sich praktisch nie - lange Frist.
+# Stylesheet und Skript kuerzer, damit Aenderungen zeitnah ankommen.
+# HTML gar nicht, damit Textaenderungen sofort sichtbar sind.
+#
+# HINWEIS FUER SPAETER: Wird style.css oder main.js geaendert, sehen
+# wiederkehrende Besucher bis zu einen Tag lang die alte Fassung. Wer das
+# vermeiden will, ruft die Datei im HTML als "css/style.css?v=2" auf - dann
+# gilt sie als neu.
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  ExpiresByType text/css                "access plus 1 day"
+  ExpiresByType application/javascript  "access plus 1 day"
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+
+# === 4. Komprimierte Auslieferung ===========================================
+# Spart bei Text rund zwei Drittel der Uebertragung - spuerbar vor allem
+# im Mobilfunknetz.
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript image/svg+xml
+</IfModule>
+
+
+# === 5. Schutzangaben =======================================================
+
+<IfModule mod_headers.c>
+  # Der Browser soll Dateitypen nicht selbst erraten
+  Header set X-Content-Type-Options "nosniff"
+
+  # Beim Klick auf einen externen Link wird nur die Domain uebermittelt,
+  # nicht die genaue Seite, auf der der Besucher war
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Die Website darf nicht unbemerkt in eine fremde Seite eingebettet werden
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

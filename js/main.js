@@ -427,14 +427,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------------------------------------------------------------------------
   // Kontakt- und Angebotsformular
   //
-  // Solange am <form> kein data-endpoint hinterlegt ist, gibt es keinen Server,
-  // der die Anfrage entgegennimmt. Dann oeffnet das Formular das E-Mail-Programm
-  // des Besuchers mit einer fertig ausgefuellten Nachricht. Es wird in diesem
-  // Fall ausdruecklich NICHT behauptet, die Anfrage sei bereits eingegangen.
+  // Der Versand laeuft ueber Web3Forms. Am <form> stehen dafuer zwei Wege:
+  //   action        - greift, wenn kein JavaScript laeuft. Dann schickt der
+  //                   Browser das Formular selbst ab; der Besucher landet auf
+  //                   der Bestaetigungsseite des Dienstes.
+  //   data-endpoint - der Weg ueber fetch(), der hier unten benutzt wird. Er
+  //                   laesst den Besucher auf der Seite und zeigt die Antwort
+  //                   direkt unter dem Knopf an.
   //
-  // Sobald ein Versanddienst eingerichtet ist (z. B. Web3Forms), genuegt es,
-  // am <form> data-endpoint="https://..." zu ergaenzen - dann wird regulaer
-  // per fetch() abgeschickt. Der uebrige Code bleibt unveraendert.
+  // Abgeschickt wird nicht das rohe Formular, sondern eine aufbereitete Fassung
+  // (siehe nutzlastBauen) - sonst gehen Mehrfachankreuzungen verloren und in der
+  // E-Mail stuenden technische Kuerzel statt lesbarer Angaben.
   // ---------------------------------------------------------------------------
   var MELDUNGEN = {
     valueMissing: 'Bitte füllen Sie dieses Feld aus.',
@@ -487,31 +490,67 @@ document.addEventListener('DOMContentLoaded', function () {
     status.classList.add('show', art);
   }
 
-  function mailtoBauen(form) {
-    var daten = new FormData(form);
-    var zeilen = [];
+  // Baut, was an den Versanddienst geht. Ein rohes FormData(form) haette drei
+  // Schwaechen, die erst in der fertigen E-Mail auffallen wuerden:
+  //   - Die Leistungs-Kaestchen tragen alle denselben Namen. Ein Empfaenger, der
+  //     die Felder in ein Woerterbuch legt, behaelt davon nur das letzte - aus
+  //     vier Kreuzen wuerde eines. Sie werden hier zu einer Zeile vereint.
+  //   - Auswahllisten senden ihren technischen Wert. In der E-Mail stuende dann
+  //     "efh" statt "Einfamilienhaus". Genommen wird deshalb der sichtbare Text.
+  //   - Leere Felder und die Spamfalle stuenden als leere Zeilen darin.
+  function nutzlastBauen(form) {
+    var daten = new FormData();
+    var gesammelt = {};
+    var reihenfolge = [];
+
     form.querySelectorAll('input, select, textarea').forEach(function (feld) {
-      if (!feld.name || feld.name === 'website' || feld.name === 'dsgvo') return;
-      // Versteckte Felder sind Angaben fuer den Versanddienst (Zugriffsschluessel,
-      // Betreff, Spamfalle) und keine Eingaben des Besuchers. Sie gehoeren nicht
-      // in den Text der E-Mail.
-      if (feld.type === 'hidden') return;
-      if (feld.type === 'checkbox' && !feld.checked) return;
-      var beschriftung = '';
-      var label = form.querySelector('label[for="' + feld.id + '"]');
-      if (label) beschriftung = label.textContent.replace(/\s*\*\s*$/, '').trim();
-      if (!beschriftung) beschriftung = feld.name;
-      var wert = feld.type === 'checkbox' ? feld.value || 'ja' : feld.value;
+      if (!feld.name || feld.disabled) return;
+
+      // Versteckte Felder sind Angaben fuer den Dienst und gehen unveraendert mit
+      if (feld.type === 'hidden') { daten.append(feld.name, feld.value); return; }
+
+      // Diese Spamfalle wertet nur die Seite selbst aus - sie gehoert nicht in
+      // die E-Mail
+      if (feld.name === 'website') return;
+
+      // Diese hier prueft der Dienst. Sie geht nur mit, wenn sie angehakt ist,
+      // also wenn ein Bot sie ausgefuellt hat
+      if (feld.name === 'botcheck') {
+        if (feld.checked) daten.append('botcheck', 'true');
+        return;
+      }
+
+      var wert;
+      if (feld.type === 'checkbox') {
+        if (!feld.checked) return;
+        // Kaestchen ohne eigenen Wert melden sonst das technische "on"
+        wert = feld.getAttribute('value') || 'Ja';
+      } else if (feld.tagName === 'SELECT') {
+        var gewaehlt = feld.options[feld.selectedIndex];
+        wert = gewaehlt && gewaehlt.value ? gewaehlt.textContent.trim() : '';
+      } else {
+        wert = feld.value.trim();
+      }
       if (!wert) return;
-      zeilen.push(beschriftung + ': ' + wert);
+
+      if (gesammelt[feld.name] === undefined) {
+        gesammelt[feld.name] = wert;
+        reihenfolge.push(feld.name);
+      } else {
+        gesammelt[feld.name] += ', ' + wert;
+      }
     });
-    var betreff = form.dataset.betreff || 'Anfrage über die Website';
-    return 'mailto:fenster@assos-projekt.de'
-      + '?subject=' + encodeURIComponent(betreff)
-      + '&body=' + encodeURIComponent(zeilen.join('\n') + '\n\n--\nGesendet über assos-projekt.de');
+
+    reihenfolge.forEach(function (name) { daten.append(name, gesammelt[name]); });
+    return daten;
   }
 
   document.querySelectorAll('form[data-form]').forEach(function (form) {
+    // Die eigene Pruefung mit deutschen Meldungen uebernimmt erst ab hier. Im
+    // Markup steht deshalb kein novalidate: laeuft dieses Skript nicht, soll der
+    // Browser die Pflichtfelder selbst pruefen, bevor er nativ abschickt.
+    form.noValidate = true;
+
     // Eingaben korrigieren blendet den jeweiligen Fehler sofort wieder aus
     form.addEventListener('input', function (e) {
       if (e.target.matches('input, select, textarea') && e.target.checkValidity()) {
@@ -551,36 +590,41 @@ document.addEventListener('DOMContentLoaded', function () {
       if (falle && falle.value) return;
 
       var knopf = form.querySelector('button[type="submit"]');
-      var endpunkt = form.dataset.endpoint;
+      var endpunkt = form.dataset.endpoint || form.getAttribute('action');
 
-      if (!endpunkt) {
-        // Kein Versanddienst hinterlegt: E-Mail-Programm mit fertiger Nachricht oeffnen
-        window.location.href = mailtoBauen(form);
-        statusSetzen(form,
-          'Ihr E-Mail-Programm öffnet sich mit der fertig ausgefüllten Nachricht – bitte dort noch auf „Senden" klicken. '
-          + 'Falls sich nichts öffnet, erreichen Sie uns direkt unter 0511 700 226 21 oder fenster@assos-projekt.de.',
-          'warn');
-        return;
-      }
+      // Sollte nie eintreten - dann lieber nativ abschicken als gar nicht
+      if (!endpunkt) { form.submit(); return; }
 
       var urspruenglich = knopf ? knopf.textContent : '';
       if (knopf) { knopf.disabled = true; knopf.textContent = 'Wird gesendet …'; }
       statusSetzen(form, 'Ihre Anfrage wird übermittelt …', 'warn');
 
+      // Ohne Frist bliebe der Knopf bei einer hängenden Verbindung dauerhaft auf
+      // „Wird gesendet" stehen - der Besucher wüsste nicht, woran er ist
+      var abbruch = window.AbortController ? new AbortController() : null;
+      var frist = window.setTimeout(function () { if (abbruch) abbruch.abort(); }, 20000);
+
       fetch(endpunkt, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
+        body: nutzlastBauen(form),
+        signal: abbruch ? abbruch.signal : undefined
       }).then(function (antwort) {
-        if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
-        statusSetzen(form, 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns zeitnah bei Ihnen.', 'ok');
-        form.reset();
+        // Der Statuscode allein genügt nicht: der Dienst antwortet auch mit 200,
+        // wenn er die Anfrage ablehnt. Maßgeblich ist das Feld „success".
+        return antwort.json().catch(function () { return null; }).then(function (inhalt) {
+          if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
+          if (inhalt && inhalt.success === false) throw new Error('abgelehnt');
+          statusSetzen(form, 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns zeitnah bei Ihnen.', 'ok');
+          form.reset();
+        });
       }).catch(function () {
         statusSetzen(form,
           'Die Übermittlung hat leider nicht geklappt. Bitte rufen Sie uns an unter 0511 700 226 21 '
           + 'oder schreiben Sie an fenster@assos-projekt.de – wir kümmern uns darum.',
           'err');
       }).then(function () {
+        window.clearTimeout(frist);
         if (knopf) { knopf.disabled = false; knopf.textContent = urspruenglich; }
       });
     });

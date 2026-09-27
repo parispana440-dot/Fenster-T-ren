@@ -139,8 +139,9 @@
   <section>
     <div class="container feature-row" style="align-items:flex-start;">
 
-      <form data-form data-betreff="Angebotsanfrage über die Website"
-            data-endpoint="https://api.web3forms.com/submit" novalidate>
+      <form data-form
+            action="https://api.web3forms.com/submit" method="post"
+            data-endpoint="https://api.web3forms.com/submit">
         <div class="field">
           <label for="objektart">Objektart *</label>
           <select id="objektart" name="objektart" required>

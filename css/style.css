@@ -2406,6 +2406,92 @@ body.ce-offen { overflow: hidden; }
 @media (max-width: 600px) {
   .hero-badge { display: none; }
 }
+
+/* Ablauf in drei Schritten auf der Förderungs-Folie - nur auf dem Telefon.
+   Ohne Siegel ist die Folie dort gut 250px kürzer als die erste; da beide
+   im selben Rasterfeld liegen, blieb der Rest leer.
+   Der Kasten darf nicht höher werden als dieser Leerraum, sonst wächst der
+   ganze Kopfbereich mit - und der Leerraum stünde dann auf der ersten Folie.
+   Gemessen von 320 bis 600px; deshalb die knappen Abstände. */
+.hero-foerder-weg { display: none; }
+@media (max-width: 600px) {
+  .hero-foerder-weg {
+    display: block;
+    margin-top: 18px;
+    padding: 12px 14px 4px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+  }
+  .hfw-titel {
+    margin: 0 0 9px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-eco-bright);
+  }
+  .hero-foerder-weg ol { list-style: none; margin: 0; padding: 0; }
+  .hero-foerder-weg li {
+    position: relative;
+    display: flex;
+    gap: 11px;
+    padding-bottom: 8px;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.72);
+    /* verhindert ein einzelnes Wort allein in der letzten Zeile */
+    text-wrap: pretty;
+  }
+  /* Verbindungslinie zwischen den Ziffern */
+  .hero-foerder-weg li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 25px;
+    bottom: 0;
+    width: 1.5px;
+    background: rgba(74,168,124,0.45);
+  }
+  .hfw-nr {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 23px;
+    height: 23px;
+    border: 1.5px solid var(--color-eco-bright);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-eco-bright);
+  }
+  .hero-foerder-weg strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+  .hero-foerder-weg + .hero-actions { margin-top: 16px; }
+}
+/* Breitere Telefone und kleine Tabletts: hier ist der Leerraum flacher,
+   dafür ist Breite übrig. Die Schritte stehen nebeneinander. */
+@media (min-width: 481px) and (max-width: 600px) {
+  .hero-foerder-weg ol {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .hero-foerder-weg li { flex-direction: column; gap: 6px; }
+  .hero-foerder-weg li:not(:last-child)::before {
+    left: 29px;
+    right: -12px;
+    top: 11px;
+    bottom: auto;
+    width: auto;
+    height: 1.5px;
+  }
+}
 @media (max-width: 480px) {
   .hero { padding: 0 0 34px; }
   /* Das Foto kostet Höhe. Damit der Angebotsknopf auf einem üblichen

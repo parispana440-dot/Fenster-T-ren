@@ -663,7 +663,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }).catch(function () {
         statusSetzen(form,
-          'Die Übermittlung hat leider nicht geklappt. Bitte rufen Sie uns an unter +49 175 3788 245 '
+          'Die Übermittlung hat leider nicht geklappt. Bitte rufen Sie uns an unter +49 155 60238878 '
           + 'oder schreiben Sie an fenster@assos-projekt.de – wir kümmern uns darum.',
           'err');
       }).then(function () {

@@ -12,7 +12,7 @@ dabei, z. B. `TODO (I2)`.
 | I4 | Die Zahlungsweise wird **individuell mit dem Kunden** vereinbart. Mit Förderung: Vertrag mit aufschiebender Bedingung (Richtlinie BEG EM: Vertrag mit aufschiebender oder auflösender Bedingung muss bei Antragstellung vorliegen, nachträgliche Aufnahme förderschädlich). | Startseite: Frage „Wann zahle ich?“ mit dieser Antwort; Satz „Zahlungen erfolgen erst danach“ entfernt |
 | I5 | Beratung und Aufmaß sind **kostenlos**. | Startseite: Knopf „Kostenlose Beratung anfragen“, Unterzeile, Ablauf, Abschluss. Die Unterseiten sagen es schon. |
 | I18 | **Keinen Herstellernamen nennen.** Stattdessen „europäische Herstellung“; alle Fenster stammen von Herstellern in Europa. | Startseite sagt „aus europäischer Fertigung“. Drutex wird nirgends genannt. P2-Artikel „Drutex-Erfahrungen“ und Drutex-Seitentitel entfallen. |
-| I2 | Rückmeldung **innerhalb von 24 Stunden**; Angebot **2 Werktage nach dem Aufmaß**. | Startseite (Zusage vor den Knöpfen, Ablauf), Kontakt, Angebot, Danke-Seite, 404; die drei widersprüchlichen Aussagen sind ersetzt |
+| I2 | Rückmeldung **innerhalb von 24 Stunden an Werktagen**; Angebot **2 Werktage nach dem Aufmaß**. | Startseite (Zusage vor den Knöpfen, Ablauf), Kontakt, Angebot, Danke-Seite, 404; die drei widersprüchlichen Aussagen sind ersetzt |
 | I19 | **Keine Telefonnummer im Kopfbereich.** | Bleibt so. Die Nummer steht im Klappmenü (Handy), im Fußbereich und im Kontaktblock. Eine Leiste unten auf dem Handy (P1) nur nach Rückfrage. |
 
 ## H – Hosting und Ablauf

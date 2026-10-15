@@ -19,7 +19,7 @@ pro Schritt.
 | 6 | Consent-Gerüst und Dienste-Inventur | Eigenes Banner, keine Tracker | Banner geprüft, keine Änderung nötig. `docs/dienste-inventur.md` angelegt. | erledigt |
 | 7 | Impressum/Datenschutz | Impressum vollständig, Web3Forms-Absatz lückenhaft | Lücken in `offene-fragen.md`. Web3Forms-Absatz **als Entwurf** um die Angaben aus dem Briefing ergänzt (Sitz Indien, SCC, Unterauftragsverarbeiter, Speicherdauer). Juristische Prüfung steht aus. | erledigt (Entwurf) |
 | 8 | Title, Meta, Canonical, Sitemap, robots, Favicon, OG, 404 | weitgehend vorhanden | Title der Startseite nach Tabelle 4.1. Danke-Seite mit `noindex` und nicht in der Sitemap. www-Variante dokumentiert. | erledigt |
-| 9 | Deployment Vercel | Website läuft auf 1blu | **Nicht umgesetzt**, Entscheidung des Inhabers (Frage H1). Auslieferung weiter per ZIP und FTP. | offen |
+| 9 | Deployment Vercel | Website läuft auf 1blu | Entfällt: Die Website bleibt laut Inhaber bei 1blu. Auslieferung weiter per ZIP und FTP. | entfällt |
 
 ## P1 – nächste Runde (Vorschlag, noch nicht begonnen)
 
@@ -29,7 +29,7 @@ pro Schritt.
 | Förder-Check | fehlt | Rechnung im Browser. Werte aus einer zentralen `js/business-config.js`. Preise bleiben Platzhalter, bis Frage I3 beantwortet ist. |
 | Zentrale Konfiguration | Werte stehen verstreut im HTML | `js/business-config.js` für Förderwerte, Kontakt und Einsatzgebiet. Statisches HTML bleibt als Rückfall bestehen. |
 | Ortsseiten | fehlen | erst nach Freigabe des Einsatzgebiets (I6) |
-| Mobile Sticky-Leiste, Telefon im Kopfbereich | Telefon nur im Menü und im Fußbereich | Erst nach Klärung von Frage I19: Der Inhaber wollte die Nummer nicht im Kopfbereich. |
+| Mobile Sticky-Leiste | Telefon nur im Menü und im Fußbereich | Keine Nummer im Kopfbereich (Vorgabe Inhaber). Eine Leiste unten auf dem Handy nur nach Rückfrage. |
 | Schriftgröße 17–18 px | 16 px | anheben und alle Seiten prüfen |
 | Pakete Basis/Komfort/Sicherheit | fehlen | erst mit Preisrahmen (I3) |
 | Sicherheits-Header | teilweise | `Permissions-Policy`, HSTS nach Test |

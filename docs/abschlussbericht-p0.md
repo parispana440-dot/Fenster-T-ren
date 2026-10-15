@@ -54,3 +54,13 @@ Stand: 15.10.2026 · Branch `claude/fenster-tueren-website-aip95b`
   vereinheitlicht.
 - **Telefon im Kopfbereich und Sticky-Leiste:** P1, und es widerspricht einer
   früheren Vorgabe des Inhabers (I19).
+
+## Nachtrag 15.10.2026 – Antworten des Inhabers umgesetzt
+
+- „Kostenlos“ ist bestätigt. Die Startseite sagt es wieder (Knopf
+  „Kostenlose Beratung anfragen“), die Unterseiten waren bereits stimmig.
+- Kein Herstellername, nur „europäische Herstellung“.
+- Zahlungsweise individuell: neue Frage auf der Startseite, kein
+  Zahlungsversprechen mehr.
+- Hosting bleibt bei 1blu, keine Telefonnummer im Kopfbereich.
+- Offen bleibt vor allem I2 (Reaktionszeit).

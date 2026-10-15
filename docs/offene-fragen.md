@@ -9,9 +9,10 @@ dabei, z. B. `TODO (I2)`.
 | Nr. | Antwort | Umgesetzt |
 |---|---|---|
 | H1 | Die Website **bleibt bei 1blu**. Kein Umzug zu Vercel. | Abschnitt 13 entfällt; Hochladen weiter per FTP |
-| I4 | Die Zahlungsweise wird **individuell mit dem Kunden** vereinbart. Es gibt kein festes Modell. | Startseite: Frage „Wann zahle ich?“ mit dieser Antwort; Satz „Zahlungen erfolgen erst danach“ entfernt |
+| I4 | Die Zahlungsweise wird **individuell mit dem Kunden** vereinbart. Mit Förderung: Vertrag mit aufschiebender Bedingung (Richtlinie BEG EM: Vertrag mit aufschiebender oder auflösender Bedingung muss bei Antragstellung vorliegen, nachträgliche Aufnahme förderschädlich). | Startseite: Frage „Wann zahle ich?“ mit dieser Antwort; Satz „Zahlungen erfolgen erst danach“ entfernt |
 | I5 | Beratung und Aufmaß sind **kostenlos**. | Startseite: Knopf „Kostenlose Beratung anfragen“, Unterzeile, Ablauf, Abschluss. Die Unterseiten sagen es schon. |
 | I18 | **Keinen Herstellernamen nennen.** Stattdessen „europäische Herstellung“; alle Fenster stammen von Herstellern in Europa. | Startseite sagt „aus europäischer Fertigung“. Drutex wird nirgends genannt. P2-Artikel „Drutex-Erfahrungen“ und Drutex-Seitentitel entfallen. |
+| I2 | Rückmeldung **innerhalb von 24 Stunden**; Angebot **2 Werktage nach dem Aufmaß**. | Startseite (Zusage vor den Knöpfen, Ablauf), Kontakt, Angebot, Danke-Seite, 404; die drei widersprüchlichen Aussagen sind ersetzt |
 | I19 | **Keine Telefonnummer im Kopfbereich.** | Bleibt so. Die Nummer steht im Klappmenü (Handy), im Fußbereich und im Kontaktblock. Eine Leiste unten auf dem Handy (P1) nur nach Rückfrage. |
 
 ## H – Hosting und Ablauf
@@ -25,7 +26,6 @@ dabei, z. B. `TODO (I2)`.
 | Nr. | Frage | Hängt davon ab |
 |---|---|---|
 | I1 | Telefon +49 155 60238878: Gilt das auch für das Google-Profil? Erreichbarkeit bisher „Mo–Fr 9–15 Uhr“, bitte bestätigen. WhatsApp ja/nein? | Fußbereich, Schema |
-| I2 | **Reaktionszeit:** Wie schnell melden Sie sich nach einer Anfrage zurück (z. B. „am selben Werktag“, „innerhalb von 24 Stunden“, „innerhalb von 2 Werktagen“)? Und wie schnell kommt nach dem Aufmaß das Angebot? Heute stehen drei verschiedene Aussagen auf der Website: „zeitnah“, „innerhalb eines Werktages“, „innerhalb von 1–2 Werktagen“. Welche gilt? | Formular, Danke-Seite, Angebotsseite |
 | I3 | Preisrahmen pro Fenster je Paket (Basis/Komfort/Sicherheit) und Aufpreise | Förder-Check, Pakete, Kosten-Seite |
 | I6 | Einsatzgebiet: Auf der Website stehen Hannover, Langenhagen, Burgwedel, Wedemark, Burgdorf, Lehrte, Garbsen, Sehnde und Laatzen. Stimmt das? | FAQ, Schema, Ortsseiten |
 | I7 | Vorgaben zu Logo, Farben, Schrift? Team- und Projektfotos | Über uns, Startseite |

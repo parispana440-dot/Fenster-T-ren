@@ -2886,3 +2886,5 @@ h3 { font-size: 1.28rem; line-height: 1.3; }
 /* Formulare nach Briefing 7.1 */
 .form-hinweis { font-size: 0.86rem; color: var(--color-text-muted); margin: -4px 0 12px; }
 .form-datenschutz { font-size: 0.86rem; color: var(--color-text-muted); margin: 6px 0 14px; }
+/* Zusage zur Reaktionszeit direkt vor den Knöpfen (Briefing 7.2) */
+.einstieg-zusage { font-size: 0.95rem; font-weight: 600; color: var(--color-ink); margin: -12px 0 18px; }

@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 <script src="js/einwilligung.js"></script>
 <script type="application/ld+json">
 {
@@ -143,10 +143,11 @@
             action="https://api.web3forms.com/submit" method="post"
             data-endpoint="https://api.web3forms.com/submit">
         <div class="field">
-          <label for="objektart">Objektart *</label>
-          <select id="objektart" name="objektart" required>
+          <label for="objektart">Objektart</label>
+          <select id="objektart" name="objektart">
             <option value="">Bitte wählen</option>
-            <option value="efh">Einfamilienhaus</option>
+            <option value="efh">Ein- oder Zweifamilienhaus</option>
+            <option value="rh">Reihenhaus</option>
             <option value="mfh">Mehrfamilienhaus</option>
             <option value="weg">Wohnungseigentümergemeinschaft (WEG)</option>
             <option value="gewerbe">Gewerbeobjekt</option>
@@ -172,14 +173,29 @@
           </div>
         </div>
 
+        <div class="form-grid">
+        <div class="field">
+          <label for="a-baujahr">Baujahr des Hauses</label>
+          <select id="a-baujahr" name="baujahr">
+                  <option value="">Bitte wählen</option>
+                  <option>vor 1970</option>
+                  <option>1970 bis 1994</option>
+                  <option>1995 bis 2020</option>
+                  <option>nach 2020</option>
+                  <option>weiß ich nicht</option>
+                </select>
+        </div>
         <div class="field">
           <label for="foerderung">Förderung erwünscht (BAFA)</label>
           <select id="foerderung" name="foerderung">
             <option value="">Bitte wählen</option>
             <option value="ja">Ja</option>
             <option value="nein">Nein</option>
+            <option value="unsicher">Weiß ich noch nicht</option>
           </select>
         </div>
+        </div>
+        <p class="form-hinweis">Gefördert werden nur Gebäude, die mindestens fünf Jahre alt sind.</p>
 
         <div class="field">
           <fieldset class="check-group">
@@ -204,28 +220,40 @@
 
         <div class="form-grid">
           <div class="field">
-            <label for="name">Name *</label>
-            <input type="text" id="name" name="name" autocomplete="name" required>
+            <label for="a-name">Name *</label>
+            <input type="text" id="a-name" name="name" autocomplete="name" required>
           </div>
+          <div class="field">
+            <label for="a-ort">Ort oder PLZ *</label>
+            <input type="text" id="a-ort" name="ort" autocomplete="postal-code" required placeholder="z. B. Langenhagen oder 30851">
+          </div>
+        </div>
+        <p class="form-hinweis" id="a-kontaktweg-hinweis">Wie dürfen wir Sie erreichen? Bitte mindestens eines angeben.</p>
+        <div class="form-grid">
+          <div class="field">
+            <label for="a-telefon">Telefon</label>
+            <input type="tel" id="a-telefon" name="telefon" autocomplete="tel" data-kontaktweg aria-describedby="a-kontaktweg-hinweis">
+          </div>
+          <div class="field">
+            <label for="a-email">E-Mail</label>
+            <input type="email" id="a-email" name="email" autocomplete="email" data-kontaktweg aria-describedby="a-kontaktweg-hinweis">
+          </div>
+        </div>
+        <div class="form-grid">
           <div class="field">
             <label for="firma">Firma / Hausverwaltung (optional)</label>
             <input type="text" id="firma" name="firma" autocomplete="organization">
           </div>
           <div class="field">
-            <label for="email">E-Mail *</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="telefon">Telefon</label>
-            <input type="tel" id="telefon" name="telefon" autocomplete="tel">
+            <label for="a-rueckruf">Bevorzugte Rückrufzeit</label>
+            <select id="a-rueckruf" name="rueckrufzeit">
+                  <option value="">egal</option>
+                  <option>vormittags</option>
+                  <option>mittags</option>
+                  <option>nachmittags</option>
+                </select>
           </div>
         </div>
-
-        <div class="checkbox-field field">
-          <input type="checkbox" id="dsgvo" name="dsgvo" required>
-          <label for="dsgvo">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen. *</label>
-        </div>
-
             <div class="hp-field" aria-hidden="true">
               <label for="a-website">Bitte dieses Feld frei lassen</label>
               <input type="text" id="a-website" name="website" tabindex="-1" autocomplete="off">
@@ -238,13 +266,16 @@
             <input type="hidden" name="access_key" value="785d39a9-08ec-4121-92e8-70a8c5b69699">
             <input type="hidden" name="subject" value="Neue Angebotsanfrage über die Website">
             <input type="hidden" name="from_name" value="Website assos-projekt.de">
+            <input type="hidden" name="redirect" value="https://www.assos-projekt.de/danke.html">
             <div class="hp-field" aria-hidden="true">
               <label for="a-botcheck">Bitte dieses Feld nicht anklicken</label>
               <input type="checkbox" id="a-botcheck" name="botcheck" tabindex="-1">
             </div>
+        <p class="form-datenschutz">Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Mehr dazu in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
         <button type="submit" class="btn btn-primary btn-block">Anfrage senden</button>
         <div class="form-status" role="status"></div>
-        <p class="form-note">* Pflichtfelder. Ihre Anfrage geht direkt an uns – wir melden uns in der Regel innerhalb eines Werktages. Lieber telefonisch? <a href="tel:+4915560238878">+49&nbsp;155&nbsp;60238878</a>, Mo–Fr 9–15&nbsp;Uhr.</p>
+        <!-- TODO (I2): Reaktionszeit vereinheitlichen (heute: "zeitnah", "innerhalb eines Werktages", "1–2 Werktage") -->
+        <p class="form-note">* Pflichtfelder. Ihre Anfrage geht direkt an uns. Lieber telefonisch? <a href="tel:+4915560238878">+49&nbsp;155&nbsp;60238878</a>, Mo–Fr 9–15&nbsp;Uhr.</p>
       </form>
 
       <aside>
@@ -315,6 +346,6 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="js/main.js?v=3"></script>
+<script src="js/main.js?v=4"></script>
 </body>
 </html>

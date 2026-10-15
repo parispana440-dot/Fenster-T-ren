@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 <script src="js/einwilligung.js"></script>
 <script type="application/ld+json">
 {
@@ -433,21 +433,29 @@
                 <input type="text" id="c-name" name="name" autocomplete="name" required>
               </div>
               <div class="field">
-                <label for="c-email">E-Mail *</label>
-                <input type="email" id="c-email" name="email" autocomplete="email" required>
+                <label for="c-ort">Ort oder PLZ *</label>
+                <input type="text" id="c-ort" name="ort" autocomplete="postal-code" required placeholder="z. B. Langenhagen oder 30851">
               </div>
             </div>
+            <p class="form-hinweis" id="c-kontaktweg-hinweis">Wie dürfen wir Sie erreichen? Bitte mindestens eines angeben.</p>
             <div class="form-grid">
               <div class="field">
                 <label for="c-telefon">Telefon</label>
-                <input type="tel" id="c-telefon" name="telefon" autocomplete="tel">
+                <input type="tel" id="c-telefon" name="telefon" autocomplete="tel" data-kontaktweg aria-describedby="c-kontaktweg-hinweis">
               </div>
+              <div class="field">
+                <label for="c-email">E-Mail</label>
+                <input type="email" id="c-email" name="email" autocomplete="email" data-kontaktweg aria-describedby="c-kontaktweg-hinweis">
+              </div>
+            </div>
+            <div class="form-grid">
               <div class="field">
                 <label for="c-thema">Worum geht es?</label>
                 <select id="c-thema" name="thema">
                   <option value="">Bitte wählen</option>
                   <option>Fenster</option>
                   <option>Haustür</option>
+                  <option>Fenster und Haustür</option>
                   <option>Rollläden oder Raffstore</option>
                   <option>Garagentor</option>
                   <option>Mehrfamilienhaus oder Gewerbeobjekt</option>
@@ -458,14 +466,19 @@
                   <option>Etwas anderes</option>
                 </select>
               </div>
+              <div class="field">
+                <label for="c-rueckruf">Bevorzugte Rückrufzeit</label>
+                <select id="c-rueckruf" name="rueckrufzeit">
+                  <option value="">egal</option>
+                  <option>vormittags</option>
+                  <option>mittags</option>
+                  <option>nachmittags</option>
+                </select>
+              </div>
             </div>
             <div class="field">
-              <label for="c-nachricht">Ihre Nachricht *</label>
-              <textarea id="c-nachricht" name="nachricht" minlength="10" required placeholder="Zum Beispiel: Einfamilienhaus Baujahr 1985, 12 Fenster sollen getauscht werden, Rollläden vorhanden."></textarea>
-            </div>
-            <div class="checkbox-field field">
-              <input type="checkbox" id="c-dsgvo" name="dsgvo" required>
-              <label for="c-dsgvo">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> zur Kenntnis genommen. *</label>
+              <label for="c-nachricht">Ihre Nachricht</label>
+              <textarea id="c-nachricht" name="nachricht" placeholder="Zum Beispiel: Einfamilienhaus Baujahr 1985, 12 Fenster sollen getauscht werden, Rollläden vorhanden."></textarea>
             </div>
             <div class="hp-field" aria-hidden="true">
               <label for="c-website">Bitte dieses Feld frei lassen</label>
@@ -479,11 +492,13 @@
             <input type="hidden" name="access_key" value="785d39a9-08ec-4121-92e8-70a8c5b69699">
             <input type="hidden" name="subject" value="Neue Nachricht über das Kontaktformular">
             <input type="hidden" name="from_name" value="Website assos-projekt.de">
+            <input type="hidden" name="redirect" value="https://www.assos-projekt.de/danke.html">
             <div class="hp-field" aria-hidden="true">
               <label for="c-botcheck">Bitte dieses Feld nicht anklicken</label>
               <input type="checkbox" id="c-botcheck" name="botcheck" tabindex="-1">
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Nachricht senden</button>
+            <p class="form-datenschutz">Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Mehr dazu in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+            <button type="submit" class="btn btn-primary btn-block">Anfrage senden</button>
             <div class="form-status" role="status"></div>
           </form>
         </div>
@@ -624,7 +639,7 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="js/main.js?v=3"></script>
+<script src="js/main.js?v=4"></script>
 <script src="js/karte.js" defer></script>
 </body>
 </html>

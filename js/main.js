@@ -487,11 +487,23 @@ document.addEventListener('DOMContentLoaded', function () {
     typeMismatch: 'Bitte prüfen Sie diese Eingabe.',
     email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein, z. B. name@beispiel.de.',
     checkbox: 'Bitte bestätigen Sie diesen Punkt, damit wir Ihre Anfrage bearbeiten dürfen.',
-    tooShort: 'Bitte schreiben Sie etwas mehr, damit wir Ihr Vorhaben einschätzen können.'
+    tooShort: 'Bitte schreiben Sie etwas mehr, damit wir Ihr Vorhaben einschätzen können.',
+    kontaktweg: 'Bitte geben Sie eine Telefonnummer oder eine E-Mail-Adresse an.'
   };
+
+  // Pflicht ist nur einer der beiden Kontaktwege (Briefing 7.1): Telefon
+  // ODER E-Mail. Sind beide leer, bekommen beide Felder einen eigenen
+  // Fehler, damit klar ist, dass eines davon genügt.
+  function kontaktwegPruefen(form) {
+    var felder = form.querySelectorAll('[data-kontaktweg]');
+    if (!felder.length) return;
+    var einerDa = Array.prototype.some.call(felder, function (f) { return f.value.trim() !== ''; });
+    felder.forEach(function (f) { f.setCustomValidity(einerDa ? '' : MELDUNGEN.kontaktweg); });
+  }
 
   function fehlertextFuer(feld) {
     var v = feld.validity;
+    if (v.customError) return feld.validationMessage;
     if (v.valueMissing) {
       if (feld.type === 'checkbox') return MELDUNGEN.checkbox;
       return MELDUNGEN.valueMissing;
@@ -549,6 +561,10 @@ document.addEventListener('DOMContentLoaded', function () {
     form.querySelectorAll('input, select, textarea').forEach(function (feld) {
       if (!feld.name || feld.disabled) return;
 
+      // Die Weiterleitung gilt nur fuer das Absenden ohne Skript. Hier
+      // leitet die Seite selbst weiter, nachdem die Antwort geprueft ist.
+      if (feld.name === 'redirect') return;
+
       // Versteckte Felder sind Angaben fuer den Dienst und gehen unveraendert mit
       if (feld.type === 'hidden') { daten.append(feld.name, feld.value); return; }
 
@@ -596,6 +612,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Eingaben korrigieren blendet den jeweiligen Fehler sofort wieder aus
     form.addEventListener('input', function (e) {
+      if (e.target.matches('[data-kontaktweg]')) {
+        kontaktwegPruefen(form);
+        form.querySelectorAll('[data-kontaktweg]').forEach(function (f) {
+          if (f.checkValidity()) fehlerLoeschen(f);
+        });
+        return;
+      }
       if (e.target.matches('input, select, textarea') && e.target.checkValidity()) {
         fehlerLoeschen(e.target);
       }
@@ -610,6 +633,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
 
       // Pflichtfelder pruefen
+      kontaktwegPruefen(form);
       var ersterFehler = null;
       form.querySelectorAll('input, select, textarea').forEach(function (feld) {
         if (feld.type === 'hidden' || feld.disabled) return;
@@ -658,8 +682,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return antwort.json().catch(function () { return null; }).then(function (inhalt) {
           if (!antwort.ok) throw new Error('HTTP ' + antwort.status);
           if (inhalt && inhalt.success === false) throw new Error('abgelehnt');
-          statusSetzen(form, 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen. Wir melden uns zeitnah bei Ihnen.', 'ok');
+          statusSetzen(form, 'Vielen Dank! Ihre Anfrage ist bei uns eingegangen.', 'ok');
           form.reset();
+          // Bestätigungsseite: klarer nächster Schritt und Messpunkt für
+          // erfolgreiche Anfragen (Briefing 7.1)
+          window.location.href = form.dataset.danke || 'danke.html';
         });
       }).catch(function () {
         statusSetzen(form,

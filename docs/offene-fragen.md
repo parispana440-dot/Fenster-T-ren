@@ -19,7 +19,7 @@ dabei, z. B. `TODO (I2)`.
 | I2 | **Reaktionszeit** auf Anfragen. Heute stehen drei verschiedene Aussagen auf der Website: „zeitnah“, „innerhalb eines Werktages“, „innerhalb von 1–2 Werktagen“. Welche gilt? | Formular, Danke-Seite, Angebotsseite |
 | I3 | Preisrahmen pro Fenster je Paket (Basis/Komfort/Sicherheit) und Aufpreise | Förder-Check, Pakete, Kosten-Seite |
 | I4 | Zahlungsmodell: 40/30/30 oder 70/30? Zahlungen erst nach dem Zuwendungsbescheid? | FAQ „Wann zahle ich?“ (auf der Startseite noch ausgeblendet) |
-| I5 | **Sind Beratung und Aufmaß kostenlos?** Steht heute auf 16 Seiten. Auf der Startseite habe ich es vorerst entfernt. Wenn ja, setze ich es dort wieder ein. Wenn nein, entferne ich es auf allen Seiten. | Startseite, Angebot, Produktseiten |
+| I5 | **Sind Beratung und Aufmaß kostenlos?** Stand heute noch auf 15 Unterseiten. Auf der Startseite habe ich es vorerst entfernt. Wenn ja, setze ich es dort wieder ein. Wenn nein, entferne ich es auf allen Seiten. | Startseite, Angebot, Produktseiten |
 | I6 | Einsatzgebiet: Auf der Website stehen Hannover, Langenhagen, Burgwedel, Wedemark, Burgdorf, Lehrte, Garbsen, Sehnde und Laatzen. Stimmt das? | FAQ, Schema, Ortsseiten |
 | I7 | Vorgaben zu Logo, Farben, Schrift? Team- und Projektfotos | Über uns, Startseite |
 | I8 | Drutex-Datenblätter (Uw, Schall, Einbruchschutz) und erlaubte Bildrechte | Produktseiten, Downloads |
